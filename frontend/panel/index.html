@@ -1,0 +1,2148 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>IG Accounting Services — Panel</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --green:#25D366;--green-dark:#128C7E;--green-light:#DCF8C6;
+  --sidebar-bg:#111b21;--sidebar-hover:#1a2931;--sidebar-active:#2a3942;
+  --bg:#f0f2f5;--bg-white:#ffffff;--border:#e5e7eb;
+  --text:#111827;--text2:#6b7280;--text3:#9ca3af;
+  --red:#ef4444;--amber:#f59e0b;--blue:#3b82f6;--purple:#8b5cf6;
+  --shadow:0 1px 3px rgba(0,0,0,.08);--shadow-md:0 4px 12px rgba(0,0,0,.1);
+  --r:10px;--r-sm:6px;--font:'DM Sans',sans-serif;
+}
+body{font-family:var(--font);background:var(--bg);color:var(--text);height:100vh;overflow:hidden;display:flex}
+
+/* ── SIDEBAR ICON ─────────────────────────────────────────────────────────── */
+.sidebar{width:62px;background:var(--sidebar-bg);display:flex;flex-direction:column;align-items:center;padding:14px 0;gap:2px;flex-shrink:0}
+.s-logo{width:38px;height:38px;background:var(--green);border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:14px;font-size:13px;font-weight:700;color:white;letter-spacing:-.5px;flex-shrink:0}
+.s-item{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background .15s;position:relative}
+.s-item:hover{background:var(--sidebar-hover)}
+.s-item.active{background:var(--sidebar-active)}
+.s-item svg{width:20px;height:20px;stroke:#8a9ba8;fill:none;stroke-width:1.8}
+.s-item.active svg{stroke:var(--green)}
+.s-badge{position:absolute;top:6px;right:6px;background:var(--red);color:white;font-size:9px;font-weight:700;min-width:14px;height:14px;border-radius:7px;display:flex;align-items:center;justify-content:center;padding:0 3px}
+.s-bottom{margin-top:auto;display:flex;flex-direction:column;align-items:center;gap:4px}
+.s-avatar{width:34px;height:34px;border-radius:50%;background:var(--green-dark);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:white;cursor:pointer}
+.s-tooltip{position:absolute;left:54px;background:#1f2937;color:white;font-size:11px;padding:4px 8px;border-radius:4px;white-space:nowrap;pointer-events:none;opacity:0;transition:opacity .1s;z-index:100}
+.s-item:hover .s-tooltip{opacity:1}
+
+/* ── MAIN ─────────────────────────────────────────────────────────────────── */
+.main{flex:1;display:flex;overflow:hidden}
+.view{display:none;flex:1;flex-direction:column;overflow:hidden}
+.view.active{display:flex}
+
+/* ── LEFT PANEL (conversaciones) ────────────────────────────────────────── */
+.pl{width:340px;background:var(--bg-white);border-right:1px solid var(--border);display:flex;flex-direction:column;flex-shrink:0}
+.pl-header{padding:14px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.pl-title{font-size:15px;font-weight:600}
+.pl-actions{display:flex;gap:4px}
+.icon-btn{width:30px;height:30px;border-radius:var(--r-sm);border:none;background:transparent;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background .1s}
+.icon-btn:hover{background:var(--bg)}
+.icon-btn svg{width:16px;height:16px;stroke:var(--text2);fill:none;stroke-width:1.8}
+.pl-search{padding:10px 12px;border-bottom:1px solid var(--border);position:relative}
+.pl-search input{width:100%;background:var(--bg);border:1px solid var(--border);border-radius:20px;padding:7px 12px 7px 32px;font-size:13px;font-family:var(--font);outline:none;color:var(--text)}
+.pl-search-icon{position:absolute;left:22px;top:50%;transform:translateY(-50%)}
+.pl-search-icon svg{width:14px;height:14px;stroke:var(--text3);fill:none;stroke-width:2}
+.pl-tabs{display:flex;padding:8px 12px;gap:6px;border-bottom:1px solid var(--border)}
+.pl-tab{padding:4px 12px;border-radius:20px;font-size:12px;font-weight:500;cursor:pointer;border:1px solid var(--border);background:transparent;color:var(--text2);font-family:var(--font);transition:all .1s}
+.pl-tab.active{background:var(--green);color:white;border-color:var(--green)}
+.chat-list{overflow-y:auto;flex:1}
+.chat-item{display:flex;align-items:center;gap:10px;padding:10px 14px;cursor:pointer;border-bottom:1px solid #f3f4f6;transition:background .1s}
+.chat-item:hover{background:#f9fafb}
+.chat-item.active{background:#f0fdf4}
+.chat-av{width:44px;height:44px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:600;color:white}
+.chat-info{flex:1;min-width:0}
+.chat-name{font-size:14px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.chat-prev{font-size:12px;color:var(--text2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:2px}
+.chat-prev.file{color:var(--green-dark)}
+.chat-meta{display:flex;flex-direction:column;align-items:flex-end;gap:4px;flex-shrink:0}
+.chat-time{font-size:11px;color:var(--text3)}
+.chat-unread{min-width:18px;height:18px;background:var(--green);color:white;font-size:10px;font-weight:600;border-radius:9px;display:flex;align-items:center;justify-content:center;padding:0 4px}
+
+/* ── CENTER (chat) ───────────────────────────────────────────────────────── */
+.pc{flex:1;display:flex;flex-direction:column;background:#f0f2f5;background-image:url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='0.02'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");overflow:hidden}
+.pc-header{background:var(--bg-white);border-bottom:1px solid var(--border);padding:10px 16px;display:flex;align-items:center;gap:10px;flex-shrink:0}
+.pc-header-info{flex:1}
+.pc-name{font-size:15px;font-weight:600}
+.pc-sub{font-size:12px;color:var(--text2)}
+.pc-actions{display:flex;gap:6px;align-items:center}
+.pc-msgs{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:6px;min-height:0}
+.msg-row{display:flex}
+.msg-row.in{justify-content:flex-start}
+.msg-row.out{justify-content:flex-end}
+.msg-bubble{max-width:62%;padding:8px 12px;border-radius:10px;font-size:13px;line-height:1.5;box-shadow:0 1px 2px rgba(0,0,0,.08)}
+.msg-bubble.in{background:white;border-radius:0 10px 10px 10px}
+.msg-bubble.out{background:var(--green-light);border-radius:10px 0 10px 10px}
+.msg-time{font-size:10px;color:var(--text3);margin-top:3px;text-align:right}
+.file-bubble{background:white;border:1px solid var(--border);border-radius:10px;padding:10px 12px;display:flex;align-items:center;gap:10px;max-width:280px;cursor:pointer;box-shadow:var(--shadow)}
+.file-bubble:hover{background:#f9fafb}
+.file-icon{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0}
+.fi-pdf{background:#fee2e2;color:#dc2626}
+.fi-doc{background:#dbeafe;color:#2563eb}
+.fi-xls{background:#d1fae5;color:#059669}
+.fi-img{background:#fef3c7;color:#d97706}
+.fi-aud{background:#f3e8ff;color:#7c3aed}
+.fi-other{background:#f3f4f6;color:#374151}
+.pc-input{background:var(--bg-white);padding:10px 16px;border-top:1px solid var(--border);display:flex;align-items:center;gap:8px;flex-shrink:0}
+.pc-input input{flex:1;background:var(--bg);border:1px solid var(--border);border-radius:20px;padding:9px 16px;font-size:14px;font-family:var(--font);outline:none;color:var(--text)}
+.send-btn{width:40px;height:40px;background:var(--green);border:none;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0}
+.send-btn:hover{background:var(--green-dark)}
+.send-btn svg{width:18px;height:18px;stroke:white;fill:none;stroke-width:2;margin-left:2px}
+.pc-empty{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;color:var(--text3)}
+.pc-empty svg{width:64px;height:64px;opacity:.2;fill:var(--text3)}
+
+/* ── RIGHT PANEL ─────────────────────────────────────────────────────────── */
+.pr{width:300px;background:var(--bg-white);border-left:1px solid var(--border);display:flex;flex-direction:column;flex-shrink:0;overflow:hidden}
+.pr-header{padding:14px 16px;border-bottom:1px solid var(--border);font-size:14px;font-weight:600;display:flex;align-items:center;justify-content:space-between}
+.pr-section{padding:12px 16px;border-bottom:1px solid #f3f4f6}
+.pr-label{font-size:10px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px}
+.pr-contact{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.pr-av{width:46px;height:46px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:600;color:white;flex-shrink:0}
+.pr-contact-name{font-size:14px;font-weight:600}
+.pr-contact-phone{font-size:12px;color:var(--text2)}
+.info-row{display:flex;justify-content:space-between;align-items:center;padding:4px 0;font-size:13px}
+.info-row span:first-child{color:var(--text2)}
+.info-row span:last-child{font-weight:500}
+.pr-select{width:100%;padding:7px 10px;border:1px solid var(--border);border-radius:var(--r-sm);font-size:13px;font-family:var(--font);background:var(--bg);color:var(--text);outline:none;cursor:pointer}
+.pr-files{overflow-y:auto;flex:1;padding:8px}
+.pr-file-item{display:flex;align-items:center;gap:8px;padding:7px 8px;border-radius:var(--r-sm);cursor:pointer;transition:background .1s}
+.pr-file-item:hover{background:var(--bg)}
+.pr-file-icon{width:30px;height:30px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;flex-shrink:0}
+.pr-file-info{flex:1;min-width:0}
+.pr-file-name{font-size:12px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pr-file-meta{font-size:10px;color:var(--text3)}
+.btn-add-client{width:100%;padding:8px;border:1.5px dashed var(--green);border-radius:8px;background:transparent;color:var(--green);font-size:12px;font-weight:600;font-family:var(--font);cursor:pointer;transition:all .15s}
+.btn-add-client:hover{background:#f0fdf4}
+
+/* ── CLIENTES VIEW ─────────────────────────────────────────────────────── */
+.content-area{flex:1;overflow-y:auto;padding:24px}
+.page-title{font-size:20px;font-weight:600;margin-bottom:2px}
+.page-sub{font-size:13px;color:var(--text2);margin-bottom:24px}
+.top-bar{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;gap:12px}
+.search-field{flex:1;max-width:340px;background:var(--bg-white);border:1px solid var(--border);border-radius:8px;padding:8px 14px;font-size:13px;font-family:var(--font);outline:none;color:var(--text)}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:8px;font-size:13px;font-family:var(--font);font-weight:500;cursor:pointer;border:none;transition:all .15s}
+.btn svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2}
+.btn-primary{background:var(--green);color:white}
+.btn-primary:hover{background:var(--green-dark)}
+.btn-ghost{background:var(--bg-white);color:var(--text2);border:1px solid var(--border)}
+.btn-ghost:hover{background:var(--bg)}
+.btn-sm{padding:5px 12px;font-size:12px}
+.btn-danger{background:#fee2e2;color:#b91c1c;border:1px solid #fecaca}
+.btn-success{background:#dcfce7;color:#15803d;border:1px solid #bbf7d0}
+
+/* CARDS GRID */
+.clients-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px}
+.client-card{background:var(--bg-white);border:1px solid var(--border);border-radius:var(--r);padding:16px;cursor:pointer;transition:box-shadow .15s}
+.client-card:hover{box-shadow:var(--shadow-md);border-color:#d1d5db}
+.cc-header{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.cc-av{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:600;color:white;flex-shrink:0}
+.cc-name{font-size:14px;font-weight:600}
+.cc-email{font-size:12px;color:var(--text2)}
+.cc-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px}
+.cc-stat{text-align:center;padding:8px;background:var(--bg);border-radius:6px}
+.cc-stat-val{font-size:16px;font-weight:600}
+.cc-stat-lbl{font-size:10px;color:var(--text3);margin-top:2px}
+.cc-footer{display:flex;align-items:center;justify-content:space-between}
+.tag{display:inline-flex;align-items:center;padding:2px 8px;border-radius:20px;font-size:11px;font-weight:500}
+.tag-green{background:#dcfce7;color:#15803d}
+.tag-amber{background:#fef3c7;color:#92400e}
+.tag-red{background:#fee2e2;color:#b91c1c}
+.tag-blue{background:#dbeafe;color:#1d4ed8}
+.tag-gray{background:#f3f4f6;color:#4b5563}
+.tag-purple{background:#f3e8ff;color:#7c3aed}
+
+/* ── PERFIL CLIENTE (slide panel) ────────────────────────────────────────── */
+.client-panel{position:fixed;top:0;right:-560px;width:560px;height:100vh;background:var(--bg-white);box-shadow:-4px 0 24px rgba(0,0,0,.12);z-index:500;display:flex;flex-direction:column;transition:right .3s ease}
+.client-panel.open{right:0}
+.cp-header{padding:16px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px;flex-shrink:0}
+.cp-av{width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700;color:white;flex-shrink:0}
+.cp-name{font-size:16px;font-weight:600}
+.cp-phone{font-size:13px;color:var(--text2)}
+.cp-close{margin-left:auto;background:none;border:none;font-size:22px;cursor:pointer;color:var(--text3);padding:4px}
+.cp-tabs{display:flex;border-bottom:1px solid var(--border);flex-shrink:0}
+.cp-tab{flex:1;padding:12px;text-align:center;font-size:13px;font-weight:500;cursor:pointer;color:var(--text2);border-bottom:2px solid transparent;transition:all .15s}
+.cp-tab.active{color:var(--green);border-bottom-color:var(--green)}
+.cp-body{flex:1;overflow-y:auto;padding:20px}
+.cp-section{margin-bottom:24px}
+.cp-section-title{font-size:12px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:12px;display:flex;align-items:center;justify-content:space-between}
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
+.info-cell{padding:10px 12px;background:var(--bg);border-radius:8px}
+.info-cell-label{font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.4px;margin-bottom:3px}
+.info-cell-val{font-size:13px;font-weight:500}
+
+/* SERVICIOS */
+.service-item{background:var(--bg);border-radius:8px;padding:12px 14px;margin-bottom:8px;display:flex;align-items:center;gap:10px}
+.service-item-info{flex:1}
+.service-item-name{font-size:13px;font-weight:500}
+.service-item-type{font-size:11px;color:var(--text3)}
+.service-item-price{font-size:13px;font-weight:600;color:var(--green-dark)}
+
+/* PAGOS */
+.pago-item{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid #f3f4f6}
+.pago-item:last-child{border-bottom:none}
+.pago-desc{flex:1;font-size:13px}
+.pago-monto{font-size:13px;font-weight:600}
+.pago-fecha{font-size:11px;color:var(--text3)}
+
+/* ARCHIVOS GRID */
+.files-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.file-card{background:var(--bg);border-radius:8px;padding:12px;cursor:pointer;transition:box-shadow .15s}
+.file-card:hover{box-shadow:var(--shadow-md)}
+.file-card-icon{width:40px;height:40px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;margin-bottom:8px}
+.file-card-name{font-size:12px;font-weight:500;word-break:break-word;line-height:1.3}
+.file-card-meta{font-size:10px;color:var(--text3);margin-top:4px}
+.file-card-footer{display:flex;align-items:center;justify-content:space-between;margin-top:8px;padding-top:6px;border-top:1px solid var(--border)}
+
+/* ── DASHBOARD ────────────────────────────────────────────────────────────── */
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:24px}
+.stat-card{background:var(--bg-white);border:1px solid var(--border);border-radius:var(--r);padding:16px}
+.stat-val{font-size:28px;font-weight:600;line-height:1}
+.stat-lbl{font-size:12px;color:var(--text2);margin-top:4px}
+.stat-change{font-size:11px;margin-top:8px}
+.stat-up{color:#16a34a}
+.stat-down{color:var(--red)}
+.charts-row{display:grid;grid-template-columns:2fr 1fr;gap:14px;margin-bottom:24px}
+.chart-card{background:var(--bg-white);border:1px solid var(--border);border-radius:var(--r);padding:16px}
+.chart-title{font-size:13px;font-weight:600;margin-bottom:14px}
+.bar-chart{display:flex;align-items:flex-end;gap:8px;height:100px}
+.bar-wrap{display:flex;flex-direction:column;align-items:center;gap:4px;flex:1}
+.bar{width:100%;background:var(--green);border-radius:4px 4px 0 0;transition:height .3s}
+.bar-label{font-size:10px;color:var(--text3)}
+.donut-wrap{display:flex;align-items:center;gap:14px}
+.donut-legend{display:flex;flex-direction:column;gap:6px}
+.legend-item{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--text2)}
+.legend-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.recent-table{background:var(--bg-white);border:1px solid var(--border);border-radius:var(--r);overflow:hidden}
+.table-hdr{padding:14px 16px;border-bottom:1px solid var(--border);font-size:13px;font-weight:600;display:flex;align-items:center;justify-content:space-between}
+table{width:100%;border-collapse:collapse}
+th{padding:10px 14px;text-align:left;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.4px;color:var(--text3);border-bottom:1px solid var(--border);background:#fafafa}
+td{padding:11px 14px;font-size:13px;border-bottom:1px solid #f3f4f6;vertical-align:middle}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:#fafafa}
+
+/* ── ARCHIVOS VIEW ────────────────────────────────────────────────────────── */
+.files-toolbar{display:flex;align-items:center;gap:10px;margin-bottom:20px;flex-wrap:wrap}
+.files-search{flex:1;min-width:200px;background:var(--bg-white);border:1px solid var(--border);border-radius:8px;padding:8px 14px;font-size:13px;font-family:var(--font);outline:none}
+.files-grid-all{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:14px}
+.fca{background:var(--bg-white);border:1px solid var(--border);border-radius:var(--r);padding:14px;cursor:pointer;transition:box-shadow .15s}
+.fca:hover{box-shadow:var(--shadow-md);border-color:#d1d5db}
+.fca-icon{width:48px;height:48px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;margin-bottom:10px}
+.fca-name{font-size:12px;font-weight:500;word-break:break-word;line-height:1.3}
+.fca-meta{font-size:10px;color:var(--text3);margin-top:4px}
+.fca-footer{display:flex;align-items:center;justify-content:space-between;margin-top:10px;padding-top:8px;border-top:1px solid #f3f4f6;font-size:11px;color:var(--text2)}
+
+/* ── MODAL ────────────────────────────────────────────────────────────────── */
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);display:none;align-items:center;justify-content:center;z-index:1000}
+.overlay.show{display:flex}
+.modal{background:var(--bg-white);border-radius:16px;padding:28px;width:100%;max-width:500px;max-height:88vh;overflow-y:auto;box-shadow:var(--shadow-md)}
+.modal-title{font-size:16px;font-weight:600;margin-bottom:20px;display:flex;justify-content:space-between;align-items:center}
+.modal-close{background:none;border:none;font-size:20px;cursor:pointer;color:var(--text3);line-height:1}
+.field{margin-bottom:14px}
+.field label{display:block;font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.4px;margin-bottom:6px}
+.field input,.field select,.field textarea{width:100%;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:9px 12px;font-size:13px;font-family:var(--font);color:var(--text);outline:none;transition:border .2s}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--green)}
+.field textarea{resize:vertical;min-height:72px}
+.modal-actions{display:flex;gap:8px;justify-content:flex-end;margin-top:20px}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+
+/* ── TOAST ────────────────────────────────────────────────────────────────── */
+.toast{position:fixed;bottom:24px;right:24px;background:#1f2937;color:white;border-radius:10px;padding:12px 18px;font-size:13px;z-index:9999;transform:translateY(80px);opacity:0;transition:.3s;max-width:320px;box-shadow:var(--shadow-md)}
+.toast.show{transform:translateY(0);opacity:1}
+.toast.ok{background:#15803d}
+.toast.err{background:#b91c1c}
+
+/* ── OVERLAY BACKDROP ─────────────────────────────────────────────────────── */
+.panel-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.2);z-index:499;display:none}
+.panel-backdrop.show{display:block}
+
+/* SCROLLBAR */
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:#d1d5db;border-radius:2px}
+.hidden{display:none!important}
+</style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+  <div class="s-logo">IG</div>
+
+  <div class="s-item active" onclick="showView('chats')" id="nav-chats">
+    <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+    <div class="s-badge hidden" id="wa-badge">0</div>
+    <span class="s-tooltip">WhatsApp</span>
+  </div>
+
+  <div class="s-item" onclick="showView('clientes')" id="nav-clientes">
+    <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+    <span class="s-tooltip">Clientes</span>
+  </div>
+
+  <div class="s-item" onclick="showView('archivos')" id="nav-archivos">
+    <svg viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+    <span class="s-tooltip">Archivos</span>
+  </div>
+
+  <div class="s-item" onclick="abrirNotifPanel()" id="nav-notifs">
+    <svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+    <div class="s-badge hidden" id="notif-badge">0</div>
+    <span class="s-tooltip">Notificaciones</span>
+  </div>
+
+  <div class="s-item" onclick="showView('dashboard')" id="nav-dashboard">
+    <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+    <span class="s-tooltip">Dashboard</span>
+  </div>
+
+  <div class="s-item" onclick="showView('pagos')" id="nav-pagos">
+    <svg viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+    <span class="s-tooltip">Pagos</span>
+  </div>
+
+  <div class="s-bottom">
+    <div class="s-item" onclick="showView('agentes')" id="nav-agentes">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+      <span class="s-tooltip">Configuración</span>
+    </div>
+    <div class="s-avatar" id="s-user-av" title="Cerrar sesión" onclick="logout()">A</div>
+  </div>
+</div>
+
+<div class="main">
+
+<!-- ═══════════════════════════════════════════════════════════════════════════
+     VIEW: WHATSAPP
+═══════════════════════════════════════════════════════════════════════════ -->
+<div class="view active" id="view-chats" style="flex-direction:row">
+
+  <!-- LEFT -->
+  <div class="pl">
+    <div class="pl-header">
+      <span class="pl-title">Conversaciones</span>
+      <div class="pl-actions">
+        <button class="icon-btn" onclick="refrescarWAList()" title="Actualizar">
+          <svg viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="pl-search">
+      <div class="pl-search-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></div>
+      <input placeholder="Buscar conversación..." oninput="filtrarWA(this.value)">
+    </div>
+    <div class="pl-tabs">
+      <button class="pl-tab active" onclick="filtrarTabWA('todos',this)">Todos</button>
+      <button class="pl-tab" onclick="filtrarTabWA('abierto',this)">Abiertos</button>
+      <button class="pl-tab" onclick="filtrarTabWA('en_proceso',this)">En proceso</button>
+      <button class="pl-tab" onclick="filtrarTabWA('resuelto',this)">Resueltos</button>
+    </div>
+    <div class="chat-list" id="wa-list"></div>
+  </div>
+
+  <!-- CENTER -->
+  <div class="pc" id="wa-center">
+    <div class="pc-empty">
+      <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      <div style="font-size:15px;font-weight:500;color:#374151">IG Accounting Services</div>
+      <div style="font-size:13px">Selecciona una conversación</div>
+    </div>
+  </div>
+
+  <!-- RIGHT -->
+  <div class="pr" id="wa-right-panel">
+    <div class="pr-header">Contacto</div>
+    <div style="padding:32px;text-align:center;color:var(--text3);font-size:13px">
+      Selecciona una conversación para ver el detalle
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════════════════
+     VIEW: CLIENTES
+═══════════════════════════════════════════════════════════════════════════ -->
+<div class="view" id="view-clientes">
+  <div class="content-area">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px">
+      <div class="page-title">Clientes</div>
+      <button class="btn btn-primary" onclick="abrirModalNuevoCliente()">
+        <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        Nuevo cliente
+      </button>
+    </div>
+    <div class="page-sub" id="clientes-sub">Cargando...</div>
+    <div class="top-bar">
+      <input class="search-field" placeholder="Buscar por nombre, email o teléfono..." oninput="buscarClientes(this.value)">
+      <select class="btn btn-ghost" style="padding:8px 14px" onchange="filtrarClientesEstado(this.value)">
+        <option value="">Todos los estados</option>
+        <option value="activo">Activos</option>
+        <option value="inactivo">Inactivos</option>
+      </select>
+    </div>
+    <div class="clients-grid" id="clientes-grid"></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════════════════
+     VIEW: ARCHIVOS
+═══════════════════════════════════════════════════════════════════════════ -->
+<div class="view" id="view-archivos">
+  <div class="content-area">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px">
+      <div class="page-title">Archivos</div>
+      <button class="btn btn-primary" onclick="abrirSubirArchivo()">
+        <svg viewBox="0 0 24 24"><polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/></svg>
+        Subir archivo
+      </button>
+    </div>
+    <div class="page-sub">Todos los archivos recibidos por WhatsApp y subidos manualmente</div>
+    <div class="files-toolbar">
+      <input class="files-search" placeholder="Buscar archivo..." oninput="buscarArchivos(this.value)">
+      <select class="btn btn-ghost" style="padding:8px 12px" onchange="filtrarArchivosTipo(this.value)">
+        <option value="">Todos los tipos</option>
+        <option value="pdf">PDF</option>
+        <option value="doc">Word/Excel</option>
+        <option value="image">Imágenes</option>
+      </select>
+      <select class="btn btn-ghost" style="padding:8px 12px" onchange="filtrarArchivosOrigen(this.value)">
+        <option value="">Todos los orígenes</option>
+        <option value="whatsapp">WhatsApp</option>
+        <option value="manual">Manual</option>
+      </select>
+    </div>
+    <div class="files-grid-all" id="archivos-grid"></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════════════════
+     VIEW: DASHBOARD
+═══════════════════════════════════════════════════════════════════════════ -->
+<div class="view" id="view-dashboard">
+  <div class="content-area">
+    <div class="page-title">Dashboard</div>
+    <div class="page-sub" id="dash-sub">Resumen general</div>
+    <div class="stats-grid" id="dash-stats"></div>
+    <div class="charts-row">
+      <div class="chart-card">
+        <div class="chart-title">Actividad esta semana</div>
+        <div class="bar-chart" id="dash-bars"></div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-title">Conversaciones por estado</div>
+        <div id="dash-donut" style="display:flex;align-items:center;gap:14px;margin-top:8px"></div>
+      </div>
+    </div>
+    <div class="recent-table">
+      <div class="table-hdr">
+        Actividad reciente
+        <span style="font-size:12px;color:var(--text3);font-weight:400">Últimas conversaciones</span>
+      </div>
+      <div id="dash-tabla"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════════════════
+     VIEW: PAGOS
+═══════════════════════════════════════════════════════════════════════════ -->
+<div class="view" id="view-pagos">
+  <div class="content-area">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px">
+      <div class="page-title">Pagos</div>
+      <button class="btn btn-primary" onclick="abrirModalNuevoPago()">
+        <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        Nuevo pago
+      </button>
+    </div>
+    <div class="page-sub">Gestión de pagos y recordatorios</div>
+    <div style="display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;align-items:center">
+      <button class="pl-tab active" onclick="filtrarPagos('todos',this)">Todos</button>
+      <button class="pl-tab" onclick="filtrarPagos('pendiente',this)">Pendientes</button>
+      <button class="pl-tab" onclick="filtrarPagos('vencido',this)">Vencidos</button>
+      <button class="pl-tab" onclick="filtrarPagos('por_vencer',this)">Por vencer (7d)</button>
+      <button class="pl-tab" onclick="filtrarPagos('esta_semana',this)">Esta semana</button>
+      <button class="pl-tab" onclick="filtrarPagos('este_mes',this)">Este mes</button>
+      <button class="pl-tab" onclick="filtrarPagos('pagado',this)">Pagados</button>
+      <input id="pagos-buscar" class="search-field" style="max-width:220px;margin-left:auto" placeholder="Buscar cliente..." oninput="filtrarPagosBuscar(this.value)">
+    </div>
+    <div id="pagos-resumen" style="display:flex;gap:12px;margin-bottom:16px;flex-wrap:wrap"></div>
+    <div class="recent-table">
+      <div class="table-hdr" id="pagos-tabla-titulo">Todos los pagos</div>
+      <div id="pagos-tabla"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════════════════
+     VIEW: AGENTES/CONFIG
+═══════════════════════════════════════════════════════════════════════════ -->
+<div class="view" id="view-agentes">
+  <div class="content-area">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px">
+      <div class="page-title">Configuración</div>
+      <button class="btn btn-primary" onclick="abrirModalNuevoAgente()">
+        <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        Nuevo agente
+      </button>
+    </div>
+    <div class="page-sub">Gestión de agentes y acceso</div>
+    <div class="clients-grid" id="agentes-grid"></div>
+  </div>
+</div>
+
+</div><!-- /main -->
+
+<!-- ═══════════════ PANEL DESLIZABLE DE CLIENTE ═══════════════ -->
+<div class="panel-backdrop" id="cp-backdrop" onclick="cerrarClientePanel()"></div>
+<div class="client-panel" id="client-panel">
+  <div class="cp-header">
+    <div class="cp-av" id="cp-av">?</div>
+    <div>
+      <div class="cp-name" id="cp-name">Cliente</div>
+      <div class="cp-phone" id="cp-phone"></div>
+    </div>
+    <button class="cp-close" onclick="cerrarClientePanel()">×</button>
+  </div>
+  <div class="cp-tabs">
+    <div class="cp-tab active" onclick="cpTab('info',this)">Info</div>
+    <div class="cp-tab" onclick="cpTab('servicios',this)">Servicios</div>
+    <div class="cp-tab" onclick="cpTab('pagos',this)">Pagos</div>
+    <div class="cp-tab" onclick="cpTab('archivos',this)">Archivos</div>
+    <div class="cp-tab" onclick="cpTab('notas',this)">Notas</div>
+    <div class="cp-tab" onclick="cpTab('actividad',this)">Historial</div>
+    <div class="cp-tab" onclick="cpTab('whatsapp',this)">WhatsApp</div>
+  </div>
+  <div class="cp-body" id="cp-body"></div>
+</div>
+
+<!-- PANEL NOTIFICACIONES -->
+<div class="panel-backdrop" id="notif-backdrop" onclick="cerrarNotifPanel()"></div>
+<div class="client-panel" id="notif-panel" style="width:380px">
+  <div class="cp-header" style="padding:14px 20px">
+    <div style="font-size:16px;font-weight:600">🔔 Notificaciones</div>
+    <button class="cp-close" onclick="cerrarNotifPanel()">×</button>
+  </div>
+  <div style="padding:10px 16px;border-bottom:1px solid var(--border);background:#f9fafb">
+    <div style="font-size:12px;color:var(--text2)">Archivos recibidos y clasificados automáticamente</div>
+  </div>
+  <div id="notif-body" style="flex:1;overflow-y:auto">
+    <div style="padding:32px;text-align:center;color:var(--text3);font-size:13px">Sin notificaciones</div>
+  </div>
+</div>
+
+<!-- MODAL -->
+<div class="overlay" id="modal-overlay">
+  <div class="modal">
+    <div class="modal-title">
+      <span id="modal-title"></span>
+      <button class="modal-close" onclick="closeModal()">×</button>
+    </div>
+    <div id="modal-body"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ── CONFIG ────────────────────────────────────────────────────────────────────
+const API = localStorage.getItem('ce_api') || 'http://localhost:3001';
+let token = localStorage.getItem('ce_token');
+let user  = JSON.parse(localStorage.getItem('ce_user') || 'null');
+let currentView = 'chats';
+let currentClienteId = null;
+let _allConvs = [];
+let _allArchivos = [];
+let _allClientes = [];
+
+if (!token || !user) { window.location.href = 'login.html'; }
+else {
+  const ini = user.nombre?.[0]?.toUpperCase() || 'A';
+  document.getElementById('s-user-av').textContent = ini;
+  document.title = 'IG Accounting — Panel';
+}
+
+function logout() { localStorage.clear(); window.location.href = 'login.html'; }
+
+// ── API ────────────────────────────────────────────────────────────────────────
+async function api(method, path, body) {
+  const opts = { method, headers: { 'Content-Type':'application/json', Authorization:`Bearer ${token}` }};
+  if (body) opts.body = JSON.stringify(body);
+  const r = await fetch(`${API}/api${path}`, opts);
+  if (r.status === 401) { logout(); return null; }
+  return r.json();
+}
+
+// ── NAVIGATION ────────────────────────────────────────────────────────────────
+function showView(view) {
+  currentView = view;
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  document.querySelectorAll('.s-item').forEach(n => n.classList.remove('active'));
+  document.getElementById(`view-${view}`)?.classList.add('active');
+  document.getElementById(`nav-${view}`)?.classList.add('active');
+  const loaders = { clientes: cargarClientes, archivos: cargarArchivos, dashboard: cargarDashboard, pagos: cargarPagos, agentes: cargarAgentes };
+  loaders[view]?.();
+  if (view === 'chats') {
+    if ('Notification' in window && Notification.permission === 'default') Notification.requestPermission();
+    refrescarWAList();
+    if (!window._waTimer) window._waTimer = setInterval(() => { if (currentView==='chats') refrescarWAList(); }, 30000);
+  }
+}
+
+// ── HELPERS ───────────────────────────────────────────────────────────────────
+const fmt  = n => n ? `$${parseFloat(n).toLocaleString('en-US',{minimumFractionDigits:0})}` : '—';
+const fmtD = d => d ? new Date(d).toLocaleDateString('es',{day:'2-digit',month:'short',year:'numeric'}) : '—';
+const fmtT = d => d ? new Date(d).toLocaleTimeString('es',{hour:'2-digit',minute:'2-digit'}) : '';
+const avatarColor = s => { const c=['#16a34a','#2563eb','#9333ea','#dc2626','#0891b2','#b45309','#0f766e','#be185d']; return c[(s?.charCodeAt(0)||0)%c.length]; };
+function $v(id) { const e=document.getElementById(id); return e?.value||''; }
+function toast(msg,type='ok') {
+  const el=document.getElementById('toast');
+  el.textContent=msg;
+  el.className=`toast ${type} show`;
+  const colors={ok:'#065F46',err:'#991B1B',warn:'#92400E'};
+  el.style.background=colors[type]||colors.ok;
+  setTimeout(()=>el.classList.remove('show'),3500);
+}
+function openModal(title,html) {
+  document.getElementById('modal-title').textContent=title;
+  document.getElementById('modal-body').innerHTML=html;
+  document.getElementById('modal-overlay').classList.add('show');
+}
+function closeModal() { document.getElementById('modal-overlay').classList.remove('show'); }
+document.getElementById('modal-overlay').addEventListener('click', e => { if(e.target===e.currentTarget) closeModal(); });
+
+function fileExt(mime,nombre) {
+  if (!mime) return (nombre||'').split('.').pop()?.toLowerCase()||'';
+  if (mime.includes('pdf')) return 'pdf';
+  if (mime.includes('word')||mime.includes('docx')) return 'doc';
+  if (mime.includes('excel')||mime.includes('xlsx')||mime.includes('sheet')) return 'xls';
+  if (mime.includes('image')) return 'img';
+  if (mime.includes('audio')) return 'aud';
+  return 'other';
+}
+function fileIconHtml(ext,size=40) {
+  const map={pdf:'fi-pdf PDF',doc:'fi-doc DOC',xls:'fi-xls XLS',img:'fi-img IMG',aud:'fi-aud AUD',other:'fi-other FILE'};
+  const [cls,lbl] = (map[ext]||map.other).split(' ');
+  return `<div class="file-icon ${cls}" style="width:${size}px;height:${size}px">${lbl}</div>`;
+}
+function estadoTag(e) {
+  const m={activo:'tag-green',completado:'tag-green',pagado:'tag-green',recurrente:'tag-green',en_proceso:'tag-blue',enviado:'tag-blue',abierto:'tag-blue',pendiente:'tag-amber',esperando_cliente:'tag-amber',vencido:'tag-red',cancelado:'tag-red',cerrado:'tag-red',inactivo:'tag-gray',resuelto:'tag-purple',manual:'tag-gray',whatsapp:'tag-green',wordpress:'tag-blue'};
+  return `<span class="tag ${m[e]||'tag-gray'}">${(e||'').replace(/_/g,' ')}</span>`;
+}
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// WHATSAPP
+// ═══════════════════════════════════════════════════════════════════════════════
+let _waFiltroTab = 'todos';
+
+async function refrescarWAList() {
+  const d = await api('GET','/conversaciones?limit=50');
+  _allConvs = d || [];
+  renderWAList(_allConvs);
+}
+
+function renderWAList(convs) {
+  const filtered = _waFiltroTab==='todos' ? convs : convs.filter(c=>c.estado===_waFiltroTab);
+  const el = document.getElementById('wa-list');
+  if (!filtered.length) { el.innerHTML='<div style="padding:32px;text-align:center;color:var(--text3);font-size:13px">Sin conversaciones</div>'; return; }
+  el.innerHTML = filtered.map(c => {
+    const nombre = c.contacto_nombre || c.telefono;
+    const color  = avatarColor(nombre);
+    const ini    = nombre[0].toUpperCase();
+    const hora   = c.ultima_actividad ? fmtT(c.ultima_actividad) : '';
+    const prev   = c.ultimo_mensaje || 'Sin mensajes';
+    const hasFile= prev.startsWith('📎');
+    const unread = c.mensajes_sin_leer > 0 ? `<div class="chat-unread">${c.mensajes_sin_leer}</div>` : '';
+    return `<div class="chat-item" id="ci-${c.id}" onclick="abrirConv('${c.id}','${nombre.replace(/'/g,"\\'")}','${color}')">
+      <div class="chat-av" style="background:${color}">${ini}</div>
+      <div class="chat-info">
+        <div class="chat-name">${nombre}</div>
+        <div class="chat-prev ${hasFile?'file':''}">${prev.substring(0,45)}</div>
+      </div>
+      <div class="chat-meta">
+        <div class="chat-time">${hora}</div>
+        ${unread}
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function filtrarWA(q) {
+  document.querySelectorAll('.chat-item').forEach(el => {
+    el.style.display = el.textContent.toLowerCase().includes(q.toLowerCase()) ? '' : 'none';
+  });
+}
+
+function filtrarTabWA(tab, el) {
+  _waFiltroTab = tab;
+  document.querySelectorAll('.pl-tab').forEach(t=>t.classList.remove('active'));
+  el.classList.add('active');
+  renderWAList(_allConvs);
+}
+
+async function abrirConv(id, nombre, color) {
+  document.querySelectorAll('.chat-item').forEach(c=>c.classList.remove('active'));
+  document.getElementById(`ci-${id}`)?.classList.add('active');
+
+  const d = await api('GET', `/conversaciones/${id}`);
+  if (!d) return;
+
+  // CENTER
+  const center = document.getElementById('wa-center');
+  center.innerHTML = `
+    <div class="pc-header">
+      <div class="chat-av" style="background:${color};width:38px;height:38px;font-size:14px;border-radius:50%;flex-shrink:0">${nombre[0].toUpperCase()}</div>
+      <div class="pc-header-info">
+        <div class="pc-name">${d.contacto_nombre||d.telefono}</div>
+        <div class="pc-sub">${d.telefono}${d.cliente_id?` · <span style="color:var(--green)">✓ Cliente</span>`:''}</div>
+      </div>
+      <div class="pc-actions">
+        ${d.cliente_id
+          ? `<button class="btn btn-ghost btn-sm" onclick="abrirClientePanel('${d.cliente_id}')" style="color:var(--green);border-color:var(--green)">👤 Ver cliente</button>`
+          : `<button class="btn btn-primary btn-sm" onclick="modalConvertirCliente('${d.contacto_id}','${(d.contacto_nombre||'').replace(/'/g,"\\'")}','${d.telefono}')">+ Agregar como cliente</button>`}
+        <select style="padding:5px 10px;border-radius:8px;border:1px solid var(--border);font-size:12px;font-family:var(--font);background:var(--bg)" onchange="cambiarEstadoConv('${id}',this.value)">
+          ${['abierto','en_proceso','resuelto','cerrado'].map(e=>`<option value="${e}" ${d.estado===e?'selected':''}>${e.replace('_',' ')}</option>`).join('')}
+        </select>
+        <button class="btn btn-ghost btn-sm" onclick="abrirModalEtiquetas('${id}',${JSON.stringify(d.etiquetas||[])})" title="Etiquetas">🏷️</button>
+      </div>
+    </div>
+    ${(d.etiquetas||[]).length ? `<div style="padding:6px 16px;background:var(--bg-white);border-bottom:1px solid var(--border);display:flex;gap:4px;flex-wrap:wrap" id="etiquetas-conv-${id}">
+      ${(d.etiquetas||[]).map(val=>{
+        const e = ETIQUETAS_DISPONIBLES?.find(x=>x.val===val);
+        return e ? `<span style="display:inline-flex;align-items:center;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:500;background:${e.color};color:${e.text}">${e.label}</span>` : '';
+      }).join('')}
+    </div>` : `<div id="etiquetas-conv-${id}"></div>`}
+    <div class="pc-msgs" id="wa-msgs">
+      ${(d.mensajes||[]).map(m=>renderMsg(m)).join('')}
+    </div>
+    <div class="pc-input">
+      <button class="icon-btn"><svg viewBox="0 0 24 24"><path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg></button>
+      <input id="wa-input" placeholder="Escribe un mensaje..." onkeydown="if(event.key==='Enter')enviarMsg('${id}','${d.telefono}')">
+      <button class="send-btn" onclick="enviarMsg('${id}','${d.telefono}')">
+        <svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+      </button>
+    </div>`;
+
+  setTimeout(()=>{ const m=document.getElementById('wa-msgs'); if(m) m.scrollTop=m.scrollHeight; },50);
+
+  // RIGHT PANEL
+  renderRightPanel(d);
+}
+
+function renderMsg(m) {
+  const entrante = m.direccion==='entrante';
+  const cls = entrante ? 'in' : 'out';
+  const hora = fmtT(m.created_at);
+  const ext  = fileExt(m.tipo_mime, m.contenido);
+  let html = '';
+
+  if (['document','image','audio','video'].includes(m.tipo)) {
+    const nombre = m.archivo_nombre || m.contenido || m.tipo;
+    const ex = m.tipo==='image'?'img': m.tipo==='audio'?'aud': fileExt(null,nombre);
+    html = `<div class="msg-row ${cls}">
+      <div class="file-bubble" onclick="${m.archivo_id?`descargarArchivo('${m.archivo_id}','${nombre}')`:''}" style="${!m.archivo_id?'cursor:default':''}">
+        ${fileIconHtml(ex)}
+        <div style="flex:1;min-width:0">
+          <div style="font-size:12px;font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${nombre}</div>
+          <div style="font-size:10px;color:var(--text3);margin-top:2px">${hora}${!m.archivo_id?' · No almacenado':' · Clic para descargar'}</div>
+        </div>
+        ${m.archivo_id?`<svg width="16" height="16" fill="none" stroke="var(--text3)" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>`:''}
+      </div>
+    </div>`;
+  } else {
+    html = `<div class="msg-row ${cls}">
+      <div class="msg-bubble ${cls}">${(m.contenido||'').replace(/\n/g,'<br>')}
+        <div class="msg-time">${hora}${!entrante?' ✓✓':''}</div>
+      </div>
+    </div>`;
+  }
+  return html;
+}
+
+function renderRightPanel(d) {
+  const nombre = d.contacto_nombre || d.telefono;
+  const color  = avatarColor(nombre);
+  const archivos = d.archivos || [];
+  const pr = document.getElementById('wa-right-panel');
+  pr.innerHTML = `
+    <div class="pr-header">Detalle del contacto</div>
+    <div class="pr-section">
+      <div class="pr-contact">
+        <div class="pr-av" style="background:${color}">${nombre[0].toUpperCase()}</div>
+        <div>
+          <div class="pr-contact-name">${nombre}</div>
+          <div class="pr-contact-phone">${d.telefono}</div>
+        </div>
+      </div>
+      ${d.cliente_id
+        ? `<div style="margin-bottom:8px">${estadoTag('activo')} <span style="font-size:12px;color:var(--text2)">Cliente registrado</span></div>`
+        : `<button class="btn-add-client" onclick="modalConvertirCliente('${d.contacto_id}','${nombre.replace(/'/g,"\\'")}','${d.telefono}')">+ Agregar como cliente</button>`
+      }
+    </div>
+    <div class="pr-section">
+      <div class="pr-label">Estado conversación</div>
+      <select class="pr-select" onchange="cambiarEstadoConv('${d.id}',this.value)">
+        ${['abierto','en_proceso','resuelto','cerrado'].map(e=>`<option value="${e}" ${d.estado===e?'selected':''}>${e.replace('_',' ')}</option>`).join('')}
+      </select>
+    </div>
+    ${archivos.length ? `
+    <div style="padding:10px 16px 4px;font-size:10px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.5px">Archivos (${archivos.length})</div>
+    <div class="pr-files">
+      ${archivos.map(a=>{
+        const ex = fileExt(a.tipo_mime,a.nombre_original);
+        return `<div class="pr-file-item" onclick="descargarArchivo('${a.id}','${a.nombre_original}')">
+          <div class="pr-file-icon ${`fi-${ex}`}">${ex.toUpperCase()}</div>
+          <div class="pr-file-info">
+            <div class="pr-file-name">${a.nombre_original}</div>
+            <div class="pr-file-meta">${fmtD(a.created_at)}</div>
+          </div>
+        </div>`;
+      }).join('')}
+    </div>` : ''}`;
+}
+
+async function enviarMsg(convId, telefono) {
+  const input = document.getElementById('wa-input');
+  const texto = input?.value?.trim();
+  if (!texto) return;
+  input.value = '';
+  const d = await api('POST', `/conversaciones/${convId}/mensajes`, {texto});
+  if (d?.success) {
+    const msgs = document.getElementById('wa-msgs');
+    if (msgs) {
+      msgs.insertAdjacentHTML('beforeend', `<div class="msg-row out"><div class="msg-bubble out">${texto}<div class="msg-time">${fmtT(new Date())} ✓✓</div></div></div>`);
+      msgs.scrollTop = msgs.scrollHeight;
+    }
+    refrescarWAList();
+  } else toast(d?.message||'Error al enviar','err');
+}
+
+async function asignarAgente(clienteId, agenteId) {
+  const d = await api('PUT', `/clientes/${clienteId}`, { agente_id: agenteId || null });
+  if (d?.id) {
+    toast(agenteId ? 'Agente asignado ✓' : 'Agente removido');
+    _cpData = { ..._cpData, agente_id: agenteId || null };
+  } else toast('Error al asignar agente', 'err');
+}
+
+async function cambiarEstadoConv(id, estado) {
+  await api('PUT', `/conversaciones/${id}/estado`, {estado});
+  toast('Estado actualizado');
+  refrescarWAList();
+}
+
+// ── CONVERTIR CONTACTO → CLIENTE ──────────────────────────────────────────────
+function modalConvertirCliente(contactoId, nombre, telefono) {
+  const parts = nombre.split(' ');
+  openModal('➕ Agregar como cliente', `
+    <p style="font-size:13px;color:var(--text2);margin-bottom:16px">Vincula <strong>${telefono}</strong> como cliente. Sus archivos y conversaciones quedarán asociados automáticamente.</p>
+    <div class="field-row">
+      <div class="field"><label>Nombre *</label><input id="nc-n" value="${parts[0]||''}"></div>
+      <div class="field"><label>Apellido</label><input id="nc-a" value="${parts.slice(1).join(' ')||''}"></div>
+    </div>
+    <div class="field"><label>Email *</label><input type="email" id="nc-e" placeholder="correo@email.com"></div>
+    <div class="field"><label>País</label><input id="nc-p" placeholder="Colombia"></div>
+    <div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:12px;margin-bottom:14px">
+      <label style="display:flex;gap:8px;align-items:center;font-size:13px;cursor:pointer">
+        <input type="checkbox" id="nc-portal" checked> <strong>Activar portal del cliente</strong>
+      </label>
+      <div style="margin-top:10px">
+        <div class="field"><label>Contraseña (vacío = autogenerar)</label><input id="nc-pass" placeholder="Se generará automáticamente"></div>
+      </div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-ghost" onclick="closeModal()">Cancelar</button>
+      <button class="btn btn-primary" onclick="confirmarConvertir('${contactoId}')">Crear cliente y vincular</button>
+    </div>`);
+}
+
+async function confirmarConvertir(contactoId) {
+  const nombre=$v('nc-n'),apellido=$v('nc-a'),email=$v('nc-e'),pais=$v('nc-p'),pass=$v('nc-pass');
+  const portal=document.getElementById('nc-portal')?.checked;
+  if (!nombre||!email) return toast('Nombre y email son requeridos','err');
+  const d = await api('POST',`/whatsapp/contacto/${contactoId}/convertir-cliente`,{nombre,apellido,email,pais,password:pass||undefined,activar_portal:portal});
+  if (d?.cliente) {
+    closeModal();
+    toast(`✅ Cliente ${nombre} ${apellido} creado${d.password_temporal?' · Pass: '+d.password_temporal:''}`, 'ok');
+    setTimeout(()=>refrescarWAList(),600);
+    setTimeout(()=>abrirClientePanel(d.cliente.id),900);
+  } else toast(d?.message||'Error','err');
+}
+
+// ── DESCARGA ─────────────────────────────────────────────────────────────────
+async function descargarArchivo(id, nombre) {
+  try {
+    const r = await fetch(`${API}/api/archivos/${id}/descargar`, {headers:{Authorization:`Bearer ${token}`}});
+    if (!r.ok) { toast('Error al descargar','err'); return; }
+    const ct = r.headers.get('content-type')||'';
+    if (ct.includes('application/json')) { const d=await r.json(); window.open(d.url,'_blank'); return; }
+    const blob = await r.blob();
+    const url  = URL.createObjectURL(blob);
+    const a    = document.createElement('a');
+    a.href=url; a.download=nombre;
+    document.body.appendChild(a); a.click();
+    document.body.removeChild(a); URL.revokeObjectURL(url);
+  } catch { toast('Error al descargar','err'); }
+}
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// CLIENTE PANEL (slide)
+// ═══════════════════════════════════════════════════════════════════════════════
+let _cpData = null;
+let _cpTab  = 'info';
+
+async function abrirClientePanel(id) {
+  currentClienteId = id;
+  const d = await api('GET', `/clientes/${id}`);
+  if (!d) return;
+  _cpData = d;
+  const color = avatarColor(d.nombre);
+  const av = document.getElementById('cp-av');
+  av.textContent = d.nombre[0].toUpperCase();
+  av.style.background = color;
+  document.getElementById('cp-name').textContent = `${d.nombre} ${d.apellido||''}`;
+  document.getElementById('cp-phone').textContent = `${d.email}${d.telefono?' · '+d.telefono:''}`;
+  document.getElementById('cp-backdrop').classList.add('show');
+  document.getElementById('client-panel').classList.add('open');
+  cpTab('info', document.querySelector('.cp-tab'));
+}
+
+function cerrarClientePanel() {
+  document.getElementById('client-panel').classList.remove('open');
+  document.getElementById('cp-backdrop').classList.remove('show');
+  currentClienteId = null;
+}
+
+function cpTab(tab, el) {
+  _cpTab = tab;
+  document.querySelectorAll('.cp-tab').forEach(t=>t.classList.remove('active'));
+  el.classList.add('active');
+  renderCpBody();
+}
+
+async function renderCpBody() {
+  const d = _cpData;
+  if (!d) return;
+  const body = document.getElementById('cp-body');
+
+  if (_cpTab==='info') {
+    // Cargar lista de agentes para el selector
+    const agentes = await api('GET', '/agentes') || [];
+    body.innerHTML = `
+      <div class="cp-section">
+        <div class="cp-section-title">Información general
+          <button class="btn btn-ghost btn-sm" onclick="editarCliente('${d.id}')">Editar</button>
+        </div>
+        <div class="info-grid">
+          <div class="info-cell"><div class="info-cell-label">Email</div><div class="info-cell-val">${d.email}</div></div>
+          <div class="info-cell"><div class="info-cell-label">Teléfono</div><div class="info-cell-val">${d.telefono||'—'}</div></div>
+          <div class="info-cell"><div class="info-cell-label">País</div><div class="info-cell-val">${d.pais||'—'}</div></div>
+          <div class="info-cell"><div class="info-cell-label">Estado</div><div class="info-cell-val">${estadoTag(d.estado)}</div></div>
+          <div class="info-cell"><div class="info-cell-label">Origen</div><div class="info-cell-val">${estadoTag(d.origen)}</div></div>
+          <div class="info-cell"><div class="info-cell-label">Portal</div><div class="info-cell-val">${d.portal_activo?'<span class="tag tag-green">✓ Activo</span>':'<span class="tag tag-gray">Inactivo</span>'}</div></div>
+        </div>
+
+        <div style="margin-bottom:14px">
+          <div style="font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.4px;margin-bottom:6px">Agente asignado</div>
+          <select style="width:100%;padding:8px 12px;border:1px solid var(--border);border-radius:8px;font-size:13px;font-family:var(--font);background:var(--bg);color:var(--text);outline:none"
+            onchange="asignarAgente('${d.id}',this.value)">
+            <option value="">Sin asignar</option>
+            ${agentes.map(a=>`<option value="${a.id}" ${d.agente_id===a.id?'selected':''}>${a.nombre} (${a.rol})</option>`).join('')}
+          </select>
+        </div>
+
+        ${!d.portal_activo?`<button class="btn btn-primary" style="width:100%;margin-bottom:8px" onclick="activarPortal('${d.id}','${d.nombre}','${d.email}')">Activar portal del cliente</button>`:''}
+
+        <div style="display:flex;gap:8px;margin-top:4px">
+          ${d.portal_activo?`<button class="btn btn-ghost btn-sm" style="flex:1" onclick="restablecerPassword('${d.id}','${d.nombre}')">🔑 Restablecer contraseña</button>`:''}
+          <button class="btn btn-danger btn-sm" style="flex:1" onclick="eliminarCliente('${d.id}','${d.nombre}')">🗑 Eliminar cliente</button>
+        </div>
+      </div>
+      <div class="cp-section">
+        <div class="cp-section-title">Resumen</div>
+        <div class="info-grid">
+          <div class="info-cell"><div class="info-cell-label">Servicios</div><div class="info-cell-val" style="font-size:20px;font-weight:700">${d.servicios?.length||0}</div></div>
+          <div class="info-cell"><div class="info-cell-label">Pagos pendientes</div><div class="info-cell-val" style="font-size:20px;font-weight:700;color:#d97706">${(d.pagos||[]).filter(p=>p.estado==='pendiente').length}</div></div>
+          <div class="info-cell"><div class="info-cell-label">Archivos</div><div class="info-cell-val" style="font-size:20px;font-weight:700">${d.archivos?.length||0}</div></div>
+          <div class="info-cell"><div class="info-cell-label">Desde</div><div class="info-cell-val" style="font-size:12px">${fmtD(d.created_at)}</div></div>
+        </div>
+      </div>`;
+  }
+
+  else if (_cpTab==='servicios') {
+    const svcs = d.servicios || [];
+    body.innerHTML = `
+      <div class="cp-section">
+        <div class="cp-section-title">Servicios (${svcs.length})
+          <button class="btn btn-primary btn-sm" onclick="modalNuevoServicio('${d.id}')">+ Agregar</button>
+        </div>
+        ${svcs.length ? svcs.map(s=>`
+          <div class="service-item">
+            <div style="font-size:22px">${tipoServicioEmoji(s.tipo)}</div>
+            <div class="service-item-info">
+              <div class="service-item-name">${s.nombre}</div>
+              <div class="service-item-type">${s.tipo?.replace(/_/g,' ')} · ${fmtD(s.fecha_vencimiento)||'Sin fecha'}</div>
+            </div>
+            <div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px">
+              <select style="font-size:11px;padding:3px 8px;border-radius:6px;border:1px solid var(--border);background:var(--bg);font-family:var(--font);cursor:pointer"
+                onchange="cambiarEstadoServicio('${s.id}',this.value,'${d.id}')">
+                ${['pendiente','en_proceso','esperando_cliente','completado','recurrente','cancelado'].map(e=>`<option value="${e}" ${s.estado===e?'selected':''}>${e.replace(/_/g,' ')}</option>`).join('')}
+              </select>
+              <div class="service-item-price">${fmt(s.precio)}</div>
+            </div>
+          </div>`).join('') : '<div style="padding:20px;text-align:center;color:var(--text3);font-size:13px">Sin servicios</div>'}
+      </div>`;
+  }
+
+  else if (_cpTab==='pagos') {
+    const pagos = d.pagos || [];
+    const pendiente = pagos.filter(p=>p.estado==='pendiente');
+    const total = pendiente.reduce((s,p)=>s+parseFloat(p.monto||0),0);
+    body.innerHTML = `
+      <div class="cp-section">
+        <div class="cp-section-title">Pagos (${pagos.length})
+          <button class="btn btn-primary btn-sm" onclick="modalNuevoPagoCliente('${d.id}')">+ Agregar</button>
+        </div>
+        ${total>0?`<div style="background:#fef3c7;border:1px solid #fde68a;border-radius:8px;padding:10px 12px;margin-bottom:12px;font-size:13px">⚠️ <strong>${fmt(total)}</strong> pendiente de cobro</div>`:''}
+        ${pagos.map(p=>`
+          <div class="pago-item">
+            <div class="pago-desc">
+              <div style="font-weight:500">${p.servicio_nombre||p.descripcion||'—'}</div>
+              <div class="pago-fecha">Vence: ${fmtD(p.fecha_vencimiento)}</div>
+            </div>
+            <div style="text-align:right">
+              <div class="pago-monto">${fmt(p.monto)}</div>
+              ${estadoTag(p.estado)}
+            </div>
+            <div style="display:flex;flex-direction:column;gap:4px">
+              ${p.estado!=='pagado'?`<button class="btn btn-success btn-sm" onclick="marcarPagado('${p.id}')">✓</button>`:''}
+              ${p.estado!=='pagado'?`<button class="btn btn-ghost btn-sm" title="Recordatorio" onclick="modalConfigurarRecordatorio('${p.id}','${p.servicio_nombre||p.descripcion||'Pago'}','${p.monto}')">⏰</button>`:''}
+            </div>
+          </div>`).join('') || '<div style="padding:20px;text-align:center;color:var(--text3);font-size:13px">Sin pagos</div>'}
+      </div>
+      <div class="cp-section">
+        <div class="cp-section-title">Recordatorios automáticos</div>
+        <div style="background:var(--bg);border-radius:8px;padding:14px;font-size:13px;color:var(--text2);line-height:1.6">
+          ✅ El sistema envía recordatorios automáticos a las <strong>8:00 AM</strong> cuando un pago vence en:<br>
+          <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap">
+            <span style="background:#dbeafe;color:#1d4ed8;padding:3px 10px;border-radius:12px;font-size:12px;font-weight:500">30 días — Email</span>
+            <span style="background:#fef3c7;color:#92400e;padding:3px 10px;border-radius:12px;font-size:12px;font-weight:500">7 días — Email + WhatsApp</span>
+            <span style="background:#fee2e2;color:#b91c1c;padding:3px 10px;border-radius:12px;font-size:12px;font-weight:500">1 día — Email + WhatsApp</span>
+          </div>
+        </div>
+        <button class="btn btn-ghost" style="width:100%;margin-top:10px" onclick="ejecutarRecordatoriosAhora()">
+          ▶ Ejecutar recordatorios ahora
+        </button>
+      </div>`;
+  }
+
+  else if (_cpTab==='archivos') {
+    const archivos = d.archivos || [];
+    const solicitudes = d.solicitudes || [];
+    body.innerHTML = `
+      <div class="cp-section">
+        <div class="cp-section-title">Solicitudes de documentos (${solicitudes.length})
+          <button class="btn btn-primary btn-sm" onclick="modalSolicitarDocumento('${d.id}','${d.nombre}','${d.telefono||''}')">📄 Solicitar</button>
+        </div>
+        ${solicitudes.length ? solicitudes.map(s=>`
+          <div style="background:var(--bg);border-radius:8px;padding:12px 14px;margin-bottom:8px;display:flex;align-items:center;gap:10px">
+            <div style="font-size:20px">${s.estado==='recibido'?'✅':'⏳'}</div>
+            <div style="flex:1;min-width:0">
+              <div style="font-size:13px;font-weight:500">${s.titulo}</div>
+              ${s.descripcion?`<div style="font-size:11px;color:var(--text3);margin-top:2px">${s.descripcion.substring(0,60)}</div>`:''}
+              ${s.fecha_limite?`<div style="font-size:11px;color:#d97706;margin-top:2px">Límite: ${fmtD(s.fecha_limite)}</div>`:''}
+            </div>
+            <div>${estadoTag(s.estado)}</div>
+          </div>`).join('') : '<div style="padding:12px 0;color:var(--text3);font-size:13px">Sin solicitudes pendientes</div>'}
+      </div>
+      <div class="cp-section">
+        <div class="cp-section-title">Archivos recibidos (${archivos.length})
+          <button class="btn btn-ghost btn-sm" onclick="abrirSubirArchivoCliente('${d.id}')">↑ Subir</button>
+        </div>
+        ${archivos.length ? `<div class="files-grid">${archivos.map(a=>{
+          const ex=fileExt(a.tipo_mime,a.nombre_original);
+          return `<div class="file-card" onclick="descargarArchivo('${a.id}','${a.nombre_original}')">
+            ${fileIconHtml(ex,40)}
+            <div class="file-card-name">${a.nombre_original}</div>
+            <div class="file-card-meta">${fmtD(a.created_at)}</div>
+            <div class="file-card-footer">${estadoTag(a.origen||'manual')}<svg width="14" height="14" fill="none" stroke="var(--text3)" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></div>
+          </div>`;
+        }).join('')}</div>` : '<div style="padding:20px;text-align:center;color:var(--text3);font-size:13px">Sin archivos</div>'}
+      </div>`;
+  }
+
+  else if (_cpTab==='notas') {
+    body.innerHTML = `<div class="cp-section"><div style="color:var(--text3);font-size:13px;text-align:center;padding:16px">Cargando notas...</div></div>`;
+    const notas = await api('GET', `/clientes/${d.id}/notas`) || [];
+    body.innerHTML = `
+      <div class="cp-section">
+        <div class="cp-section-title">Nueva nota interna</div>
+        <div style="background:#fffbeb;border:1px solid #fde68a;border-radius:8px;padding:12px;margin-bottom:14px;font-size:12px;color:#92400e">
+          🔒 Las notas son privadas — el cliente nunca las ve
+        </div>
+        <textarea id="nota-texto" placeholder="Escribe una nota interna sobre este cliente..." 
+          style="width:100%;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:10px 12px;font-size:13px;font-family:var(--font);color:var(--text);outline:none;resize:vertical;min-height:90px;margin-bottom:10px"></textarea>
+        <button class="btn btn-primary" style="width:100%" onclick="guardarNota('${d.id}')">💾 Guardar nota</button>
+      </div>
+      <div class="cp-section">
+        <div class="cp-section-title">Notas anteriores (${notas.length})</div>
+        ${notas.length ? notas.map(n=>`
+          <div style="background:var(--bg);border-radius:8px;padding:12px 14px;margin-bottom:8px;border-left:3px solid #fbbf24">
+            <div style="font-size:13px;line-height:1.5;margin-bottom:6px">${n.texto.replace(/\n/g,'<br>')}</div>
+            <div style="font-size:11px;color:var(--text3)">
+              ${n.agente||'Agente'} · ${fmtD(n.fecha)} ${fmtT(n.fecha)}
+            </div>
+          </div>`).join('') : '<div style="padding:16px;text-align:center;color:var(--text3);font-size:13px">Sin notas aún</div>'}
+      </div>`;
+  }
+
+  else if (_cpTab==='actividad') {
+    body.innerHTML = `<div class="cp-section"><div style="color:var(--text3);font-size:13px;text-align:center;padding:16px">Cargando historial...</div></div>`;
+    const actividad = await api('GET', `/clientes/${d.id}/actividad`) || [];
+    const iconos = {
+      'nota.interna':'📝', 'cliente.creado':'✨', 'cliente.creado_desde_whatsapp':'📱',
+      'cliente.actualizado':'✏️', 'cliente.portal_activado':'🔑',
+      'archivo.recibido_whatsapp':'📎', 'archivo.subido_manual':'📤', 'archivo.subido_portal':'📥',
+      'mensaje.recibido_whatsapp':'💬', 'solicitud.creada':'📄', 'recordatorio.programado':'⏰',
+      'pago_recordatorio':'💳', 'servicio.creado':'🏢', 'servicio.actualizado':'🔄',
+    };
+    body.innerHTML = `
+      <div class="cp-section">
+        <div class="cp-section-title">Historial de actividad (${actividad.length})</div>
+        ${actividad.length ? `<div style="position:relative">
+          ${actividad.map((a,i)=>{
+            const icono = iconos[a.accion] || '•';
+            const det = a.detalles || {};
+            let desc = a.accion.replace(/\./g,' ').replace(/_/g,' ');
+            if (det.titulo) desc = det.titulo;
+            else if (det.nombre) desc = det.nombre;
+            else if (det.texto) desc = det.texto.substring(0,60)+'...';
+            else if (det.email) desc = `email: ${det.email}`;
+            return `<div style="display:flex;gap:12px;padding:10px 0;border-bottom:1px solid #f3f4f6">
+              <div style="font-size:18px;flex-shrink:0;width:28px;text-align:center">${icono}</div>
+              <div style="flex:1;min-width:0">
+                <div style="font-size:13px;font-weight:500">${desc}</div>
+                <div style="font-size:11px;color:var(--text3);margin-top:2px">
+                  ${a.agente_nombre||'Sistema'} · ${fmtD(a.created_at)} ${fmtT(a.created_at)}
+                </div>
+              </div>
+            </div>`;
+          }).join('')}
+        </div>` : '<div style="padding:16px;text-align:center;color:var(--text3);font-size:13px">Sin actividad registrada</div>'}
+      </div>`;
+  }
+
+  else if (_cpTab==='whatsapp') {
+    body.innerHTML = `<div style="padding:20px;text-align:center;color:var(--text3);font-size:13px">Cargando conversaciones...</div>`;
+    api('GET','/conversaciones?limit=50').then(convs=>{
+      const mias = (convs||[]).filter(c=>c.cliente_id===d.id||c.contacto_nombre?.includes(d.nombre));
+      body.innerHTML = `
+        <div class="cp-section">
+          <div class="cp-section-title">Conversaciones WhatsApp (${mias.length})</div>
+          ${mias.length ? mias.map(c=>`
+            <div class="service-item" style="cursor:pointer" onclick="cerrarClientePanel();showView('chats');setTimeout(()=>abrirConv('${c.id}','${(c.contacto_nombre||d.telefono).replace(/'/g,"\\'")}','${avatarColor(c.contacto_nombre||d.nombre)}'),400)">
+              <div style="font-size:22px">💬</div>
+              <div class="service-item-info">
+                <div class="service-item-name">${c.ultimo_mensaje||'Sin mensajes'}</div>
+                <div class="service-item-type">${fmtD(c.ultima_actividad)}</div>
+              </div>
+              ${estadoTag(c.estado)}
+            </div>`).join('') : '<div style="padding:16px;color:var(--text3);font-size:13px">Sin conversaciones</div>'}
+        </div>`;
+    });
+  }
+}
+
+async function ejecutarRecordatoriosAhora() {
+  const d = await api('POST', '/recordatorios/ejecutar');
+  if (d?.success) toast('✅ Recordatorios procesados y enviados');
+  else toast(d?.message||'Error','err');
+}
+
+function modalConfigurarRecordatorio(pagoId, nombre, monto) {
+  openModal(`⏰ Recordatorio — ${nombre}`, `
+    <p style="font-size:13px;color:var(--text2);margin-bottom:16px">
+      Enviar recordatorio de pago de <strong>$${monto}</strong> al cliente:
+    </p>
+    <div class="field"><label>Notificar por</label>
+      <div style="display:flex;gap:16px;margin-top:6px">
+        <label style="display:flex;gap:8px;align-items:center;font-size:13px;cursor:pointer">
+          <input type="checkbox" id="rec-wa" checked> 📱 WhatsApp
+        </label>
+        <label style="display:flex;gap:8px;align-items:center;font-size:13px;cursor:pointer">
+          <input type="checkbox" id="rec-email" checked> 📧 Email
+        </label>
+      </div>
+    </div>
+    <div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:12px;margin-bottom:14px;font-size:12px;color:#15803d">
+      💡 El sistema también envía recordatorios automáticos a los 30, 7 y 1 día antes del vencimiento.
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-ghost" onclick="closeModal()">Cancelar</button>
+      <button class="btn btn-primary" onclick="enviarRecordatorioAhora('${pagoId}')">Enviar ahora</button>
+    </div>`);
+}
+
+async function enviarRecordatorioAhora(pagoId) {
+  const canales = [];
+  if (document.getElementById('rec-wa')?.checked) canales.push('whatsapp');
+  if (document.getElementById('rec-email')?.checked) canales.push('email');
+  if (!canales.length) return toast('Selecciona al menos un canal','err');
+  const d = await api('POST', `/pagos/${pagoId}/enviar-recordatorio`, { canales });
+  if (d?.success) { closeModal(); toast('✅ Recordatorio enviado'); }
+  else toast(d?.message||'Error al enviar','err');
+}
+
+async function guardarNota(clienteId) {
+  const texto = document.getElementById('nota-texto')?.value?.trim();
+  if (!texto) return toast('Escribe algo en la nota','err');
+  const d = await api('POST', `/clientes/${clienteId}/notas`, { texto });
+  if (d?.success) {
+    toast('Nota guardada ✓');
+    abrirClientePanel(clienteId);
+    // Volver a la pestaña notas
+    setTimeout(()=>{
+      const tabs = document.querySelectorAll('.cp-tab');
+      tabs.forEach(t=>{ if(t.textContent.includes('Notas')) t.click(); });
+    }, 300);
+  } else toast(d?.message||'Error','err');
+}
+
+// ── ETIQUETAS EN CONVERSACIONES ───────────────────────────────────────────────
+const ETIQUETAS_DISPONIBLES = [
+  { label:'🔴 Urgente',    val:'urgente',    color:'#fee2e2',text:'#b91c1c' },
+  { label:'📋 W-9',        val:'w9',         color:'#dbeafe',text:'#1d4ed8' },
+  { label:'🏢 LLC',        val:'llc',        color:'#d1fae5',text:'#065f46' },
+  { label:'📊 Impuestos',  val:'impuestos',  color:'#fef3c7',text:'#92400e' },
+  { label:'💰 Nómina',     val:'nomina',     color:'#f3e8ff',text:'#7c3aed' },
+  { label:'📄 Contrato',   val:'contrato',   color:'#e0f2fe',text:'#0369a1' },
+  { label:'✅ Resuelto',   val:'resuelto',   color:'#dcfce7',text:'#15803d' },
+  { label:'⏳ En espera',  val:'en_espera',  color:'#f3f4f6',text:'#374151' },
+];
+
+function abrirModalEtiquetas(convId, etiquetasActuales) {
+  const actuales = etiquetasActuales || [];
+  openModal('🏷️ Etiquetas de la conversación', `
+    <p style="font-size:13px;color:var(--text2);margin-bottom:16px">Selecciona las etiquetas para organizar esta conversación:</p>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px">
+      ${ETIQUETAS_DISPONIBLES.map(e=>`
+        <label style="cursor:pointer">
+          <input type="checkbox" id="et-${e.val}" ${actuales.includes(e.val)?'checked':''} style="display:none">
+          <span id="et-lbl-${e.val}" onclick="toggleEtiqueta('${e.val}')"
+            style="display:inline-flex;align-items:center;padding:6px 14px;border-radius:20px;font-size:13px;font-weight:500;cursor:pointer;border:2px solid transparent;background:${actuales.includes(e.val)?e.color:'var(--bg)'};color:${actuales.includes(e.val)?e.text:'var(--text3)'};border-color:${actuales.includes(e.val)?e.text:'transparent'};transition:all .15s">
+            ${e.label}
+          </span>
+        </label>`).join('')}
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-ghost" onclick="closeModal()">Cancelar</button>
+      <button class="btn btn-primary" onclick="guardarEtiquetas('${convId}')">Guardar etiquetas</button>
+    </div>`);
+}
+
+function toggleEtiqueta(val) {
+  const cb = document.getElementById(`et-${val}`);
+  const lbl = document.getElementById(`et-lbl-${val}`);
+  const e = ETIQUETAS_DISPONIBLES.find(x=>x.val===val);
+  if (!cb || !lbl || !e) return;
+  cb.checked = !cb.checked;
+  if (cb.checked) {
+    lbl.style.background = e.color;
+    lbl.style.color = e.text;
+    lbl.style.borderColor = e.text;
+  } else {
+    lbl.style.background = 'var(--bg)';
+    lbl.style.color = 'var(--text3)';
+    lbl.style.borderColor = 'transparent';
+  }
+}
+
+async function guardarEtiquetas(convId) {
+  const etiquetas = ETIQUETAS_DISPONIBLES
+    .filter(e => document.getElementById(`et-${e.val}`)?.checked)
+    .map(e => e.val);
+  const d = await api('PUT', `/conversaciones/${convId}/etiquetas`, { etiquetas });
+  if (d?.id !== undefined || d?.contacto_id) {
+    closeModal();
+    toast('Etiquetas guardadas ✓');
+    // Refrescar el chat actual
+    const activeItem = document.querySelector('.chat-item.active');
+    if (activeItem) {
+      const id = activeItem.id.replace('ci-','');
+      renderEtiquetasEnChat(id, etiquetas);
+    }
+    refrescarWAList();
+  } else toast(d?.message||'Error','err');
+}
+
+function renderEtiquetasEnChat(convId, etiquetas) {
+  const container = document.getElementById(`etiquetas-conv-${convId}`);
+  if (!container) return;
+  container.innerHTML = etiquetas.map(val=>{
+    const e = ETIQUETAS_DISPONIBLES.find(x=>x.val===val);
+    if (!e) return '';
+    return `<span style="display:inline-flex;align-items:center;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:500;background:${e.color};color:${e.text};margin-right:4px">${e.label}</span>`;
+  }).join('');
+}
+
+async function cambiarEstadoServicio(servicioId, estado, clienteId) {
+  const d = await api('PUT', `/servicios/${servicioId}`, { estado });
+  if (d?.id) { toast('Estado actualizado ✓'); abrirClientePanel(clienteId); }
+  else toast('Error al actualizar','err');
+}
+
+function restablecerPassword(id, nombre) {
+  openModal(`🔑 Restablecer contraseña — ${nombre}`, `
+    <p style="font-size:13px;color:var(--text2);margin-bottom:16px">Se enviará una nueva contraseña al cliente por email.</p>
+    <div class="field"><label>Nueva contraseña (vacío = autogenerar)</label><input id="rp-pass" placeholder="Dejar vacío para autogenerar"></div>
+    <div class="modal-actions">
+      <button class="btn btn-ghost" onclick="closeModal()">Cancelar</button>
+      <button class="btn btn-primary" onclick="confirmarRestablecerPassword('${id}')">Restablecer y enviar</button>
+    </div>`);
+}
+
+async function confirmarRestablecerPassword(id) {
+  const pass = $v('rp-pass');
+  const d = await api('POST', `/clientes/${id}/activar-portal`, { password: pass||undefined, enviar_email: true });
+  if (d?.message?.includes('activado') || d?.email) {
+    closeModal();
+    toast('Contraseña restablecida y enviada por email ✓');
+  } else toast(d?.message||'Error','err');
+}
+
+function eliminarCliente(id, nombre) {
+  openModal(`🗑 Eliminar cliente`, `
+    <div style="text-align:center;padding:8px 0 20px">
+      <div style="font-size:40px;margin-bottom:12px">⚠️</div>
+      <div style="font-size:15px;font-weight:600;margin-bottom:8px">¿Eliminar a ${nombre}?</div>
+      <p style="font-size:13px;color:var(--text2)">Esta acción marcará al cliente como inactivo. Sus datos, archivos y conversaciones se conservarán.</p>
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-ghost" onclick="closeModal()">Cancelar</button>
+      <button class="btn btn-danger" onclick="confirmarEliminarCliente('${id}')">Sí, desactivar cliente</button>
+    </div>`);
+}
+
+async function confirmarEliminarCliente(id) {
+  const d = await api('PUT', `/clientes/${id}`, { estado: 'inactivo' });
+  if (d?.id) {
+    closeModal();
+    cerrarClientePanel();
+    toast('Cliente desactivado');
+    cargarClientes();
+  } else toast(d?.message||'Error','err');
+}
+
+function modalSolicitarDocumento(clienteId, nombreCliente, telefono) {
+  openModal(`📄 Solicitar documento — ${nombreCliente}`, `
+    <div class="field"><label>Documento solicitado *</label>
+      <select id="sol-tipo-pre" style="width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:8px;font-size:13px;font-family:var(--font);background:var(--bg);outline:none;margin-bottom:8px" onchange="actualizarTituloSolicitud(this.value)">
+        <option value="">— Seleccionar tipo —</option>
+        <option value="Pasaporte o documento de identidad">🪪 Pasaporte / ID</option>
+        <option value="Formulario W-9">📋 Formulario W-9</option>
+        <option value="Formulario W-8BEN">📋 Formulario W-8BEN</option>
+        <option value="Número EIN / Tax ID">🔢 Número EIN / Tax ID</option>
+        <option value="Estado de cuenta bancario">🏦 Estado de cuenta bancario</option>
+        <option value="Declaración de impuestos">📊 Declaración de impuestos</option>
+        <option value="Contrato firmado">✍️ Contrato firmado</option>
+        <option value="Comprobante de dirección">🏠 Comprobante de dirección</option>
+        <option value="Nómina / Payroll">💰 Nómina / Payroll</option>
+        <option value="Otro">✏️ Otro (personalizado)</option>
+      </select>
+      <input id="sol-titulo" placeholder="O escribe el nombre del documento..." style="width:100%;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:9px 12px;font-size:13px;font-family:var(--font);color:var(--text);outline:none">
+    </div>
+    <div class="field"><label>Instrucciones / descripción</label>
+      <textarea id="sol-desc" placeholder="Por favor envíe el documento vigente, legible y en formato PDF o imagen..."></textarea>
+    </div>
+    <div class="field"><label>Fecha límite</label><input type="date" id="sol-fecha"></div>
+    <div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:12px;margin-bottom:14px">
+      <div style="font-size:11px;font-weight:600;color:#15803d;margin-bottom:8px">📱 Notificar al cliente por:</div>
+      <div style="display:flex;gap:12px">
+        <label style="display:flex;gap:6px;align-items:center;font-size:13px;cursor:pointer">
+          <input type="checkbox" id="sol-wa" ${telefono?'checked':'disabled'}> WhatsApp
+        </label>
+        <label style="display:flex;gap:6px;align-items:center;font-size:13px;cursor:pointer">
+          <input type="checkbox" id="sol-email" checked> Email
+        </label>
+      </div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-ghost" onclick="closeModal()">Cancelar</button>
+      <button class="btn btn-primary" onclick="crearSolicitudDoc('${clienteId}')">Enviar solicitud</button>
+    </div>`);
+}
+
+function actualizarTituloSolicitud(val) {
+  if (val && val !== 'Otro') document.getElementById('sol-titulo').value = val;
+}
+
+async function crearSolicitudDoc(clienteId) {
+  const titulo = $v('sol-titulo');
+  const desc   = $v('sol-desc');
+  const fecha  = $v('sol-fecha');
+  const wa     = document.getElementById('sol-wa')?.checked;
+  const email  = document.getElementById('sol-email')?.checked;
+  if (!titulo) return toast('El título del documento es requerido','err');
+  const canales = [];
+  if (wa) canales.push('whatsapp');
+  if (email) canales.push('email');
+  const d = await api('POST', '/solicitudes-archivos', {
+    cliente_id: clienteId, titulo, descripcion: desc||null,
+    fecha_limite: fecha||null, canales,
+  });
+  if (d?.id) {
+    closeModal();
+    toast(`✅ Solicitud enviada a ${_cpData?.nombre}`);
+    abrirClientePanel(clienteId);
+  } else toast(d?.message||'Error al crear solicitud','err');
+}
+
+function tipoServicioEmoji(tipo) {
+  const m={llc_formation:'🏢',tax_filing:'📋',registered_agent:'📝',ein_application:'🔢',bookkeeping:'📊',payroll:'💰',annual_report:'📄',otro:'⚙️'};
+  return m[tipo]||'⚙️';
+}
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// CLIENTES
+// ═══════════════════════════════════════════════════════════════════════════════
+let _buscarTimer;
+
+async function cargarClientes(filtro='') {
+  const url = filtro ? `/clientes?buscar=${encodeURIComponent(filtro)}&limit=50` : '/clientes?limit=50';
+  const d = await api('GET', url);
+  _allClientes = d?.data || d || [];
+  renderClientesGrid(_allClientes);
+  document.getElementById('clientes-sub').textContent = `${d?.total||_allClientes.length} clientes registrados`;
+}
+
+function renderClientesGrid(clientes) {
+  const grid = document.getElementById('clientes-grid');
+  if (!clientes.length) { grid.innerHTML='<div style="grid-column:1/-1;padding:32px;text-align:center;color:var(--text3)">Sin clientes</div>'; return; }
+  grid.innerHTML = clientes.map(c=>{
+    const color=avatarColor(c.nombre);
+    const ini=c.nombre[0].toUpperCase();
+    return `<div class="client-card" onclick="abrirClientePanel('${c.id}')">
+      <div class="cc-header">
+        <div class="cc-av" style="background:${color}">${ini}</div>
+        <div style="min-width:0">
+          <div class="cc-name">${c.nombre} ${c.apellido||''}</div>
+          <div class="cc-email">${c.email}</div>
+        </div>
+        ${estadoTag(c.estado)}
+      </div>
+      <div class="cc-stats">
+        <div class="cc-stat"><div class="cc-stat-val" style="color:var(--green)">${c.total_servicios||0}</div><div class="cc-stat-lbl">Servicios</div></div>
+        <div class="cc-stat"><div class="cc-stat-val" style="color:#d97706">${c.pagos_pendientes||0}</div><div class="cc-stat-lbl">Pagos pend.</div></div>
+        <div class="cc-stat"><div class="cc-stat-val">${c.total_archivos||0}</div><div class="cc-stat-lbl">Archivos</div></div>
+      </div>
+      <div class="cc-footer">
+        <div style="font-size:11px;color:var(--text3)">${c.telefono||c.pais||''}</div>
+        ${c.portal_activo?'<span class="tag tag-green">Portal activo</span>':'<span class="tag tag-gray">Sin portal</span>'}
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function buscarClientes(q) {
+  clearTimeout(_buscarTimer);
+  _buscarTimer = setTimeout(()=>cargarClientes(q), 400);
+}
+
+async function filtrarClientesEstado(estado) {
+  const d = await api('GET', `/clientes?estado=${estado}&limit=50`);
+  renderClientesGrid(d?.data||d||[]);
+}
+
+function abrirModalNuevoCliente() {
+  openModal('Nuevo cliente', `
+    <div class="field-row">
+      <div class="field"><label>Nombre *</label><input id="c-n" placeholder="Juan"></div>
+      <div class="field"><label>Apellido</label><input id="c-a" placeholder="García"></div>
+    </div>
+    <div class="field"><label>Email *</label><input type="email" id="c-e" placeholder="juan@email.com"></div>
+    <div class="field"><label>Teléfono (con código de país)</label><input id="c-t" placeholder="+57 300 123 4567"></div>
+    <div class="field-row">
+      <div class="field"><label>País</label><input id="c-p" placeholder="Colombia"></div>
+      <div class="field"><label>Origen</label>
+        <select id="c-o"><option value="manual">Manual</option><option value="whatsapp">WhatsApp</option><option value="referido">Referido</option></select>
+      </div>
+    </div>
+    <div class="field"><label>Notas internas</label><textarea id="c-no" placeholder="Notas..."></textarea></div>
+    <div class="modal-actions">
+      <button class="btn btn-ghost" onclick="closeModal()">Cancelar</button>
+      <button class="btn btn-primary" onclick="crearCliente()">Crear cliente</button>
+    </div>`);
+}
+
+async function crearCliente() {
+  const body={nombre:$v('c-n'),apellido:$v('c-a'),email:$v('c-e'),telefono:$v('c-t'),pais:$v('c-p'),origen:$v('c-o'),notas_internas:$v('c-no')};
+  if (!body.nombre||!body.email) return toast('Nombre y email son requeridos','err');
+  const d = await api('POST','/clientes',body);
+  if (d?.id) { closeModal(); toast('Cliente creado ✓'); cargarClientes(); setTimeout(()=>abrirClientePanel(d.id),400); }
+  else toast(d?.message||'Error','err');
+}
+
+function activarPortal(id,nombre,email) {
+  closeModal();
+  openModal('Activar portal — '+nombre,`
+    <p style="font-size:13px;color:var(--text2);margin-bottom:16px">Se creará acceso al portal para <strong>${email}</strong>.</p>
+    <div class="field"><label>Contraseña (vacío = autogenerar)</label><input id="p-pass" placeholder="Dejar vacío para autogenerar"></div>
+    <div class="modal-actions">
+      <button class="btn btn-ghost" onclick="closeModal()">Cancelar</button>
+      <button class="btn btn-primary" onclick="confirmarPortal('${id}')">Activar y enviar email</button>
+    </div>`);
+}
+
+async function confirmarPortal(id) {
+  const pass=$v('p-pass');
+  const d=await api('POST',`/clientes/${id}/activar-portal`,{password:pass||undefined,enviar_email:true});
+  if (d?.message?.includes('activado')||d?.email) { closeModal(); toast('Portal activado ✓'); if(currentClienteId===id){abrirClientePanel(id);} }
+  else toast(d?.message||'Error','err');
+}
+
+function editarCliente(id) {
+  const c=_cpData;
+  openModal('Editar cliente',`
+    <div class="field-row">
+      <div class="field"><label>Nombre</label><input id="ec-n" value="${c.nombre}"></div>
+      <div class="field"><label>Apellido</label><input id="ec-a" value="${c.apellido||''}"></div>
+    </div>
+    <div class="field"><label>Teléfono</label><input id="ec-t" value="${c.telefono||''}"></div>
+    <div class="field"><label>País</label><input id="ec-p" value="${c.pais||''}"></div>
+    <div class="field"><label>Estado</label>
+      <select id="ec-s"><option value="activo" ${c.estado==='activo'?'selected':''}>Activo</option><option value="inactivo" ${c.estado==='inactivo'?'selected':''}>Inactivo</option></select>
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-ghost" onclick="closeModal()">Cancelar</button>
+      <button class="btn btn-primary" onclick="guardarEdicionCliente('${id}')">Guardar</button>
+    </div>`);
+}
+
+async function guardarEdicionCliente(id) {
+  const body={nombre:$v('ec-n'),apellido:$v('ec-a'),telefono:$v('ec-t'),pais:$v('ec-p'),estado:$v('ec-s')};
+  const d=await api('PUT',`/clientes/${id}`,body);
+  if(d?.id){closeModal();toast('Cliente actualizado ✓');abrirClientePanel(id);}
+  else toast(d?.message||'Error','err');
+}
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// SERVICIOS
+// ═══════════════════════════════════════════════════════════════════════════════
+function modalNuevoServicio(clienteId) {
+  openModal('Nuevo servicio',`
+    <div class="field"><label>Tipo</label>
+      <select id="s-ti">
+        ${['llc_formation','tax_filing','registered_agent','ein_application','bookkeeping','payroll','annual_report','otro'].map(t=>`<option value="${t}">${t.replace(/_/g,' ')}</option>`).join('')}
+      </select></div>
+    <div class="field"><label>Nombre *</label><input id="s-n" placeholder="LLC Formation — Wyoming"></div>
+    <div class="field-row">
+      <div class="field"><label>Precio (USD)</label><input type="number" id="s-p" placeholder="500"></div>
+      <div class="field"><label>Fecha vencimiento</label><input type="date" id="s-f"></div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-ghost" onclick="closeModal()">Cancelar</button>
+      <button class="btn btn-primary" onclick="crearServicio('${clienteId}')">Crear servicio</button>
+    </div>`);
+}
+
+async function crearServicio(clienteId) {
+  const body={cliente_id:clienteId,tipo:$v('s-ti'),nombre:$v('s-n'),precio:$v('s-p')||null,fecha_vencimiento:$v('s-f')||null};
+  if(!body.nombre) return toast('Nombre requerido','err');
+  const d=await api('POST','/servicios',body);
+  if(d?.id){closeModal();toast('Servicio creado ✓');abrirClientePanel(clienteId);}
+  else toast(d?.message||'Error','err');
+}
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// PAGOS
+// ═══════════════════════════════════════════════════════════════════════════════
+let _allPagos = [];
+let _filtropagoActivo = 'todos';
+
+async function cargarPagos() {
+  const d = await api('GET','/pagos');
+  _allPagos = d || [];
+  renderResumenPagos(_allPagos);
+  renderTablaPagos(_allPagos);
+}
+
+function renderResumenPagos(pagos) {
+  const hoy = new Date();
+  const en7d = new Date(); en7d.setDate(en7d.getDate()+7);
+  const pendientes  = pagos.filter(p=>p.estado==='pendiente'||p.estado==='enviado');
+  const vencidos    = pagos.filter(p=>p.estado==='vencido'||(p.estado==='pendiente'&&new Date(p.fecha_vencimiento)<hoy));
+  const porVencer   = pagos.filter(p=>p.estado!=='pagado'&&p.fecha_vencimiento&&new Date(p.fecha_vencimiento)<=en7d&&new Date(p.fecha_vencimiento)>=hoy);
+  const pagados     = pagos.filter(p=>p.estado==='pagado');
+  const totalPend   = pendientes.reduce((s,p)=>s+parseFloat(p.monto||0),0);
+
+  document.getElementById('pagos-resumen').innerHTML = `
+    <div style="background:#fef3c7;border:1px solid #fde68a;border-radius:10px;padding:12px 16px;flex:1;min-width:140px;cursor:pointer" onclick="filtrarPagos('pendiente',null)">
+      <div style="font-size:11px;color:#92400e;font-weight:600;text-transform:uppercase;margin-bottom:4px">Pendientes</div>
+      <div style="font-size:22px;font-weight:700;color:#92400e">${pendientes.length}</div>
+      <div style="font-size:12px;color:#92400e;margin-top:2px">${fmt(totalPend)}</div>
+    </div>
+    <div style="background:#fee2e2;border:1px solid #fecaca;border-radius:10px;padding:12px 16px;flex:1;min-width:140px;cursor:pointer" onclick="filtrarPagos('vencido',null)">
+      <div style="font-size:11px;color:#b91c1c;font-weight:600;text-transform:uppercase;margin-bottom:4px">Vencidos</div>
+      <div style="font-size:22px;font-weight:700;color:#b91c1c">${vencidos.length}</div>
+      <div style="font-size:12px;color:#b91c1c;margin-top:2px">Requieren atención</div>
+    </div>
+    <div style="background:#fff7ed;border:1px solid #fed7aa;border-radius:10px;padding:12px 16px;flex:1;min-width:140px;cursor:pointer" onclick="filtrarPagos('por_vencer',null)">
+      <div style="font-size:11px;color:#c2410c;font-weight:600;text-transform:uppercase;margin-bottom:4px">Por vencer (7d)</div>
+      <div style="font-size:22px;font-weight:700;color:#c2410c">${porVencer.length}</div>
+      <div style="font-size:12px;color:#c2410c;margin-top:2px">Próximos a vencer</div>
+    </div>
+    <div style="background:#dcfce7;border:1px solid #bbf7d0;border-radius:10px;padding:12px 16px;flex:1;min-width:140px;cursor:pointer" onclick="filtrarPagos('pagado',null)">
+      <div style="font-size:11px;color:#15803d;font-weight:600;text-transform:uppercase;margin-bottom:4px">Pagados</div>
+      <div style="font-size:22px;font-weight:700;color:#15803d">${pagados.length}</div>
+      <div style="font-size:12px;color:#15803d;margin-top:2px">${fmt(pagados.reduce((s,p)=>s+parseFloat(p.monto||0),0))}</div>
+    </div>`;
+}
+
+function filtrarPagos(filtro, btnEl) {
+  _filtropagoActivo = filtro;
+  // Actualizar botones activos
+  if (btnEl) {
+    document.querySelectorAll('#view-pagos .pl-tab').forEach(b=>b.classList.remove('active'));
+    btnEl.classList.add('active');
+  }
+  const hoy   = new Date(); hoy.setHours(0,0,0,0);
+  const en7d  = new Date(); en7d.setDate(en7d.getDate()+7);
+  const fin7d = new Date(); fin7d.setHours(23,59,59,999); fin7d.setDate(fin7d.getDate()+7);
+  const inicioSemana = new Date(); inicioSemana.setDate(inicioSemana.getDate()-inicioSemana.getDay());
+  const finSemana    = new Date(inicioSemana); finSemana.setDate(finSemana.getDate()+6);
+  const inicioMes    = new Date(hoy.getFullYear(), hoy.getMonth(), 1);
+  const finMes       = new Date(hoy.getFullYear(), hoy.getMonth()+1, 0);
+
+  let filtrados = _allPagos;
+  let titulo = 'Todos los pagos';
+
+  if (filtro==='pendiente') {
+    filtrados = _allPagos.filter(p=>p.estado==='pendiente'||p.estado==='enviado');
+    titulo = `⏳ Pagos pendientes (${filtrados.length})`;
+  } else if (filtro==='vencido') {
+    filtrados = _allPagos.filter(p=>p.estado==='vencido'||(p.estado==='pendiente'&&p.fecha_vencimiento&&new Date(p.fecha_vencimiento)<hoy));
+    titulo = `🔴 Pagos vencidos (${filtrados.length})`;
+  } else if (filtro==='por_vencer') {
+    filtrados = _allPagos.filter(p=>p.estado!=='pagado'&&p.fecha_vencimiento&&new Date(p.fecha_vencimiento)>=hoy&&new Date(p.fecha_vencimiento)<=fin7d);
+    titulo = `⚠️ Por vencer esta semana (${filtrados.length})`;
+  } else if (filtro==='esta_semana') {
+    filtrados = _allPagos.filter(p=>p.fecha_vencimiento&&new Date(p.fecha_vencimiento)>=inicioSemana&&new Date(p.fecha_vencimiento)<=finSemana);
+    titulo = `📅 Pagos esta semana (${filtrados.length})`;
+  } else if (filtro==='este_mes') {
+    filtrados = _allPagos.filter(p=>p.fecha_vencimiento&&new Date(p.fecha_vencimiento)>=inicioMes&&new Date(p.fecha_vencimiento)<=finMes);
+    titulo = `🗓 Pagos este mes (${filtrados.length})`;
+  } else if (filtro==='pagado') {
+    filtrados = _allPagos.filter(p=>p.estado==='pagado');
+    titulo = `✅ Pagos completados (${filtrados.length})`;
+  } else {
+    titulo = `Todos los pagos (${filtrados.length})`;
+  }
+
+  document.getElementById('pagos-tabla-titulo').textContent = titulo;
+  renderTablaPagos(filtrados);
+}
+
+function filtrarPagosBuscar(q) {
+  const filtrados = _allPagos.filter(p=>
+    (p.cliente_nombre||'').toLowerCase().includes(q.toLowerCase()) ||
+    (p.descripcion||'').toLowerCase().includes(q.toLowerCase()) ||
+    (p.servicio_nombre||'').toLowerCase().includes(q.toLowerCase())
+  );
+  document.getElementById('pagos-tabla-titulo').textContent = `Resultados para "${q}" (${filtrados.length})`;
+  renderTablaPagos(filtrados);
+}
+
+function renderTablaPagos(pagos) {
+  const tabla = document.getElementById('pagos-tabla');
+  if (!pagos?.length) {
+    tabla.innerHTML='<div style="padding:32px;text-align:center;color:var(--text3)">Sin pagos en este filtro</div>';
+    return;
+  }
+  const hoy = new Date(); hoy.setHours(0,0,0,0);
+  tabla.innerHTML=`<table>
+    <thead><tr><th>Cliente</th><th>Descripción</th><th>Monto</th><th>Estado</th><th>Vence</th><th>Acciones</th></tr></thead>
+    <tbody>${pagos.map(p=>{
+      const vence = p.fecha_vencimiento ? new Date(p.fecha_vencimiento) : null;
+      const dias  = vence ? Math.ceil((vence-hoy)/86400000) : null;
+      const alertaVence = dias!==null && dias<=7 && dias>=0 && p.estado!=='pagado'
+        ? `<span style="font-size:10px;background:#fff7ed;color:#c2410c;padding:1px 6px;border-radius:10px;margin-left:4px">${dias===0?'Hoy':dias===1?'Mañana':`${dias}d`}</span>` : '';
+      const filaStyle = p.estado==='vencido'?'background:#fff5f5':dias===0&&p.estado!=='pagado'?'background:#fffbeb':'';
+      return `<tr style="${filaStyle}">
+        <td style="font-weight:500">${p.cliente_nombre||'—'}</td>
+        <td>${p.servicio_nombre||p.descripcion||'—'}</td>
+        <td style="font-weight:600">${fmt(p.monto)}</td>
+        <td>${estadoTag(p.estado)}</td>
+        <td>${fmtD(p.fecha_vencimiento)}${alertaVence}</td>
+        <td style="display:flex;gap:6px;flex-wrap:wrap">
+          ${p.estado!=='pagado'?`<button class="btn btn-success btn-sm" onclick="marcarPagado('${p.id}')">✓ Pagado</button>`:''}
+          ${p.estado!=='pagado'?`<button class="btn btn-ghost btn-sm" onclick="enviarRecordatorio('${p.id}')" title="Enviar recordatorio">📩</button>`:''}
+          ${p.estado!=='pagado'?`<button class="btn btn-ghost btn-sm" onclick="modalConfigurarRecordatorio('${p.id}','${(p.servicio_nombre||p.descripcion||'Pago').replace(/'/g,"\\'")}','${p.monto}')" title="Configurar recordatorio">⏰</button>`:''}
+        </td>
+      </tr>`;
+    }).join('')}</tbody></table>`;
+}
+
+function modalNuevoPagoCliente(clienteId) {
+  openModal('Nuevo pago',`
+    <div class="field"><label>Monto (USD) *</label><input type="number" id="pg-m" placeholder="350"></div>
+    <div class="field"><label>Descripción</label><input id="pg-d" placeholder="Tax Filing 2025"></div>
+    <div class="field"><label>Fecha vencimiento</label><input type="date" id="pg-f"></div>
+    <div class="modal-actions">
+      <button class="btn btn-ghost" onclick="closeModal()">Cancelar</button>
+      <button class="btn btn-primary" onclick="crearPago('${clienteId}')">Crear pago</button>
+    </div>`);
+}
+
+function abrirModalNuevoPago() {
+  openModal('Nuevo pago',`
+    <div class="field">
+      <label>Cliente *</label>
+      <input id="pg-buscar" placeholder="Buscar por nombre, email o teléfono..." autocomplete="off"
+        oninput="buscarClientePago(this.value)"
+        style="width:100%;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:9px 12px;font-size:13px;font-family:var(--font);color:var(--text);outline:none">
+      <div id="pg-dropdown" style="display:none;background:white;border:1px solid var(--border);border-radius:8px;box-shadow:var(--shadow-md);max-height:200px;overflow-y:auto;margin-top:4px;z-index:100;position:relative"></div>
+      <input type="hidden" id="pg-c">
+      <div id="pg-cliente-sel" style="display:none;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:8px 12px;margin-top:6px;font-size:13px;display:none;align-items:center;justify-content:space-between">
+        <span id="pg-cliente-nombre"></span>
+        <button onclick="limpiarClientePago()" style="background:none;border:none;cursor:pointer;color:var(--text3);font-size:16px">×</button>
+      </div>
+    </div>
+    <div class="field"><label>Monto (USD) *</label><input type="number" id="pg-m" placeholder="350"></div>
+    <div class="field"><label>Descripción</label><input id="pg-d" placeholder="Tax Filing 2025"></div>
+    <div class="field"><label>Fecha vencimiento</label><input type="date" id="pg-f"></div>
+    <div class="modal-actions">
+      <button class="btn btn-ghost" onclick="closeModal()">Cancelar</button>
+      <button class="btn btn-primary" onclick="crearPagoGlobal()">Crear pago</button>
+    </div>`);
+}
+
+let _pgTimer;
+async function buscarClientePago(q) {
+  clearTimeout(_pgTimer);
+  const dd = document.getElementById('pg-dropdown');
+  if (!q || q.length < 2) { dd.style.display='none'; return; }
+  _pgTimer = setTimeout(async () => {
+    const d = await api('GET', `/clientes?buscar=${encodeURIComponent(q)}&limit=10`);
+    const clientes = d?.data || d || [];
+    if (!clientes.length) {
+      dd.innerHTML = '<div style="padding:12px;color:var(--text3);font-size:13px">Sin resultados</div>';
+      dd.style.display = 'block';
+      return;
+    }
+    dd.innerHTML = clientes.map(c => `
+      <div onclick="seleccionarClientePago('${c.id}','${(c.nombre+' '+(c.apellido||'')).trim().replace(/'/g,"\\'")}','${c.email}')"
+        style="padding:10px 14px;cursor:pointer;border-bottom:1px solid #f3f4f6;transition:background .1s"
+        onmouseover="this.style.background='#f9fafb'" onmouseout="this.style.background=''">
+        <div style="font-size:13px;font-weight:500">${c.nombre} ${c.apellido||''}</div>
+        <div style="font-size:11px;color:var(--text3)">${c.email}${c.telefono?' · '+c.telefono:''}</div>
+      </div>`).join('');
+    dd.style.display = 'block';
+  }, 300);
+}
+
+function seleccionarClientePago(id, nombre, email) {
+  document.getElementById('pg-c').value = id;
+  document.getElementById('pg-buscar').value = '';
+  document.getElementById('pg-dropdown').style.display = 'none';
+  const sel = document.getElementById('pg-cliente-sel');
+  document.getElementById('pg-cliente-nombre').textContent = `✓ ${nombre} — ${email}`;
+  sel.style.display = 'flex';
+}
+
+function limpiarClientePago() {
+  document.getElementById('pg-c').value = '';
+  document.getElementById('pg-cliente-sel').style.display = 'none';
+  document.getElementById('pg-buscar').value = '';
+  document.getElementById('pg-buscar').focus();
+}
+
+async function crearPagoGlobal() {
+  const clienteId = $v('pg-c');
+  if (!clienteId) return toast('Selecciona un cliente de la lista','err');
+  await crearPago(clienteId);
+}
+
+async function crearPago(clienteId) {
+  const body={cliente_id:clienteId,monto:parseFloat($v('pg-m')),descripcion:$v('pg-d'),fecha_vencimiento:$v('pg-f')||null};
+  if(!body.cliente_id) return toast('Selecciona un cliente','err');
+  if(!body.monto) return toast('Monto requerido','err');
+  const d=await api('POST','/pagos',body);
+  if(d?.id){
+    closeModal();
+    toast('Pago creado ✓');
+    if(currentClienteId===clienteId) abrirClientePanel(clienteId);
+    else { await cargarPagos(); filtrarPagos(_filtropagoActivo, null); }
+  } else toast(d?.message||'Error','err');
+}
+
+async function marcarPagado(id) {
+  const d=await api('PUT',`/pagos/${id}/marcar-pagado`);
+  if(d?.id){
+    toast('Pago confirmado ✓');
+    if(currentClienteId) abrirClientePanel(currentClienteId);
+    else { await cargarPagos(); filtrarPagos(_filtropagoActivo, null); }
+  } else toast('Error','err');
+}
+
+async function enviarRecordatorio(id) {
+  const d=await api('POST',`/pagos/${id}/enviar-recordatorio`,{canales:['email','whatsapp']});
+  if(d?.success) toast('Recordatorio enviado ✓');
+  else toast(d?.message||'Error','err');
+}
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// ARCHIVOS
+// ═══════════════════════════════════════════════════════════════════════════════
+async function cargarArchivos() {
+  const d = await api('GET','/archivos');
+  _allArchivos = d||[];
+  renderArchivosGrid(_allArchivos);
+}
+
+function renderArchivosGrid(archivos) {
+  const grid=document.getElementById('archivos-grid');
+  if(!archivos.length){grid.innerHTML='<div style="grid-column:1/-1;padding:32px;text-align:center;color:var(--text3)">Sin archivos</div>';return;}
+  grid.innerHTML=archivos.map(a=>{
+    const ex=fileExt(a.tipo_mime,a.nombre_original);
+    return `<div class="fca" onclick="descargarArchivo('${a.id}','${a.nombre_original}')">
+      ${fileIconHtml(ex,48)}
+      <div class="fca-name">${a.nombre_original}</div>
+      <div class="fca-meta">${fmtD(a.created_at)}</div>
+      <div class="fca-footer">
+        <span>${a.cliente_nombre||'Sin cliente'}</span>
+        ${estadoTag(a.origen||'manual')}
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function buscarArchivos(q) {
+  const filtrados=_allArchivos.filter(a=>(a.nombre_original||'').toLowerCase().includes(q.toLowerCase())||(a.cliente_nombre||'').toLowerCase().includes(q.toLowerCase()));
+  renderArchivosGrid(filtrados);
+}
+
+function filtrarArchivosTipo(tipo) {
+  if(!tipo){renderArchivosGrid(_allArchivos);return;}
+  const filtrados=_allArchivos.filter(a=>fileExt(a.tipo_mime,a.nombre_original)===tipo||(tipo==='doc'&&['doc','xls'].includes(fileExt(a.tipo_mime,a.nombre_original))));
+  renderArchivosGrid(filtrados);
+}
+
+function filtrarArchivosOrigen(origen) {
+  const filtrados=origen?_allArchivos.filter(a=>a.origen===origen):_allArchivos;
+  renderArchivosGrid(filtrados);
+}
+
+function abrirSubirArchivo() { abrirSubirArchivoCliente(''); }
+
+function abrirSubirArchivoCliente(clienteId) {
+  openModal('Subir archivo',`
+    ${!clienteId?`<div class="field"><label>Cliente ID *</label><input id="up-c" placeholder="UUID del cliente"></div>`:`<input type="hidden" id="up-c" value="${clienteId}">`}
+    <div class="field"><label>Tipo de documento</label><input id="up-t" placeholder="pasaporte, w9, ein_letter..."></div>
+    <div class="field"><label>Archivo *</label><input type="file" id="up-f" style="background:transparent;border:none;padding:0;font-size:13px"></div>
+    <div class="modal-actions">
+      <button class="btn btn-ghost" onclick="closeModal()">Cancelar</button>
+      <button class="btn btn-primary" onclick="confirmarSubida()">Subir</button>
+    </div>`);
+}
+
+async function confirmarSubida() {
+  const cid=$v('up-c'), tipo=$v('up-t'), file=document.getElementById('up-f')?.files?.[0];
+  if(!cid||!file) return toast('Cliente y archivo son requeridos','err');
+  const form=new FormData();
+  form.append('archivo',file); form.append('cliente_id',cid);
+  if(tipo) form.append('tipo_documento',tipo);
+  const r=await fetch(`${API}/api/archivos/upload`,{method:'POST',headers:{Authorization:`Bearer ${token}`},body:form});
+  const d=await r.json();
+  if(d?.id){closeModal();toast('Archivo subido ✓');if(currentClienteId===cid)abrirClientePanel(cid);else cargarArchivos();}
+  else toast(d?.message||'Error','err');
+}
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// DASHBOARD
+// ═══════════════════════════════════════════════════════════════════════════════
+async function cargarDashboard() {
+  const d = await api('GET','/dashboard');
+  if (!d) return;
+  document.getElementById('dash-sub').textContent = `Actualizado: ${new Date().toLocaleString('es',{day:'2-digit',month:'short',hour:'2-digit',minute:'2-digit'})}`;
+
+  document.getElementById('dash-stats').innerHTML=`
+    <div class="stat-card"><div class="stat-val" style="color:var(--green)">${d.clientes?.total||0}</div><div class="stat-lbl">Clientes activos</div><div class="stat-change stat-up">+${d.clientes?.nuevos_mes||0} este mes</div></div>
+    <div class="stat-card"><div class="stat-val" style="color:#2563eb">${d.servicios_activos||0}</div><div class="stat-lbl">Servicios activos</div><div class="stat-change stat-up">En proceso</div></div>
+    <div class="stat-card"><div class="stat-val" style="color:#d97706">${d.pagos?.pendientes||0}</div><div class="stat-lbl">Pagos pendientes</div><div class="stat-change">${fmt(d.pagos?.total_pendiente)} por cobrar</div></div>
+    <div class="stat-card"><div class="stat-val" style="color:var(--purple)">${d.conversaciones_abiertas||0}</div><div class="stat-lbl">Conversaciones abiertas</div><div class="stat-change stat-up">${d.mensajes_hoy||0} mensajes hoy</div></div>`;
+
+  // Barras simples
+  const dias=['Lun','Mar','Mié','Jue','Vie','Sáb','Dom'];
+  const vals=[65,82,48,74,90,35,20];
+  const max=Math.max(...vals);
+  document.getElementById('dash-bars').innerHTML=dias.map((d,i)=>`
+    <div class="bar-wrap">
+      <div class="bar" style="height:${Math.round(vals[i]/max*90)}px"></div>
+      <div class="bar-label">${d}</div>
+    </div>`).join('');
+
+  // Donut estado conversaciones
+  const estados=[{lbl:'Abiertas',col:'#25D366',val:d.conversaciones_abiertas||0},{lbl:'En proceso',col:'#3b82f6',val:d.servicios_activos||0},{lbl:'Resueltas',col:'#8b5cf6',val:Math.round((d.clientes?.total||0)*0.3)},{lbl:'Cerradas',col:'#9ca3af',val:Math.round((d.clientes?.total||0)*0.2)}];
+  const total2=estados.reduce((s,e)=>s+e.val,0)||1;
+  let off=0;
+  const arcos=estados.map(e=>{const pct=e.val/total2*201;const arc=`<circle cx="45" cy="45" r="32" fill="none" stroke="${e.col}" stroke-width="16" stroke-dasharray="${pct} ${201-pct}" stroke-dashoffset="${-off}" transform="rotate(-90 45 45)"/>`;off+=pct;return arc;}).join('');
+  document.getElementById('dash-donut').innerHTML=`
+    <svg width="90" height="90" viewBox="0 0 90 90">
+      <circle cx="45" cy="45" r="32" fill="none" stroke="#f3f4f6" stroke-width="16"/>
+      ${arcos}
+      <text x="45" y="49" text-anchor="middle" font-size="12" font-weight="600" fill="#111827">${d.conversaciones_abiertas||0}</text>
+    </svg>
+    <div class="donut-legend">${estados.map(e=>`<div class="legend-item"><div class="legend-dot" style="background:${e.col}"></div>${e.lbl} — ${e.val}</div>`).join('')}</div>`;
+
+  // Tabla reciente
+  const convs = await api('GET','/conversaciones?limit=8');
+  document.getElementById('dash-tabla').innerHTML=`<table>
+    <thead><tr><th>Contacto</th><th>Último mensaje</th><th>Estado</th><th>Fecha</th></tr></thead>
+    <tbody>${(convs||[]).map(c=>`<tr>
+      <td style="font-weight:500">${c.contacto_nombre||c.telefono}</td>
+      <td style="color:var(--text2)">${(c.ultimo_mensaje||'—').substring(0,40)}</td>
+      <td>${estadoTag(c.estado)}</td>
+      <td style="color:var(--text3);font-size:12px">${fmtD(c.ultima_actividad)}</td>
+    </tr>`).join('')}</tbody></table>`;
+
+  // Pagos próximos
+  if(d.proximos_pagos?.length) {
+    document.getElementById('dash-tabla').insertAdjacentHTML('beforebegin',`
+      <div class="recent-table" style="margin-bottom:16px">
+        <div class="table-hdr">⚠️ Pagos próximos a vencer</div>
+        <table><thead><tr><th>Cliente</th><th>Descripción</th><th>Monto</th><th>Vence</th><th></th></tr></thead>
+        <tbody>${d.proximos_pagos.map(p=>`<tr>
+          <td>${p.cliente_nombre}</td><td>${p.servicio_nombre||p.descripcion||'—'}</td>
+          <td style="font-weight:600">${fmt(p.monto)}</td><td style="color:#d97706">${fmtD(p.fecha_vencimiento)}</td>
+          <td><button class="btn btn-ghost btn-sm" onclick="enviarRecordatorio('${p.id}')">📩 Recordatorio</button></td>
+        </tr>`).join('')}</tbody></table></div>`);
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// AGENTES
+// ═══════════════════════════════════════════════════════════════════════════════
+async function cargarAgentes() {
+  const d=await api('GET','/agentes');
+  const grid=document.getElementById('agentes-grid');
+  if(!d?.length){grid.innerHTML='<div style="padding:32px;color:var(--text3)">Sin agentes</div>';return;}
+  grid.innerHTML=d.map(a=>{
+    const color=avatarColor(a.nombre);
+    return `<div class="client-card">
+      <div class="cc-header">
+        <div class="cc-av" style="background:${color}">${a.nombre[0].toUpperCase()}</div>
+        <div>
+          <div class="cc-name">${a.nombre}</div>
+          <div class="cc-email">${a.email}</div>
+        </div>
+        ${estadoTag(a.rol)}
+      </div>
+      <div class="cc-footer">
+        ${estadoTag(a.estado||'activo')}
+        ${user?.rol==='admin'&&a.id!==user?.id?`<button class="btn btn-danger btn-sm" onclick="desactivarAgente('${a.id}')">Desactivar</button>`:''}
+      </div>
+    </div>`;
+  }).join('') + `<div class="client-card" style="border:1.5px dashed var(--border);display:flex;align-items:center;justify-content:center;min-height:140px;cursor:pointer" onclick="abrirModalNuevoAgente()">
+    <div style="text-align:center;color:var(--text3)"><div style="font-size:28px;margin-bottom:6px">+</div><div style="font-size:13px;font-weight:500">Agregar agente</div></div>
+  </div>`;
+}
+
+function abrirModalNuevoAgente() {
+  openModal('Nuevo agente',`
+    <div class="field"><label>Nombre *</label><input id="ag-n" placeholder="María García"></div>
+    <div class="field"><label>Email *</label><input type="email" id="ag-e" placeholder="maria@igaccounting.com"></div>
+    <div class="field"><label>Contraseña *</label><input type="password" id="ag-p" placeholder="Mínimo 8 caracteres"></div>
+    <div class="field"><label>Rol</label>
+      <select id="ag-r"><option value="agente">Agente</option><option value="admin">Administrador</option></select>
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-ghost" onclick="closeModal()">Cancelar</button>
+      <button class="btn btn-primary" onclick="crearAgente()">Crear agente</button>
+    </div>`);
+}
+
+async function crearAgente() {
+  const body={nombre:$v('ag-n'),email:$v('ag-e'),password:$v('ag-p'),rol:$v('ag-r')};
+  if(!body.nombre||!body.email||!body.password) return toast('Todos los campos son requeridos','err');
+  const d=await api('POST','/agentes',body);
+  if(d?.id){closeModal();toast('Agente creado ✓');cargarAgentes();}
+  else toast(d?.message||'Error','err');
+}
+
+async function desactivarAgente(id) {
+  if(!confirm('¿Desactivar este agente?')) return;
+  await api('DELETE',`/agentes/${id}`);
+  toast('Agente desactivado');
+  cargarAgentes();
+}
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// SOCKET.IO — TIEMPO REAL
+// ═══════════════════════════════════════════════════════════════════════════════
+(function initSocket() {
+  if (!token) return;
+  const script = document.createElement('script');
+  script.src = `${API}/socket.io/socket.io.js`;
+  script.onload = () => {
+    const socket = io(API, { auth:{token}, transports:['websocket','polling'], reconnectionAttempts:5 });
+    socket.on('connect', () => console.log('✅ Socket.IO:', socket.id));
+    socket.on('connect_error', e => console.warn('⚠️', e.message));
+
+    socket.on('nuevo_mensaje', data => {
+      const convId = data.conversacion_id;
+      const nombre = data.contacto?.nombre || data.contacto?.telefono || 'Contacto';
+
+      // Badge
+      const badge=document.getElementById('wa-badge');
+      if(badge){const n=parseInt(badge.textContent||'0')+1;badge.textContent=n;badge.classList.remove('hidden');}
+
+      // Notificación escritorio
+      if('Notification' in window && Notification.permission==='granted') {
+        const notif=new Notification(`💬 ${nombre}`,{body:(data.mensaje?.contenido||'Nuevo mensaje').substring(0,60),tag:`conv-${convId}`});
+        notif.onclick=()=>{window.focus();showView('chats');notif.close();};
+        setTimeout(()=>notif.close(),5000);
+      }
+
+      // Refrescar lista
+      if(currentView==='chats') {
+        refrescarWAList();
+        const activeConv=document.querySelector('.chat-item.active');
+        if(activeConv?.id===`ci-${convId}`) {
+          const msgs=document.getElementById('wa-msgs');
+          if(msgs) {
+            msgs.insertAdjacentHTML('beforeend',renderMsg({...data.mensaje,archivo_id:data.archivo?.id,archivo_nombre:data.archivo?.nombre_original}));
+            msgs.scrollTop=msgs.scrollHeight;
+          }
+        }
+      } else {
+        toast(`💬 ${nombre}: ${(data.mensaje?.contenido||'').substring(0,40)}`,'ok');
+      }
+    });
+
+    // ── ARCHIVO SUBIDO DESDE EL PORTAL DEL CLIENTE ────────────────────────────
+    socket.on('archivo_portal', data => {
+      // Notificación
+      mostrarNotifArchivo({
+        tipo:           'archivo_recibido',
+        titulo:         `📎 ${data.cliente_nombre} subió un documento`,
+        cuerpo:         `${data.archivo_nombre} — desde el portal`,
+        cliente_id:     data.cliente_id,
+        archivo_id:     data.archivo_id,
+        solicitud_titulo: data.solicitud_titulo || null,
+        ts:             new Date(),
+      }, true);
+
+      // Si el panel del cliente está abierto, refrescarlo
+      if (currentClienteId === data.cliente_id) {
+        setTimeout(() => abrirClientePanel(data.cliente_id), 500);
+      }
+    });
+
+    // ── NOTIFICACIÓN DE ARCHIVO (flujo automático) ─────────────────────────────
+    socket.on('notificacion_archivo', data => {
+      mostrarNotifArchivo(data, true);
+    });
+
+    socket.on('notificacion_archivo_global', data => {
+      mostrarNotifArchivo(data, false);
+    });
+  };
+  script.onerror=()=>console.warn('⚠️ No se pudo cargar Socket.IO');
+  document.head.appendChild(script);
+})();
+
+// ── PANEL DE NOTIFICACIONES DE ARCHIVOS ───────────────────────────────────────
+let _notifs = [];
+
+function mostrarNotifArchivo(data, esDirecta) {
+  // Agregar al stack de notificaciones
+  _notifs.unshift({ ...data, leida: false, ts: new Date() });
+  if (_notifs.length > 50) _notifs = _notifs.slice(0, 50);
+
+  // Badge en sidebar
+  const badge = document.getElementById('notif-badge');
+  if (badge) {
+    const n = parseInt(badge.textContent || '0') + 1;
+    badge.textContent = n;
+    badge.classList.remove('hidden');
+  }
+
+  // Notificación de escritorio
+  if ('Notification' in window && Notification.permission === 'granted') {
+    const notif = new Notification(data.titulo, {
+      body: data.cuerpo,
+      tag: `archivo-${data.archivo_id}`,
+    });
+    notif.onclick = () => {
+      window.focus();
+      if (data.cliente_id) abrirClientePanel(data.cliente_id);
+      notif.close();
+    };
+    setTimeout(() => notif.close(), 6000);
+  }
+
+  // Toast en el panel
+  const icono = data.tipo === 'archivo_sin_cliente' ? '⚠️' : '📎';
+  toast(`${icono} ${data.titulo}`, data.tipo === 'archivo_sin_cliente' ? 'warn' : 'ok');
+
+  // Si el panel de notificaciones está abierto, actualizarlo
+  if (document.getElementById('notif-panel')?.classList.contains('open')) {
+    renderNotifPanel();
+  }
+}
+
+function abrirNotifPanel() {
+  const panel = document.getElementById('notif-panel');
+  const backdrop = document.getElementById('notif-backdrop');
+  panel?.classList.add('open');
+  backdrop?.classList.add('show');
+  // Marcar todas como leídas
+  _notifs.forEach(n => n.leida = true);
+  const badge = document.getElementById('notif-badge');
+  if (badge) { badge.textContent = '0'; badge.classList.add('hidden'); }
+  renderNotifPanel();
+}
+
+function cerrarNotifPanel() {
+  document.getElementById('notif-panel')?.classList.remove('open');
+  document.getElementById('notif-backdrop')?.classList.remove('show');
+}
+
+function renderNotifPanel() {
+  const body = document.getElementById('notif-body');
+  if (!body) return;
+  if (!_notifs.length) {
+    body.innerHTML = '<div style="padding:32px;text-align:center;color:var(--text3);font-size:13px">Sin notificaciones</div>';
+    return;
+  }
+  body.innerHTML = _notifs.map((n, i) => `
+    <div style="padding:14px 16px;border-bottom:1px solid var(--border);cursor:pointer;transition:background .1s;${!n.leida?'background:#f0fdf4':''}"
+      onclick="notifClick('${n.cliente_id||''}','${n.conversacion_id||''}')">
+      <div style="display:flex;align-items:flex-start;gap:10px">
+        <div style="font-size:22px;flex-shrink:0">${n.tipo==='archivo_sin_cliente'?'⚠️':'📎'}</div>
+        <div style="flex:1;min-width:0">
+          <div style="font-size:13px;font-weight:500;margin-bottom:3px">${n.titulo}</div>
+          <div style="font-size:12px;color:var(--text2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${n.cuerpo||''}</div>
+          ${n.solicitud_titulo?`<div style="font-size:11px;color:var(--green);margin-top:4px">✓ Solicitud completada: ${n.solicitud_titulo}</div>`:''}
+          <div style="font-size:10px;color:var(--text3);margin-top:4px">${n.ts?n.ts.toLocaleTimeString('es',{hour:'2-digit',minute:'2-digit'}):''}</div>
+        </div>
+      </div>
+    </div>`).join('');
+}
+
+function notifClick(clienteId, convId) {
+  cerrarNotifPanel();
+  if (clienteId) { abrirClientePanel(clienteId); return; }
+  if (convId) { showView('chats'); }
+}
+
+// ── ARRANCAR ───────────────────────────────────────────────────────────────────
+showView('chats');
+</script>
+</body>
+</html>

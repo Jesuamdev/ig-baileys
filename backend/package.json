@@ -1,0 +1,37 @@
+{
+  "name": "corpease-unified-backend",
+  "version": "2.0.0",
+  "description": "CorpEase CRM + WhatsApp Panel — Sistema Unificado",
+  "main": "src/index.js",
+  "scripts": {
+    "dev":         "nodemon src/index.js",
+    "start":       "node src/index.js",
+    "migrate":     "node src/models/migrate.js",
+    "seed":        "node src/models/seed.js",
+    "setup":       "npm run migrate && npm run seed"
+  },
+  "dependencies": {
+    "axios":              "^1.6.7",
+    "bcryptjs":           "^2.4.3",
+    "cors":               "^2.8.5",
+    "dotenv":             "^16.4.4",
+    "express":            "^4.18.3",
+    "express-rate-limit": "^7.2.0",
+    "express-validator":  "^7.0.1",
+    "helmet":             "^7.1.0",
+    "jsonwebtoken":       "^9.0.2",
+    "morgan":             "^1.10.0",
+    "multer":             "^1.4.5-lts.1",
+    "node-cron":          "^3.0.3",
+    "nodemailer":         "^6.9.10",
+    "pg":                 "^8.11.3",
+    "resend":             "^3.2.0",
+    "socket.io":          "^4.7.4",
+    "uuid":               "^9.0.1",
+    "winston":            "^3.12.0",
+    "aws-sdk":            "^2.1560.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  }
+}

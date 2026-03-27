@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CorpEase — Acceso</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap');
+  *{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --bg:#0A0F1E;--surface:#111827;--border:#1E2D45;
+    --accent:#2563EB;--accent2:#3B82F6;
+    --text:#F1F5F9;--muted:#64748B;--green:#10B981;--red:#EF4444;
+  }
+  body{font-family:'DM Sans',sans-serif;background:var(--bg);min-height:100vh;display:flex;align-items:center;justify-content:center;color:var(--text)}
+  .bg-grid{position:fixed;inset:0;background-image:linear-gradient(rgba(37,99,235,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(37,99,235,.04) 1px,transparent 1px);background-size:48px 48px;pointer-events:none}
+  .card{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:48px 40px;width:100%;max-width:400px;position:relative}
+  .logo{display:flex;align-items:center;gap:12px;margin-bottom:36px}
+  .logo-icon{width:42px;height:42px;background:var(--accent);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:600;color:white;font-family:'DM Mono',monospace}
+  .logo-text{font-size:22px;font-weight:600;letter-spacing:-.5px}
+  .logo-sub{font-size:12px;color:var(--muted);margin-top:2px}
+  h2{font-size:20px;font-weight:500;margin-bottom:6px}
+  .subtitle{font-size:14px;color:var(--muted);margin-bottom:32px}
+  label{display:block;font-size:12px;font-weight:500;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px}
+  .field{margin-bottom:20px}
+  input{width:100%;background:#0D1626;border:1px solid var(--border);border-radius:10px;padding:12px 16px;font-size:15px;font-family:'DM Sans',sans-serif;color:var(--text);outline:none;transition:.2s}
+  input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(37,99,235,.15)}
+  input::placeholder{color:var(--muted)}
+  .btn{width:100%;padding:13px;background:var(--accent);color:white;border:none;border-radius:10px;font-size:15px;font-family:'DM Sans',sans-serif;font-weight:500;cursor:pointer;transition:.2s;margin-top:4px}
+  .btn:hover{background:var(--accent2);transform:translateY(-1px)}
+  .btn:active{transform:translateY(0)}
+  .btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
+  .error{background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.3);color:#FCA5A5;padding:12px 16px;border-radius:10px;font-size:14px;margin-bottom:20px;display:none}
+  .portal-link{text-align:center;margin-top:24px;font-size:13px;color:var(--muted)}
+  .portal-link a{color:var(--accent2);text-decoration:none;font-weight:500}
+  .portal-link a:hover{text-decoration:underline}
+  .dot{width:8px;height:8px;background:var(--green);border-radius:50%;position:absolute;top:20px;right:20px;box-shadow:0 0 8px var(--green)}
+</style>
+</head>
+<body>
+<div class="bg-grid"></div>
+<div class="card">
+  <div class="dot"></div>
+  <div class="logo">
+    <div class="logo-icon">C</div>
+    <div>
+      <div class="logo-text">IG Accounting</div>
+      <div class="logo-sub">Panel de Gestión</div>
+    </div>
+  </div>
+  <h2>Iniciar sesión</h2>
+  <p class="subtitle">Acceso para agentes y administradores</p>
+  <div class="error" id="error"></div>
+  <div class="field">
+    <label>Email</label>
+    <input type="email" id="email" placeholder="agente@corpease.com" autocomplete="email">
+  </div>
+  <div class="field">
+    <label>Contraseña</label>
+    <input type="password" id="password" placeholder="••••••••" autocomplete="current-password">
+  </div>
+  <button class="btn" id="btn" onclick="login()">Entrar al panel</button>
+  <div class="portal-link">
+    ¿Eres cliente? <a href="../portal/login.html">Accede a tu portal →</a>
+  </div>
+</div>
+<script>
+const API = localStorage.getItem('ce_api') || 'http://localhost:3001';
+document.getElementById('password').addEventListener('keydown', e => e.key === 'Enter' && login());
+
+async function login() {
+  const email = document.getElementById('email').value.trim();
+  const pass  = document.getElementById('password').value;
+  const err   = document.getElementById('error');
+  const btn   = document.getElementById('btn');
+  err.style.display = 'none';
+  if (!email || !pass) { showErr('Completa todos los campos'); return; }
+  btn.disabled = true; btn.textContent = 'Verificando...';
+  try {
+    const r = await fetch(`${API}/api/auth/login`, {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ email, password: pass })
+    });
+    const d = await r.json();
+    if (!r.ok) throw new Error(d.message || 'Error al iniciar sesión');
+    localStorage.setItem('ce_token', d.token);
+    localStorage.setItem('ce_user', JSON.stringify(d.usuario));
+    localStorage.setItem('ce_api', API);
+    window.location.href = 'index.html';
+  } catch(e) { showErr(e.message); btn.disabled=false; btn.textContent='Entrar al panel'; }
+}
+function showErr(m) { const e=document.getElementById('error'); e.textContent=m; e.style.display='block'; }
+</script>
+</body>
+</html>

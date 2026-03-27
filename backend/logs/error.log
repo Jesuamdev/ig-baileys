@@ -1,0 +1,49 @@
+[2026-03-26 14:11:16] ERROR: WA error: Error validating access token: Session has expired on Wednesday, 25-Mar-26 23:00:00 PDT. The current time is Thursday, 26-Mar-26 12:11:16 PDT.
+[2026-03-26 14:11:26] ERROR: WA error: Error validating access token: Session has expired on Wednesday, 25-Mar-26 23:00:00 PDT. The current time is Thursday, 26-Mar-26 12:11:27 PDT.
+[2026-03-26 14:12:22] ERROR: WA error: Error validating access token: Session has expired on Wednesday, 25-Mar-26 23:00:00 PDT. The current time is Thursday, 26-Mar-26 12:12:22 PDT.
+[2026-03-26 14:12:42] ERROR: Error descargando archivo: Request failed with status code 401
+[2026-03-26 14:14:20] ERROR: WA error: Unsupported post request. Object with ID 'undefined' does not exist, cannot be loaded due to missing permissions, or does not support this operation. Please read the Graph API documentation at https://developers.facebook.com/docs/graph-api
+[2026-03-26 14:14:28] ERROR: WA error: Unsupported post request. Object with ID 'undefined' does not exist, cannot be loaded due to missing permissions, or does not support this operation. Please read the Graph API documentation at https://developers.facebook.com/docs/graph-api
+[2026-03-26 15:04:43] ERROR: WA error: (#131030) Recipient phone number not in allowed list
+[2026-03-26 15:04:43] ERROR: enviarRecordatorio:
+[2026-03-26 15:04:47] ERROR: WA error: (#131030) Recipient phone number not in allowed list
+[2026-03-26 15:04:47] ERROR: enviarRecordatorio:
+[2026-03-26 16:14:13] ERROR: WA error: Error validating access token: Session has expired on Thursday, 26-Mar-26 14:00:00 PDT. The current time is Thursday, 26-Mar-26 14:14:13 PDT.
+[2026-03-26 16:14:13] ERROR: enviarRecordatorio:
+[2026-03-26 16:17:11] ERROR: WA error: Error validating access token: Session has expired on Thursday, 26-Mar-26 14:00:00 PDT. The current time is Thursday, 26-Mar-26 14:17:11 PDT.
+[2026-03-26 16:17:18] ERROR: WA error: Error validating access token: Session has expired on Thursday, 26-Mar-26 14:00:00 PDT. The current time is Thursday, 26-Mar-26 14:17:18 PDT.
+[2026-03-26 16:20:07] ERROR: Error descargando archivo: Request failed with status code 401
+[2026-03-26 16:22:17] ERROR: Error descargando archivo: Request failed with status code 401
+[2026-03-26 18:22:03] ERROR: WA error: Error validating access token: Session has expired on Thursday, 26-Mar-26 14:00:00 PDT. The current time is Thursday, 26-Mar-26 16:22:03 PDT.
+[2026-03-26 18:22:03] ERROR: enviarRecordatorio:
+[2026-03-26 18:22:06] ERROR: WA error: Error validating access token: Session has expired on Thursday, 26-Mar-26 14:00:00 PDT. The current time is Thursday, 26-Mar-26 16:22:06 PDT.
+[2026-03-26 18:22:06] ERROR: enviarRecordatorio:
+[2026-03-26 18:22:07] ERROR: WA error: Error validating access token: Session has expired on Thursday, 26-Mar-26 14:00:00 PDT. The current time is Thursday, 26-Mar-26 16:22:07 PDT.
+[2026-03-26 18:22:07] ERROR: enviarRecordatorio:
+[2026-03-26 18:22:07] ERROR: WA error: Error validating access token: Session has expired on Thursday, 26-Mar-26 14:00:00 PDT. The current time is Thursday, 26-Mar-26 16:22:08 PDT.
+[2026-03-26 18:22:07] ERROR: enviarRecordatorio:
+[2026-03-26 18:22:08] ERROR: WA error: Error validating access token: Session has expired on Thursday, 26-Mar-26 14:00:00 PDT. The current time is Thursday, 26-Mar-26 16:22:08 PDT.
+[2026-03-26 18:22:08] ERROR: enviarRecordatorio:
+[2026-03-26 18:22:42] ERROR: WA error: Error validating access token: Session has expired on Thursday, 26-Mar-26 14:00:00 PDT. The current time is Thursday, 26-Mar-26 16:22:42 PDT.
+[2026-03-26 18:22:42] ERROR: enviarRecordatorio:
+[2026-03-26 18:32:07] ERROR: WA error: Error validating access token: Session has expired on Thursday, 26-Mar-26 14:00:00 PDT. The current time is Thursday, 26-Mar-26 16:32:07 PDT.
+[2026-03-26 18:32:07] ERROR: enviarRecordatorio:
+[2026-03-26 18:34:52] ERROR: portalSubirArchivo:
+[2026-03-26 18:35:00] ERROR: portalSubirArchivo:
+[2026-03-26 18:36:48] ERROR: WA error: (#131030) Recipient phone number not in allowed list
+[2026-03-26 18:36:48] ERROR: enviarRecordatorio:
+[2026-03-26 18:50:43] ERROR: portalSubirArchivo:
+[2026-03-26 18:51:37] ERROR: portalSubirArchivo:
+[2026-03-26 18:54:58] ERROR: convertirCliente:
+[2026-03-26 19:26:56] ERROR: portalSubirArchivo:
+[2026-03-26 19:27:06] ERROR: portalSubirArchivo:
+[2026-03-26 19:31:31] ERROR: portalSubirArchivo:
+[2026-03-26 19:31:41] ERROR: portalSubirArchivo:
+[2026-03-26 19:33:09] ERROR: portalSubirArchivo:
+[2026-03-26 19:33:21] ERROR: portalSubirArchivo:
+[2026-03-26 19:33:41] ERROR: portalSubirArchivo:
+[2026-03-26 19:34:47] ERROR: portalSubirArchivo:
+[2026-03-26 19:39:54] ERROR: WA error: (#131030) Recipient phone number not in allowed list
+[2026-03-26 19:39:54] ERROR: enviarRecordatorio:
+[2026-03-26 19:47:29] ERROR: WA error: (#131030) Recipient phone number not in allowed list
+[2026-03-26 19:47:29] ERROR: enviarRecordatorio:

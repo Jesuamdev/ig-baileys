@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>IG Accounting Services — Mi Portal</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#F1F5F9;--surface:#FFFFFF;--border:#E2E8F0;--accent:#2563EB;--accent2:#EFF6FF;--text:#0F172A;--muted:#64748B;--green:#10B981;--yellow:#F59E0B;--red:#EF4444;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text)}
+
+/* HEADER */
+header{background:var(--surface);border-bottom:1px solid var(--border);padding:0 32px;height:64px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:10}
+.logo{display:flex;align-items:center;gap:10px}
+.logo-icon{width:34px;height:34px;background:var(--accent);border-radius:9px;display:flex;align-items:center;justify-content:center;font-weight:600;color:white;font-size:15px}
+.logo-name{font-size:16px;font-weight:600}
+.header-right{display:flex;align-items:center;gap:16px}
+.welcome{font-size:14px;color:var(--muted)}
+.welcome strong{color:var(--text)}
+.btn-logout{background:none;border:1px solid var(--border);border-radius:8px;padding:7px 14px;font-size:13px;cursor:pointer;color:var(--muted);font-family:'DM Sans',sans-serif}
+.btn-logout:hover{background:var(--bg);color:var(--text)}
+
+/* NAV TABS */
+.nav-tabs{background:var(--surface);border-bottom:1px solid var(--border);padding:0 32px;display:flex;gap:0}
+.tab{padding:14px 20px;font-size:14px;font-weight:500;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;transition:.2s}
+.tab:hover{color:var(--text)}
+.tab.active{color:var(--accent);border-bottom-color:var(--accent)}
+
+/* CONTENT */
+.content{max-width:900px;margin:0 auto;padding:32px}
+
+/* CARDS */
+.card{background:var(--surface);border:1px solid var(--border);border-radius:14px;overflow:hidden;margin-bottom:20px}
+.card-header{padding:18px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.card-title{font-size:15px;font-weight:600}
+.card-body{padding:20px}
+
+/* STATS */
+.stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:24px}
+.stat{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px}
+.stat-label{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px}
+.stat-value{font-size:26px;font-weight:600;color:var(--accent)}
+.stat-sub{font-size:12px;color:var(--muted);margin-top:4px}
+
+/* TABLE */
+table{width:100%;border-collapse:collapse}
+th{padding:10px 14px;text-align:left;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);border-bottom:1px solid var(--border)}
+td{padding:13px 14px;font-size:13px;border-bottom:1px solid rgba(226,232,240,.5);vertical-align:middle}
+tr:last-child td{border-bottom:none}
+
+/* BADGE */
+.badge{display:inline-flex;align-items:center;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:500}
+.badge-green{background:#D1FAE5;color:#065F46}
+.badge-yellow{background:#FEF3C7;color:#92400E}
+.badge-red{background:#FEE2E2;color:#991B1B}
+.badge-blue{background:#DBEAFE;color:#1E40AF}
+.badge-gray{background:#F1F5F9;color:#475569}
+
+/* SOLICITUD CARD */
+.solicitud-card{background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:16px 18px;margin-bottom:12px}
+.solicitud-title{font-size:14px;font-weight:600;margin-bottom:6px}
+.solicitud-desc{font-size:13px;color:var(--muted);line-height:1.5;margin-bottom:10px}
+.solicitud-footer{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+
+/* EMPTY */
+.empty{text-align:center;padding:40px;color:var(--muted);font-size:14px}
+
+/* PAY BTN */
+.btn-pay{background:var(--accent);color:white;border:none;border-radius:8px;padding:7px 16px;font-size:13px;font-family:'DM Sans',sans-serif;font-weight:500;cursor:pointer;text-decoration:none;display:inline-block}
+.btn-pay:hover{background:#1D4ED8}
+
+/* TOAST */
+.toast{position:fixed;bottom:24px;right:24px;background:#1E293B;color:#F1F5F9;border-radius:12px;padding:14px 20px;font-size:14px;z-index:9999;transform:translateY(80px);opacity:0;transition:.3s}
+.toast.show{transform:translateY(0);opacity:1}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <div class="logo-icon">IG</div>
+    <div class="logo-name">IG Accounting</div>
+  </div>
+  <div class="header-right">
+    <div class="welcome">Hola, <strong id="user-name">...</strong></div>
+    <button class="btn-logout" onclick="logout()">Cerrar sesión</button>
+  </div>
+</header>
+
+<div class="nav-tabs">
+  <div class="tab active" onclick="showTab('inicio')">Mi resumen</div>
+  <div class="tab" onclick="showTab('servicios')">Mis servicios</div>
+  <div class="tab" onclick="showTab('pagos')">Pagos</div>
+  <div class="tab" onclick="showTab('documentos')">Mis documentos</div>
+  <div class="tab" onclick="showTab('solicitudes')">Documentos solicitados</div>
+</div>
+
+<div class="content" id="content">
+  <div class="empty">Cargando tu información...</div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const API   = localStorage.getItem('ce_api') || 'http://localhost:3001';
+let token   = localStorage.getItem('ce_client_token');
+let user    = JSON.parse(localStorage.getItem('ce_client_user') || 'null');
+
+if (!token || !user) { window.location.href = 'login.html'; }
+else { document.getElementById('user-name').textContent = user.nombre; loadInicio(); }
+
+function logout() { localStorage.removeItem('ce_client_token'); localStorage.removeItem('ce_client_user'); window.location.href = 'login.html'; }
+
+async function api(path) {
+  const r = await fetch(`${API}/api${path}`, { headers: { 'Authorization': `Bearer ${token}` } });
+  if (r.status === 401) { logout(); return null; }
+  return r.json();
+}
+
+function showTab(tab) {
+  document.querySelectorAll('.tab').forEach((el,i) => {
+    const tabs=['inicio','servicios','pagos','documentos','solicitudes'];
+    el.classList.toggle('active', tabs[i]===tab);
+  });
+  const fns = { inicio:loadInicio, servicios:loadServicios, pagos:loadPagos, documentos:loadDocumentos, solicitudes:loadSolicitudes };
+  fns[tab]?.();
+}
+
+function set(html) { document.getElementById('content').innerHTML = html; }
+
+const fmtDate = d => d ? new Date(d).toLocaleDateString('es',{day:'2-digit',month:'long',year:'numeric'}) : '—';
+const fmt = n => n ? `$${parseFloat(n).toLocaleString('en-US',{minimumFractionDigits:0,maximumFractionDigits:0})}` : '—';
+const badge = (e) => {
+  const m = {completado:'green',recurrente:'green',pagado:'green',activo:'green',en_proceso:'blue',enviado:'blue',abierto:'blue',pendiente:'yellow',esperando_cliente:'yellow',vencido:'red',cancelado:'red',recibido:'green'};
+  return `<span class="badge badge-${m[e]||'gray'}">${e?.replace(/_/g,' ')}</span>`;
+};
+
+async function loadInicio() {
+  const [perfil, servicios, pagos, solicitudes] = await Promise.all([
+    api('/portal/perfil'), api('/portal/servicios'), api('/portal/pagos'), api('/portal/solicitudes')
+  ]);
+  if (!perfil) return;
+  const pendientes = (pagos||[]).filter(p=>p.estado==='pendiente'||p.estado==='enviado');
+  const docsReq    = (solicitudes||[]).filter(s=>s.estado==='pendiente');
+  set(`
+    <div class="stats-row">
+      <div class="stat">
+        <div class="stat-label">Servicios activos</div>
+        <div class="stat-value">${(servicios||[]).filter(s=>!['completado','cancelado'].includes(s.estado)).length}</div>
+        <div class="stat-sub">En proceso</div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">Pagos pendientes</div>
+        <div class="stat-value" style="color:var(--yellow)">${pendientes.length}</div>
+        <div class="stat-sub">${pendientes.length ? fmt(pendientes.reduce((a,p)=>a+parseFloat(p.monto),0)) : 'Al día'}</div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">Documentos solicitados</div>
+        <div class="stat-value" style="color:var(--red)">${docsReq.length}</div>
+        <div class="stat-sub">${docsReq.length?'Pendientes de envío':'Todo al día'}</div>
+      </div>
+    </div>
+
+    ${pendientes.length ? `
+    <div class="card">
+      <div class="card-header"><span class="card-title">⚠️ Pagos pendientes</span></div>
+      <div class="card-body">
+        ${pendientes.map(p=>`
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--border)">
+            <div>
+              <div style="font-weight:500;font-size:14px">${p.servicio_nombre||p.descripcion||'Pago pendiente'}</div>
+              <div style="font-size:12px;color:var(--muted);margin-top:2px">Vence: ${fmtDate(p.fecha_vencimiento)}</div>
+            </div>
+            <div style="display:flex;align-items:center;gap:12px">
+              <strong style="font-size:16px">${fmt(p.monto)}</strong>
+              ${p.link_pago?`<a href="${p.link_pago}" target="_blank" class="btn-pay">Pagar</a>`:''}
+            </div>
+          </div>`).join('')}
+      </div>
+    </div>` : ''}
+
+    ${docsReq.length ? `
+    <div class="card">
+      <div class="card-header"><span class="card-title">📄 Documentos que necesitamos</span></div>
+      <div class="card-body">
+        ${docsReq.map(s=>`
+          <div class="solicitud-card">
+            <div class="solicitud-title">${s.titulo}</div>
+            ${s.descripcion?`<div class="solicitud-desc">${s.descripcion}</div>`:''}
+            <div class="solicitud-footer">
+              ${badge(s.estado)}
+              ${s.fecha_limite?`<span style="font-size:12px;color:var(--muted)">Fecha límite: ${fmtDate(s.fecha_limite)}</span>`:''}
+              <span style="font-size:12px;color:var(--muted)">Envíalo por WhatsApp y lo registramos automáticamente</span>
+            </div>
+          </div>`).join('')}
+      </div>
+    </div>` : ''}
+
+    <div class="card">
+      <div class="card-header"><span class="card-title">Mi información</span></div>
+      <div class="card-body">
+        <table><tbody>
+          <tr><td style="color:var(--muted);width:140px">Email</td><td>${perfil.email}</td></tr>
+          <tr><td style="color:var(--muted)">Teléfono</td><td>${perfil.telefono||'—'}</td></tr>
+          <tr><td style="color:var(--muted)">País</td><td>${perfil.pais||'—'}</td></tr>
+          <tr><td style="color:var(--muted)">Cliente desde</td><td>${fmtDate(perfil.created_at)}</td></tr>
+        </tbody></table>
+      </div>
+    </div>
+  `);
+}
+
+async function loadServicios() {
+  const d = await api('/portal/servicios');
+  if (!d) return;
+  set(`
+    <div class="card">
+      <div class="card-header"><span class="card-title">Mis servicios</span></div>
+      ${d.length ? `<table><thead><tr><th>Servicio</th><th>Tipo</th><th>Estado</th><th>Precio</th><th>Vencimiento</th></tr></thead>
+      <tbody>${d.map(s=>`
+        <tr>
+          <td><strong>${s.nombre}</strong></td>
+          <td><span class="badge badge-blue">${s.tipo?.replace(/_/g,' ')}</span></td>
+          <td>${badge(s.estado)}</td>
+          <td>${fmt(s.precio)}</td>
+          <td>${fmtDate(s.fecha_vencimiento)}</td>
+        </tr>`).join('')}</tbody></table>` : '<div class="empty">No tienes servicios activos</div>'}
+    </div>`);
+}
+
+async function loadPagos() {
+  const d = await api('/portal/pagos');
+  if (!d) return;
+  set(`
+    <div class="card">
+      <div class="card-header"><span class="card-title">Mis pagos</span></div>
+      ${d.length ? `<table><thead><tr><th>Descripción</th><th>Monto</th><th>Estado</th><th>Vencimiento</th><th></th></tr></thead>
+      <tbody>${d.map(p=>`
+        <tr>
+          <td>${p.servicio_nombre||p.descripcion||'—'}</td>
+          <td><strong>${fmt(p.monto)} ${p.moneda||'USD'}</strong></td>
+          <td>${badge(p.estado)}</td>
+          <td>${fmtDate(p.fecha_vencimiento)}</td>
+          <td>${p.link_pago&&p.estado!=='pagado'?`<a href="${p.link_pago}" target="_blank" class="btn-pay">Pagar ahora</a>`:''}</td>
+        </tr>`).join('')}</tbody></table>` : '<div class="empty">No tienes pagos registrados</div>'}
+    </div>`);
+}
+
+async function loadDocumentos() {
+  const d = await api('/portal/archivos');
+  if (!d) return;
+  set(`
+    <div class="card">
+      <div class="card-header"><span class="card-title">Mis documentos</span></div>
+      ${d.length ? `<table><thead><tr><th>Archivo</th><th>Tipo</th><th>Verificado</th><th>Fecha</th></tr></thead>
+      <tbody>${d.map(a=>`
+        <tr>
+          <td style="font-size:12px">${a.nombre_original}</td>
+          <td>${a.tipo_documento?`<span class="badge badge-blue">${a.tipo_documento}</span>`:'<span class="badge badge-gray">Sin clasificar</span>'}</td>
+          <td>${a.verificado?'<span class="badge badge-green">✓ Verificado</span>':'<span class="badge badge-gray">En revisión</span>'}</td>
+          <td>${fmtDate(a.created_at)}</td>
+        </tr>`).join('')}</tbody></table>` : '<div class="empty">No tienes documentos subidos aún.<br>Puedes enviarlos directamente por WhatsApp.</div>'}
+    </div>`);
+}
+
+async function loadSolicitudes() {
+  const d = await api('/portal/solicitudes');
+  if (!d) return;
+  set(`
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">Documentos solicitados por tu asesor</span>
+        <span style="font-size:12px;color:var(--muted)">${d.filter(s=>s.estado==='pendiente').length} pendientes</span>
+      </div>
+      <div class="card-body">
+        ${d.length ? d.map(s=>`
+          <div class="solicitud-card" id="sol-${s.id}">
+            <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:8px">
+              <div>
+                <div class="solicitud-title">${s.titulo}</div>
+                ${s.descripcion?`<div class="solicitud-desc">${s.descripcion}</div>`:''}
+              </div>
+              ${badge(s.estado)}
+            </div>
+            <div class="solicitud-footer">
+              ${s.fecha_limite?`<span style="font-size:12px;color:var(--muted)">📅 Límite: ${fmtDate(s.fecha_limite)}</span>`:''}
+              ${s.archivo_nombre
+                ? `<span style="font-size:12px;color:#065F46;background:#D1FAE5;padding:3px 10px;border-radius:20px">✓ Recibido: ${s.archivo_nombre}</span>`
+                : `<div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+                    <input type="file" id="file-${s.id}" style="display:none" onchange="subirDocumento('${s.id}',this)">
+                    <button onclick="document.getElementById('file-${s.id}').click()"
+                      style="background:var(--accent);color:white;border:none;border-radius:8px;padding:7px 14px;font-size:13px;font-family:'DM Sans',sans-serif;font-weight:500;cursor:pointer;display:flex;align-items:center;gap:6px">
+                      📎 Subir documento
+                    </button>
+                    <span style="font-size:12px;color:var(--muted)">o envíalo por WhatsApp</span>
+                   </div>`
+              }
+            </div>
+            <div id="prog-${s.id}" style="display:none;margin-top:10px">
+              <div style="background:#E2E8F0;border-radius:4px;height:4px;overflow:hidden">
+                <div id="bar-${s.id}" style="background:var(--accent);height:100%;width:0%;transition:width .3s"></div>
+              </div>
+              <div style="font-size:12px;color:var(--muted);margin-top:4px" id="prog-txt-${s.id}">Subiendo...</div>
+            </div>
+          </div>`).join('')
+        : '<div class="empty">No hay documentos pendientes. ¡Todo al día! 🎉</div>'}
+      </div>
+    </div>`);
+}
+
+async function subirDocumento(solicitudId, input) {
+  const file = input.files?.[0];
+  if (!file) return;
+
+  // Mostrar barra de progreso
+  document.getElementById(`prog-${solicitudId}`).style.display = 'block';
+  document.getElementById(`bar-${solicitudId}`).style.width = '30%';
+  document.getElementById(`prog-txt-${solicitudId}`).textContent = `Subiendo ${file.name}...`;
+
+  const form = new FormData();
+  form.append('archivo', file);
+
+  try {
+    document.getElementById(`bar-${solicitudId}`).style.width = '60%';
+
+    const r = await fetch(`${API}/api/portal/solicitudes/${solicitudId}/subir`, {
+      method: 'POST',
+      headers: { Authorization: `Bearer ${token}` },
+      body: form,
+    });
+
+    let d;
+    try { d = await r.json(); } catch(e) { d = {}; }
+
+    document.getElementById(`bar-${solicitudId}`).style.width = '100%';
+
+    if (r.status === 401) {
+      toast('❌ Sesión expirada, inicia sesión nuevamente', 'err');
+      setTimeout(() => window.location.href = 'login.html', 1500);
+      return;
+    }
+
+    if (r.status === 404) {
+      document.getElementById(`prog-txt-${solicitudId}`).textContent = 'Solicitud no encontrada';
+      document.getElementById(`bar-${solicitudId}`).style.background = 'var(--red)';
+      toast('❌ No se encontró la solicitud', 'err');
+      return;
+    }
+
+    if (d?.success) {
+      document.getElementById(`prog-txt-${solicitudId}`).textContent = '✓ Documento recibido';
+      document.getElementById(`bar-${solicitudId}`).style.background = '#10b981';
+      toast('✅ Documento subido correctamente');
+      setTimeout(() => loadSolicitudes(), 1000);
+    } else {
+      const msg = d?.message || `Error ${r.status}`;
+      document.getElementById(`prog-txt-${solicitudId}`).textContent = msg;
+      document.getElementById(`bar-${solicitudId}`).style.background = 'var(--red)';
+      toast(`❌ ${msg}`, 'err');
+    }
+  } catch (err) {
+    console.error('subirDocumento error:', err);
+    toast('❌ Error de conexión — verifica que el servidor esté activo', 'err');
+    document.getElementById(`prog-${solicitudId}`).style.display = 'none';
+  }
+}
+
+function toast(m, type='ok') { const el=document.getElementById('toast'); el.textContent=m; el.style.background=type==='err'?'#991B1B':'#065F46'; el.classList.add('show'); setTimeout(()=>el.classList.remove('show'),3500); }
+</script>
+</body>
+</html>
