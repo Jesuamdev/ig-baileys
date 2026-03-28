@@ -1,54 +1,78 @@
 // src/controllers/webhookController.js
-// Adaptado para Baileys — mantiene 100% la lógica de base de datos original
 const { v4: uuidv4 } = require('uuid');
 const { query, withTransaction } = require('../models/db');
 const storageService = require('../services/storageService');
 const { procesarFlujos } = require('../services/flowService');
 const logger = require('../utils/logger');
 
-// GET /api/whatsapp/webhook — ya no se usa con Baileys pero lo mantenemos por compatibilidad
 function verificarWebhook(req, res) {
   res.json({ status: 'baileys', message: 'Usando Baileys — webhook Meta no requerido' });
 }
 
-// POST /api/whatsapp/webhook — ya no se usa con Baileys
 async function recibirMensaje(req, res) {
   res.json({ status: 'baileys', message: 'Usando Baileys — webhook Meta no requerido' });
 }
 
-// Procesar mensaje entrante desde Baileys
+// Resolver número de teléfono real desde el JID
+async function resolverTelefono(jid, msg, sock) {
+  if (jid.endsWith('@g.us')) return null;
+
+  if (jid.endsWith('@s.whatsapp.net')) {
+    return jid.replace('@s.whatsapp.net', '');
+  }
+
+  if (jid.endsWith('@lid')) {
+    const participant = msg.key.participant || msg.participant;
+    if (participant && participant.includes('@s.whatsapp.net')) {
+      return participant.replace('@s.whatsapp.net', '');
+    }
+    if (sock) {
+      try {
+        const result = await sock.onWhatsApp(jid);
+        if (result?.[0]?.jid) {
+          return result[0].jid.replace('@s.whatsapp.net', '');
+        }
+      } catch (e) {
+        logger.warn(`No se pudo resolver @lid: ${jid}`);
+      }
+    }
+    return jid.replace('@lid', '');
+  }
+
+  return jid.replace('@s.whatsapp.net', '').replace('@g.us', '');
+}
+
 async function procesarMensajeBaileys(msg, sock, io) {
   try {
-    const jid      = msg.key.remoteJid;
-    const telefono = jid.replace('@s.whatsapp.net', '').replace('@g.us', '');
-    const msgId    = msg.key.id;
-    const message  = msg.message;
+    const jid     = msg.key.remoteJid;
+    const msgId   = msg.key.id;
+    const message = msg.message;
 
-    if (!message || jid.endsWith('@g.us')) return; // ignorar grupos
+    if (!message || jid.endsWith('@g.us')) return;
 
-    // Evitar duplicados
+    const telefono = await resolverTelefono(jid, msg, sock);
+    if (!telefono) return;
+
     const dup = await query('SELECT id FROM mensajes WHERE whatsapp_message_id = $1', [msgId]);
     if (dup.rows.length) return;
 
-    // Detectar tipo de mensaje
-    const tipo     = detectarTipo(message);
-    const contenido = extraerContenido(message, tipo);
-    const preview   = tipo !== 'text' ? `📎 ${contenido}` : contenido.substring(0, 100);
-
-    // Nombre del contacto
+    const tipo           = detectarTipo(message);
+    const contenido      = extraerContenido(message, tipo);
+    const preview        = tipo !== 'text' ? `📎 ${contenido}` : contenido.substring(0, 100);
     const nombreContacto = msg.pushName || null;
 
     await withTransaction(async (client) => {
 
-      // 1. Upsert contacto
+      // 1. Upsert contacto — guardar JID original para poder responder
       const { rows: cRows } = await client.query(`
-        INSERT INTO contactos (telefono, nombre, ultimo_mensaje)
-        VALUES ($1, $2, NOW())
+        INSERT INTO contactos (telefono, nombre, ultimo_mensaje, jid)
+        VALUES ($1, $2, NOW(), $3)
         ON CONFLICT (telefono) DO UPDATE
           SET ultimo_mensaje = NOW(),
-              nombre = COALESCE(contactos.nombre, $2)
+              nombre = COALESCE(contactos.nombre, $2),
+              jid = EXCLUDED.jid
         RETURNING *
-      `, [telefono, nombreContacto]);
+      `, [telefono, nombreContacto, jid]);
       const contacto = cRows[0];
 
       // 2. Buscar cliente vinculado
@@ -93,7 +117,7 @@ async function procesarMensajeBaileys(msg, sock, io) {
       `, [conversacion.id, contacto.id, tipo, contenido, msgId]);
       const mensajeGuardado = msgRows[0];
 
-      // 5. Descargar y guardar archivo si aplica
+      // 5. Archivo si aplica
       let archivoGuardado = null;
       if (['image', 'document', 'audio', 'video'].includes(tipo)) {
         archivoGuardado = await descargarYGuardarArchivo(
@@ -113,7 +137,7 @@ async function procesarMensajeBaileys(msg, sock, io) {
         ]);
       }
 
-      // 7. Emitir por Socket.IO
+      // 7. Socket.IO
       if (io) {
         io.emit('nuevo_mensaje', {
           conversacion_id: conversacion.id,
@@ -153,7 +177,7 @@ async function procesarMensajeBaileys(msg, sock, io) {
         });
       }
 
-      logger.info(`✅ Mensaje Baileys: ${tipo} de ${telefono}${clienteId ? ` [cliente ${clienteId}]` : ''}`);
+      logger.info(`✅ Mensaje Baileys: ${tipo} de ${telefono} [jid: ${jid}]${clienteId ? ` [cliente ${clienteId}]` : ''}`);
     });
   } catch (err) {
     logger.error('procesarMensajeBaileys error:', err.message);
@@ -166,10 +190,10 @@ async function descargarYGuardarArchivo(msg, message, tipo, mensajeId, conversac
     const buffer = await descargarMedia(msg);
     if (!buffer) return null;
 
-    const mediaInfo     = message[tipo === 'text' ? 'conversation' : tipo] || {};
-    const mimeType      = mediaInfo.mimetype || 'application/octet-stream';
-    const extension     = obtenerExtension(mimeType, tipo);
-    const nombreOriginal = mediaInfo.fileName || mediaInfo.filename || `${tipo}_${Date.now()}.${extension}`;
+    const mediaInfo        = message[`${tipo}Message`] || {};
+    const mimeType         = mediaInfo.mimetype || 'application/octet-stream';
+    const extension        = obtenerExtension(mimeType, tipo);
+    const nombreOriginal   = mediaInfo.fileName || mediaInfo.filename || `${tipo}_${Date.now()}.${extension}`;
     const nombreAlmacenado = `${uuidv4()}.${extension}`;
 
     const urlAlmacenamiento = await storageService.upload({
@@ -198,14 +222,13 @@ async function descargarYGuardarArchivo(msg, message, tipo, mensajeId, conversac
   }
 }
 
-// Helpers
 function detectarTipo(message) {
   if (message.conversation || message.extendedTextMessage) return 'text';
-  if (message.imageMessage) return 'image';
+  if (message.imageMessage)    return 'image';
   if (message.documentMessage) return 'document';
-  if (message.audioMessage) return 'audio';
-  if (message.videoMessage) return 'video';
-  if (message.stickerMessage) return 'sticker';
+  if (message.audioMessage)    return 'audio';
+  if (message.videoMessage)    return 'video';
+  if (message.stickerMessage)  return 'sticker';
   return 'text';
 }
 

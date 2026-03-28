@@ -1,5 +1,6 @@
 {
   "dependencies": {
-    "cors": "^2.8.6"
+    "cors": "^2.8.6",
+    "qrcode-terminal": "^0.12.0"
   }
 }

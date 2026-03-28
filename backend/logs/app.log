@@ -2510,3 +2510,455 @@
 [2026-03-26 20:18:12] INFO: ::1 - - [27/Mar/2026:01:18:12 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 304 - "http://127.0.0.1:5500/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
 [2026-03-26 20:18:42] INFO: ::1 - - [27/Mar/2026:01:18:42 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 304 - "http://127.0.0.1:5500/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
 [2026-03-26 20:19:12] INFO: ::1 - - [27/Mar/2026:01:19:12 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 304 - "http://127.0.0.1:5500/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:19:22] INFO: 🚀 CorpEase Sistema Unificado corriendo en puerto 3000 [development]
+[2026-03-28 17:19:22] INFO: 📱 WhatsApp webhook: /api/whatsapp/webhook
+[2026-03-28 17:19:22] INFO: 🖥️  Panel agentes:   http://localhost:3000
+[2026-03-28 17:19:22] INFO: ✅ Cron de recordatorios activo (diario 8:00 AM)
+[2026-03-28 17:19:23] INFO: 📱 QR generado — escanea desde el panel
+[2026-03-28 17:20:23] INFO: 📱 QR generado — escanea desde el panel
+[2026-03-28 17:20:43] INFO: 📱 QR generado — escanea desde el panel
+[2026-03-28 17:21:03] INFO: 📱 QR generado — escanea desde el panel
+[2026-03-28 17:21:23] INFO: 📱 QR generado — escanea desde el panel
+[2026-03-28 17:21:43] INFO: 📱 QR generado — escanea desde el panel
+[2026-03-28 17:22:03] WARN: ⚠️ Conexión cerrada — reconectar: true
+[2026-03-28 17:22:07] INFO: 📱 QR generado — escanea desde el panel
+[2026-03-28 17:23:07] INFO: 📱 QR generado — escanea desde el panel
+[2026-03-28 17:23:29] INFO: 🚀 CorpEase Sistema Unificado corriendo en puerto 3000 [development]
+[2026-03-28 17:23:29] INFO: 📱 WhatsApp webhook: /api/whatsapp/webhook
+[2026-03-28 17:23:29] INFO: 🖥️  Panel agentes:   http://localhost:3000
+[2026-03-28 17:23:29] INFO: ✅ Cron de recordatorios activo (diario 8:00 AM)
+[2026-03-28 17:23:30] INFO: 📱 QR generado — escanea desde el panel
+[2026-03-28 17:24:30] INFO: 📱 QR generado — escanea desde el panel
+[2026-03-28 17:24:44] WARN: ⚠️ Conexión cerrada — reconectar: true
+[2026-03-28 17:24:48] INFO: ✅ WhatsApp conectado via Baileys
+[2026-03-28 17:24:49] INFO: ✅ Mensaje Baileys: text de 584122232414 [cliente 066af742-e789-41ef-9a0e-45b9bb0f8418]
+[2026-03-28 17:24:52] INFO: ✅ Mensaje Baileys: text de 584122232414 [cliente 066af742-e789-41ef-9a0e-45b9bb0f8418]
+[2026-03-28 17:24:54] INFO: ✅ Mensaje Baileys: text de 584122232414 [cliente 066af742-e789-41ef-9a0e-45b9bb0f8418]
+[2026-03-28 17:24:54] INFO: ✅ Mensaje Baileys: text de 584122232414 [cliente 066af742-e789-41ef-9a0e-45b9bb0f8418]
+[2026-03-28 17:24:54] INFO: ✅ Mensaje Baileys: text de 584122232414 [cliente 066af742-e789-41ef-9a0e-45b9bb0f8418]
+[2026-03-28 17:24:55] INFO: ✅ Mensaje Baileys: text de 584122232414 [cliente 066af742-e789-41ef-9a0e-45b9bb0f8418]
+[2026-03-28 17:25:13] INFO: ✅ Mensaje Baileys: text de 584122232414 [cliente 066af742-e789-41ef-9a0e-45b9bb0f8418]
+[2026-03-28 17:25:14] INFO: ✅ Mensaje Baileys: text de 584122232414 [cliente 066af742-e789-41ef-9a0e-45b9bb0f8418]
+[2026-03-28 17:25:16] INFO: ::1 - - [28/Mar/2026:22:25:16 +0000] "GET /panel/login.html HTTP/1.1" 404 49 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:25:16] INFO: ::1 - - [28/Mar/2026:22:25:16 +0000] "GET /favicon.ico HTTP/1.1" 404 44 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:26:41] INFO: ✅ Mensaje Baileys: text de 28085361598681@lid
+[2026-03-28 17:28:19] INFO: Agente conectado: 513d81f7-2a11-42f9-ab1d-4f94bc131dc5
+[2026-03-28 17:28:19] INFO: ::1 - - [28/Mar/2026:22:28:19 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 401 45 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:28:19] INFO: Socket desconectado: 513d81f7-2a11-42f9-ab1d-4f94bc131dc5
+[2026-03-28 17:29:27] INFO: Agente conectado: 513d81f7-2a11-42f9-ab1d-4f94bc131dc5
+[2026-03-28 17:29:27] INFO: ::1 - - [28/Mar/2026:22:29:27 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 401 45 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:29:27] INFO: Socket desconectado: 513d81f7-2a11-42f9-ab1d-4f94bc131dc5
+[2026-03-28 17:30:07] INFO: Login agente: admin@corpease.com
+[2026-03-28 17:30:07] INFO: ::1 - - [28/Mar/2026:22:30:07 +0000] "POST /api/auth/login HTTP/1.1" 200 381 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:30:08] INFO: ::1 - - [28/Mar/2026:22:30:08 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 200 2690 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:30:08] INFO: Agente conectado: 5e147856-792f-4dc8-b6ae-309e392092be
+[2026-03-28 17:30:15] INFO: ::1 - - [28/Mar/2026:22:30:15 +0000] "GET /api/conversaciones/74151398-132d-40d9-9c91-fcb48ecf35c8 HTTP/1.1" 200 831 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:30:18] INFO: ✅ Mensaje enviado a 28085361598681
+[2026-03-28 17:30:18] INFO: ::1 - - [28/Mar/2026:22:30:18 +0000] "POST /api/conversaciones/74151398-132d-40d9-9c91-fcb48ecf35c8/mensajes HTTP/1.1" 200 16 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:30:18] INFO: ::1 - - [28/Mar/2026:22:30:18 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 200 2695 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:30:18] INFO: ::1 - - [28/Mar/2026:22:30:18 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:30:24] INFO: ✅ Mensaje enviado a 28085361598681
+[2026-03-28 17:30:24] INFO: ::1 - - [28/Mar/2026:22:30:24 +0000] "POST /api/conversaciones/74151398-132d-40d9-9c91-fcb48ecf35c8/mensajes HTTP/1.1" 200 16 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:30:24] INFO: ::1 - - [28/Mar/2026:22:30:24 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 200 2706 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:30:24] INFO: ::1 - - [28/Mar/2026:22:30:24 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:30:26] INFO: ::1 - - [28/Mar/2026:22:30:26 +0000] "GET /api/conversaciones/c526268e-c2ca-4d07-ac46-a93437693423 HTTP/1.1" 200 3984 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:30:29] INFO: ✅ Mensaje enviado a 584122232414
+[2026-03-28 17:30:29] INFO: ::1 - - [28/Mar/2026:22:30:29 +0000] "POST /api/conversaciones/c526268e-c2ca-4d07-ac46-a93437693423/mensajes HTTP/1.1" 200 16 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:30:29] INFO: ::1 - - [28/Mar/2026:22:30:29 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 200 2712 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:30:29] INFO: ::1 - - [28/Mar/2026:22:30:29 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:30:32] INFO: ✅ Mensaje enviado a 584122232414
+[2026-03-28 17:30:32] INFO: ::1 - - [28/Mar/2026:22:30:32 +0000] "POST /api/conversaciones/c526268e-c2ca-4d07-ac46-a93437693423/mensajes HTTP/1.1" 200 16 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:30:32] INFO: ::1 - - [28/Mar/2026:22:30:32 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 200 2723 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:30:32] INFO: ::1 - - [28/Mar/2026:22:30:32 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:30:38] INFO: ::1 - - [28/Mar/2026:22:30:38 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:30:43] INFO: ✅ Mensaje Baileys: text de 28085361598681@lid
+[2026-03-28 17:30:43] INFO: ::1 - - [28/Mar/2026:22:30:43 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 200 2712 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:30:45] INFO: ::1 - - [28/Mar/2026:22:30:45 +0000] "GET /api/conversaciones/74151398-132d-40d9-9c91-fcb48ecf35c8 HTTP/1.1" 200 1948 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:30:46] INFO: ::1 - - [28/Mar/2026:22:30:46 +0000] "GET /api/conversaciones/74151398-132d-40d9-9c91-fcb48ecf35c8 HTTP/1.1" 200 1948 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:31:08] INFO: ::1 - - [28/Mar/2026:22:31:08 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 200 2712 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:31:16] INFO: ✅ Mensaje Baileys: text de 28085361598681@lid
+[2026-03-28 17:31:16] INFO: ::1 - - [28/Mar/2026:22:31:16 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 200 2720 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:31:35] INFO: ::1 - - [28/Mar/2026:22:31:35 +0000] "GET /api/conversaciones/74151398-132d-40d9-9c91-fcb48ecf35c8 HTTP/1.1" 200 2351 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:31:36] INFO: ::1 - - [28/Mar/2026:22:31:36 +0000] "GET /api/conversaciones/74151398-132d-40d9-9c91-fcb48ecf35c8 HTTP/1.1" 200 2351 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:31:38] INFO: ::1 - - [28/Mar/2026:22:31:38 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 200 2720 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:31:39] INFO: ✅ Mensaje enviado a 28085361598681
+[2026-03-28 17:31:39] INFO: ::1 - - [28/Mar/2026:22:31:39 +0000] "POST /api/conversaciones/74151398-132d-40d9-9c91-fcb48ecf35c8/mensajes HTTP/1.1" 200 16 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:31:39] INFO: ::1 - - [28/Mar/2026:22:31:39 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 200 2713 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:31:39] INFO: ::1 - - [28/Mar/2026:22:31:39 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:32:08] INFO: ::1 - - [28/Mar/2026:22:32:08 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:32:38] INFO: ::1 - - [28/Mar/2026:22:32:38 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:33:08] INFO: ::1 - - [28/Mar/2026:22:33:08 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:33:38] INFO: ::1 - - [28/Mar/2026:22:33:38 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:34:11] INFO: ::1 - - [28/Mar/2026:22:34:11 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:35:11] INFO: ::1 - - [28/Mar/2026:22:35:11 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:36:12] INFO: ::1 - - [28/Mar/2026:22:36:12 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:36:38] INFO: 🚀 CorpEase Sistema Unificado corriendo en puerto 3000 [development]
+[2026-03-28 17:36:38] INFO: 📱 WhatsApp webhook: /api/whatsapp/webhook
+[2026-03-28 17:36:38] INFO: 🖥️  Panel agentes:   http://localhost:3000
+[2026-03-28 17:36:38] INFO: ✅ Cron de recordatorios activo (diario 8:00 AM)
+[2026-03-28 17:36:38] INFO: Agente conectado: 5e147856-792f-4dc8-b6ae-309e392092be
+[2026-03-28 17:36:39] INFO: ✅ WhatsApp conectado via Baileys
+[2026-03-28 17:36:51] INFO: ::1 - - [28/Mar/2026:22:36:51 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:36:52] INFO: Socket desconectado: 5e147856-792f-4dc8-b6ae-309e392092be
+[2026-03-28 17:36:52] INFO: ::1 - - [28/Mar/2026:22:36:52 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:36:52] INFO: Agente conectado: 5e147856-792f-4dc8-b6ae-309e392092be
+[2026-03-28 17:36:53] INFO: ::1 - - [28/Mar/2026:22:36:53 +0000] "GET /api/conversaciones/74151398-132d-40d9-9c91-fcb48ecf35c8 HTTP/1.1" 200 2702 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:36:57] INFO: ✅ Mensaje enviado a 28085361598681@s.whatsapp.net
+[2026-03-28 17:36:57] INFO: ::1 - - [28/Mar/2026:22:36:57 +0000] "POST /api/conversaciones/74151398-132d-40d9-9c91-fcb48ecf35c8/mensajes HTTP/1.1" 200 16 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:36:57] INFO: ::1 - - [28/Mar/2026:22:36:57 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 200 2712 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:36:57] INFO: ::1 - - [28/Mar/2026:22:36:57 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:37:02] INFO: ✅ Mensaje enviado a 28085361598681@s.whatsapp.net
+[2026-03-28 17:37:02] INFO: ::1 - - [28/Mar/2026:22:37:02 +0000] "POST /api/conversaciones/74151398-132d-40d9-9c91-fcb48ecf35c8/mensajes HTTP/1.1" 200 16 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:37:02] INFO: ::1 - - [28/Mar/2026:22:37:02 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 200 2711 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:37:02] INFO: ::1 - - [28/Mar/2026:22:37:02 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:37:06] INFO: ✅ Mensaje Baileys: text de 28085361598681@lid
+[2026-03-28 17:37:06] INFO: ::1 - - [28/Mar/2026:22:37:06 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 200 2712 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:37:08] INFO: ::1 - - [28/Mar/2026:22:37:08 +0000] "GET /api/conversaciones/74151398-132d-40d9-9c91-fcb48ecf35c8 HTTP/1.1" 200 3801 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:37:08] INFO: ::1 - - [28/Mar/2026:22:37:08 +0000] "GET /api/conversaciones/74151398-132d-40d9-9c91-fcb48ecf35c8 HTTP/1.1" 200 3801 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:37:22] INFO: ::1 - - [28/Mar/2026:22:37:22 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 200 2712 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:37:51] INFO: ✅ Mensaje enviado a 28085361598681@s.whatsapp.net
+[2026-03-28 17:37:51] INFO: ::1 - - [28/Mar/2026:22:37:51 +0000] "POST /api/conversaciones/74151398-132d-40d9-9c91-fcb48ecf35c8/mensajes HTTP/1.1" 200 16 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:37:51] INFO: ::1 - - [28/Mar/2026:22:37:51 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 200 2712 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:37:51] INFO: ::1 - - [28/Mar/2026:22:37:51 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:37:52] INFO: ::1 - - [28/Mar/2026:22:37:52 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:38:23] INFO: ::1 - - [28/Mar/2026:22:38:23 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:38:53] INFO: ::1 - - [28/Mar/2026:22:38:53 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:39:23] INFO: ::1 - - [28/Mar/2026:22:39:23 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:39:53] INFO: ::1 - - [28/Mar/2026:22:39:53 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:40:12] INFO: Socket desconectado: 5e147856-792f-4dc8-b6ae-309e392092be
+[2026-03-28 17:40:13] INFO: ::1 - - [28/Mar/2026:22:40:13 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:40:13] INFO: Agente conectado: 5e147856-792f-4dc8-b6ae-309e392092be
+[2026-03-28 17:40:14] INFO: ::1 - - [28/Mar/2026:22:40:14 +0000] "GET /api/conversaciones/74151398-132d-40d9-9c91-fcb48ecf35c8 HTTP/1.1" 200 4158 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:40:38] INFO: ::1 - - [28/Mar/2026:22:40:38 +0000] "GET /api/conversaciones/c526268e-c2ca-4d07-ac46-a93437693423 HTTP/1.1" 200 4726 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:40:39] INFO: ✅ Mensaje enviado a 584122232414@s.whatsapp.net
+[2026-03-28 17:40:39] INFO: ::1 - - [28/Mar/2026:22:40:39 +0000] "POST /api/conversaciones/c526268e-c2ca-4d07-ac46-a93437693423/mensajes HTTP/1.1" 200 16 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:40:39] INFO: ::1 - - [28/Mar/2026:22:40:39 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 200 2701 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:40:39] INFO: ::1 - - [28/Mar/2026:22:40:39 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:40:43] INFO: ::1 - - [28/Mar/2026:22:40:43 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:40:49] INFO: ::1 - - [28/Mar/2026:22:40:49 +0000] "GET /api/conversaciones/74151398-132d-40d9-9c91-fcb48ecf35c8 HTTP/1.1" 200 4158 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:40:52] INFO: ✅ Mensaje enviado a 28085361598681@s.whatsapp.net
+[2026-03-28 17:40:52] INFO: ::1 - - [28/Mar/2026:22:40:52 +0000] "POST /api/conversaciones/74151398-132d-40d9-9c91-fcb48ecf35c8/mensajes HTTP/1.1" 200 16 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:40:52] INFO: ::1 - - [28/Mar/2026:22:40:52 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 200 2700 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:40:52] INFO: ::1 - - [28/Mar/2026:22:40:52 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:41:13] INFO: ::1 - - [28/Mar/2026:22:41:13 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:41:43] INFO: ::1 - - [28/Mar/2026:22:41:43 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:42:13] INFO: ::1 - - [28/Mar/2026:22:42:13 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:42:25] INFO: Socket desconectado: 5e147856-792f-4dc8-b6ae-309e392092be
+[2026-03-28 17:42:26] INFO: ::1 - - [28/Mar/2026:22:42:26 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 200 2781 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:42:26] INFO: Agente conectado: 5e147856-792f-4dc8-b6ae-309e392092be
+[2026-03-28 17:42:27] INFO: Socket desconectado: 5e147856-792f-4dc8-b6ae-309e392092be
+[2026-03-28 17:42:27] INFO: ::1 - - [28/Mar/2026:22:42:27 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:42:27] INFO: Agente conectado: 5e147856-792f-4dc8-b6ae-309e392092be
+[2026-03-28 17:42:28] INFO: ::1 - - [28/Mar/2026:22:42:28 +0000] "GET /api/conversaciones/74151398-132d-40d9-9c91-fcb48ecf35c8 HTTP/1.1" 200 4567 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:42:32] INFO: ✅ Mensaje enviado a 573208271798@s.whatsapp.net
+[2026-03-28 17:42:32] INFO: ::1 - - [28/Mar/2026:22:42:32 +0000] "POST /api/conversaciones/74151398-132d-40d9-9c91-fcb48ecf35c8/mensajes HTTP/1.1" 200 16 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:42:32] INFO: ::1 - - [28/Mar/2026:22:42:32 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 200 2779 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:42:32] INFO: ::1 - - [28/Mar/2026:22:42:32 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:42:40] INFO: ✅ Mensaje Baileys: text de 28085361598681@lid
+[2026-03-28 17:42:40] INFO: ::1 - - [28/Mar/2026:22:42:40 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 200 3250 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:42:43] INFO: ✅ Mensaje Baileys: text de 28085361598681@lid
+[2026-03-28 17:42:43] INFO: ::1 - - [28/Mar/2026:22:42:43 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 200 3254 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:42:46] INFO: ::1 - - [28/Mar/2026:22:42:46 +0000] "GET /api/conversaciones/00b69225-45a0-4c80-91d9-6eb3411d641a HTTP/1.1" 200 1216 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:42:57] INFO: ::1 - - [28/Mar/2026:22:42:57 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 200 3254 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:43:27] INFO: ::1 - - [28/Mar/2026:22:43:27 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:43:38] INFO: Socket desconectado: 5e147856-792f-4dc8-b6ae-309e392092be
+[2026-03-28 17:43:38] INFO: ::1 - - [28/Mar/2026:22:43:38 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 200 2 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:43:38] INFO: Agente conectado: 5e147856-792f-4dc8-b6ae-309e392092be
+[2026-03-28 17:43:39] INFO: Socket desconectado: 5e147856-792f-4dc8-b6ae-309e392092be
+[2026-03-28 17:43:39] INFO: ::1 - - [28/Mar/2026:22:43:39 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:43:39] INFO: Agente conectado: 5e147856-792f-4dc8-b6ae-309e392092be
+[2026-03-28 17:43:43] INFO: ✅ Mensaje Baileys: text de 28085361598681@lid
+[2026-03-28 17:43:43] INFO: ::1 - - [28/Mar/2026:22:43:43 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 200 470 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:43:46] INFO: ::1 - - [28/Mar/2026:22:43:46 +0000] "GET /api/conversaciones/8cd60bac-794d-4963-887f-85060fd41efe HTTP/1.1" 200 827 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:43:51] INFO: ✅ Mensaje enviado a 28085361598681@s.whatsapp.net
+[2026-03-28 17:43:51] INFO: ::1 - - [28/Mar/2026:22:43:51 +0000] "POST /api/conversaciones/8cd60bac-794d-4963-887f-85060fd41efe/mensajes HTTP/1.1" 200 16 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:43:51] INFO: ::1 - - [28/Mar/2026:22:43:51 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 200 472 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:43:51] INFO: ::1 - - [28/Mar/2026:22:43:51 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:43:59] INFO: Socket desconectado: 5e147856-792f-4dc8-b6ae-309e392092be
+[2026-03-28 17:43:59] INFO: ::1 - - [28/Mar/2026:22:43:59 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:43:59] INFO: Agente conectado: 5e147856-792f-4dc8-b6ae-309e392092be
+[2026-03-28 17:44:00] INFO: ::1 - - [28/Mar/2026:22:44:00 +0000] "GET /api/conversaciones/8cd60bac-794d-4963-887f-85060fd41efe HTTP/1.1" 200 1186 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:44:07] ERROR: convertirCliente:
+[2026-03-28 17:44:07] INFO: ::1 - - [28/Mar/2026:22:44:07 +0000] "POST /api/whatsapp/contacto/72079eb1-93d9-462b-bec0-1a4de53aa560/convertir-cliente HTTP/1.1" 500 84 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:44:09] INFO: ::1 - - [28/Mar/2026:22:44:09 +0000] "POST /api/whatsapp/contacto/72079eb1-93d9-462b-bec0-1a4de53aa560/convertir-cliente HTTP/1.1" 200 135 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:44:09] INFO: ::1 - - [28/Mar/2026:22:44:09 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 200 508 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:44:10] INFO: ::1 - - [28/Mar/2026:22:44:10 +0000] "GET /api/clientes/cbe2b3c4-676d-4cd2-8473-7fa807493e2c HTTP/1.1" 200 503 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:44:10] INFO: ::1 - - [28/Mar/2026:22:44:10 +0000] "GET /api/agentes HTTP/1.1" 200 381 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:44:14] INFO: Email enviado → jesuamddev@gmail.com: 🔑 Acceso a tu portal — CorpEase
+[2026-03-28 17:44:14] INFO: ::1 - - [28/Mar/2026:22:44:14 +0000] "POST /api/clientes/cbe2b3c4-676d-4cd2-8473-7fa807493e2c/activar-portal HTTP/1.1" 200 93 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:44:14] INFO: ::1 - - [28/Mar/2026:22:44:14 +0000] "GET /api/clientes/cbe2b3c4-676d-4cd2-8473-7fa807493e2c HTTP/1.1" 200 502 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:44:14] INFO: ::1 - - [28/Mar/2026:22:44:14 +0000] "GET /api/agentes HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:44:16] INFO: ✅ Mensaje enviado a 28085361598681@s.whatsapp.net
+[2026-03-28 17:44:16] INFO: ::1 - - [28/Mar/2026:22:44:16 +0000] "POST /api/conversaciones/8cd60bac-794d-4963-887f-85060fd41efe/mensajes HTTP/1.1" 200 16 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:44:16] INFO: ::1 - - [28/Mar/2026:22:44:16 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 200 507 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:44:17] INFO: ::1 - - [28/Mar/2026:22:44:17 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:44:18] INFO: Socket desconectado: 5e147856-792f-4dc8-b6ae-309e392092be
+[2026-03-28 17:44:18] INFO: ::1 - - [28/Mar/2026:22:44:18 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:44:18] INFO: Agente conectado: 5e147856-792f-4dc8-b6ae-309e392092be
+[2026-03-28 17:44:21] INFO: ::1 - - [28/Mar/2026:22:44:21 +0000] "GET /api/conversaciones/8cd60bac-794d-4963-887f-85060fd41efe HTTP/1.1" 200 1575 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:44:23] INFO: ✅ Mensaje enviado a 28085361598681@s.whatsapp.net
+[2026-03-28 17:44:23] INFO: ::1 - - [28/Mar/2026:22:44:23 +0000] "POST /api/conversaciones/8cd60bac-794d-4963-887f-85060fd41efe/mensajes HTTP/1.1" 200 16 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:44:23] INFO: ::1 - - [28/Mar/2026:22:44:23 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 200 503 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:44:23] INFO: ::1 - - [28/Mar/2026:22:44:23 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:44:48] INFO: ::1 - - [28/Mar/2026:22:44:48 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:45:18] INFO: ::1 - - [28/Mar/2026:22:45:18 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:45:48] INFO: ::1 - - [28/Mar/2026:22:45:48 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:46:18] INFO: ::1 - - [28/Mar/2026:22:46:18 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:46:48] INFO: ::1 - - [28/Mar/2026:22:46:48 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:47:49] INFO: ::1 - - [28/Mar/2026:22:47:49 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:48:50] INFO: ::1 - - [28/Mar/2026:22:48:50 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:49:26] INFO: ✅ Mensaje Baileys: text de status@broadcast
+[2026-03-28 17:49:26] INFO: ::1 - - [28/Mar/2026:22:49:26 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 200 970 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:49:51] INFO: ::1 - - [28/Mar/2026:22:49:51 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:50:52] INFO: ::1 - - [28/Mar/2026:22:50:52 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:51:53] INFO: ::1 - - [28/Mar/2026:22:51:53 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:52:22] INFO: 🚀 CorpEase Sistema Unificado corriendo en puerto 3000 [development]
+[2026-03-28 17:52:22] INFO: 📱 WhatsApp webhook: /api/whatsapp/webhook
+[2026-03-28 17:52:22] INFO: 🖥️  Panel agentes:   http://localhost:3000
+[2026-03-28 17:52:22] INFO: ✅ Cron de recordatorios activo (diario 8:00 AM)
+[2026-03-28 17:52:22] INFO: Agente conectado: 5e147856-792f-4dc8-b6ae-309e392092be
+[2026-03-28 17:52:24] INFO: ✅ WhatsApp conectado via Baileys
+[2026-03-28 17:52:31] INFO: ::1 - - [28/Mar/2026:22:52:31 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 200 2 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:52:32] INFO: Socket desconectado: 5e147856-792f-4dc8-b6ae-309e392092be
+[2026-03-28 17:52:32] INFO: ::1 - - [28/Mar/2026:22:52:32 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:52:32] INFO: Agente conectado: 5e147856-792f-4dc8-b6ae-309e392092be
+[2026-03-28 17:52:33] INFO: Socket desconectado: 5e147856-792f-4dc8-b6ae-309e392092be
+[2026-03-28 17:52:33] INFO: ::1 - - [28/Mar/2026:22:52:33 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:52:33] INFO: Agente conectado: 5e147856-792f-4dc8-b6ae-309e392092be
+[2026-03-28 17:52:41] WARN: Usando fallback para @lid: 28085361598681
+[2026-03-28 17:52:41] INFO: ✅ Mensaje Baileys: text de 28085361598681
+[2026-03-28 17:52:41] INFO: ::1 - - [28/Mar/2026:22:52:41 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 200 496 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:52:44] INFO: ::1 - - [28/Mar/2026:22:52:44 +0000] "GET /api/conversaciones/eee5664a-6810-4535-b826-4f5605143f02 HTTP/1.1" 200 883 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:52:54] INFO: ✅ Mensaje enviado a 28085361598681@s.whatsapp.net
+[2026-03-28 17:52:54] INFO: ::1 - - [28/Mar/2026:22:52:54 +0000] "POST /api/conversaciones/eee5664a-6810-4535-b826-4f5605143f02/mensajes HTTP/1.1" 200 16 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:52:54] INFO: ::1 - - [28/Mar/2026:22:52:54 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 200 471 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:52:54] INFO: ::1 - - [28/Mar/2026:22:52:54 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:53:03] INFO: ::1 - - [28/Mar/2026:22:53:03 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:53:33] INFO: ::1 - - [28/Mar/2026:22:53:33 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:54:03] INFO: ::1 - - [28/Mar/2026:22:54:03 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:54:33] INFO: ::1 - - [28/Mar/2026:22:54:33 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:54:43] INFO: 🚀 CorpEase Sistema Unificado corriendo en puerto 3000 [development]
+[2026-03-28 17:54:43] INFO: 📱 WhatsApp webhook: /api/whatsapp/webhook
+[2026-03-28 17:54:43] INFO: 🖥️  Panel agentes:   http://localhost:3000
+[2026-03-28 17:54:43] INFO: ✅ Cron de recordatorios activo (diario 8:00 AM)
+[2026-03-28 17:54:43] INFO: Agente conectado: 5e147856-792f-4dc8-b6ae-309e392092be
+[2026-03-28 17:54:45] INFO: ✅ WhatsApp conectado via Baileys
+[2026-03-28 17:54:47] INFO: Socket desconectado: 5e147856-792f-4dc8-b6ae-309e392092be
+[2026-03-28 17:54:47] INFO: Agente conectado: 5e147856-792f-4dc8-b6ae-309e392092be
+[2026-03-28 17:54:47] INFO: ::1 - - [28/Mar/2026:22:54:47 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:54:47] INFO: Socket desconectado: 5e147856-792f-4dc8-b6ae-309e392092be
+[2026-03-28 17:54:48] INFO: ::1 - - [28/Mar/2026:22:54:48 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:54:48] INFO: Agente conectado: 5e147856-792f-4dc8-b6ae-309e392092be
+[2026-03-28 17:54:48] INFO: ::1 - - [28/Mar/2026:22:54:48 +0000] "GET /api/conversaciones/eee5664a-6810-4535-b826-4f5605143f02 HTTP/1.1" 200 1218 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:54:52] INFO: Socket desconectado: 5e147856-792f-4dc8-b6ae-309e392092be
+[2026-03-28 17:54:52] INFO: ::1 - - [28/Mar/2026:22:54:52 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 200 471 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:54:52] INFO: Agente conectado: 5e147856-792f-4dc8-b6ae-309e392092be
+[2026-03-28 17:54:52] INFO: Socket desconectado: 5e147856-792f-4dc8-b6ae-309e392092be
+[2026-03-28 17:54:52] INFO: ::1 - - [28/Mar/2026:22:54:52 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:54:52] INFO: Agente conectado: 5e147856-792f-4dc8-b6ae-309e392092be
+[2026-03-28 17:54:52] INFO: Socket desconectado: 5e147856-792f-4dc8-b6ae-309e392092be
+[2026-03-28 17:54:53] INFO: ::1 - - [28/Mar/2026:22:54:53 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:54:53] INFO: Agente conectado: 5e147856-792f-4dc8-b6ae-309e392092be
+[2026-03-28 17:54:53] INFO: Socket desconectado: 5e147856-792f-4dc8-b6ae-309e392092be
+[2026-03-28 17:54:53] INFO: ::1 - - [28/Mar/2026:22:54:53 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:54:53] INFO: Agente conectado: 5e147856-792f-4dc8-b6ae-309e392092be
+[2026-03-28 17:55:02] INFO: ::1 - - [28/Mar/2026:22:55:02 +0000] "GET /api/conversaciones/eee5664a-6810-4535-b826-4f5605143f02 HTTP/1.1" 200 1218 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:55:04] INFO: Intentando enviar a JID: 28085361598681@s.whatsapp.net (teléfono original: 28085361598681)
+[2026-03-28 17:55:05] INFO: ✅ Mensaje enviado a 28085361598681@s.whatsapp.net
+[2026-03-28 17:55:05] INFO: ::1 - - [28/Mar/2026:22:55:05 +0000] "POST /api/conversaciones/eee5664a-6810-4535-b826-4f5605143f02/mensajes HTTP/1.1" 200 16 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:55:05] INFO: ::1 - - [28/Mar/2026:22:55:05 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 200 467 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:55:05] INFO: ::1 - - [28/Mar/2026:22:55:05 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:55:23] INFO: ::1 - - [28/Mar/2026:22:55:23 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:55:45] INFO: Socket desconectado: 5e147856-792f-4dc8-b6ae-309e392092be
+[2026-03-28 17:55:45] INFO: ::1 - - [28/Mar/2026:22:55:45 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:55:45] INFO: Agente conectado: 5e147856-792f-4dc8-b6ae-309e392092be
+[2026-03-28 17:55:46] INFO: Socket desconectado: 5e147856-792f-4dc8-b6ae-309e392092be
+[2026-03-28 17:55:46] INFO: ::1 - - [28/Mar/2026:22:55:46 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:55:46] INFO: Agente conectado: 5e147856-792f-4dc8-b6ae-309e392092be
+[2026-03-28 17:55:46] INFO: Socket desconectado: 5e147856-792f-4dc8-b6ae-309e392092be
+[2026-03-28 17:55:46] INFO: ::1 - - [28/Mar/2026:22:55:46 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:55:46] INFO: Agente conectado: 5e147856-792f-4dc8-b6ae-309e392092be
+[2026-03-28 17:55:46] INFO: Socket desconectado: 5e147856-792f-4dc8-b6ae-309e392092be
+[2026-03-28 17:55:46] INFO: ::1 - - [28/Mar/2026:22:55:46 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:55:47] INFO: Agente conectado: 5e147856-792f-4dc8-b6ae-309e392092be
+[2026-03-28 17:55:49] INFO: Socket desconectado: 5e147856-792f-4dc8-b6ae-309e392092be
+[2026-03-28 17:57:03] INFO: ::1 - - [28/Mar/2026:22:57:03 +0000] "GET / HTTP/1.1" 404 33 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 17:57:05] INFO: ::1 - - [28/Mar/2026:22:57:05 +0000] "GET / HTTP/1.1" 404 33 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 18:01:29] INFO: 🚀 CorpEase Sistema Unificado corriendo en puerto 3000 [development]
+[2026-03-28 18:01:29] INFO: 📱 WhatsApp webhook: /api/whatsapp/webhook
+[2026-03-28 18:01:29] INFO: 🖥️  Panel agentes:   http://localhost:3000
+[2026-03-28 18:01:29] INFO: ✅ Cron de recordatorios activo (diario 8:00 AM)
+[2026-03-28 18:01:31] INFO: ✅ WhatsApp conectado via Baileys
+[2026-03-28 18:01:45] INFO: ::1 - - [28/Mar/2026:23:01:45 +0000] "GET / HTTP/1.1" 404 33 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 18:01:45] INFO: ::1 - - [28/Mar/2026:23:01:45 +0000] "GET / HTTP/1.1" 404 33 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 18:02:47] INFO: ::1 - - [28/Mar/2026:23:02:47 +0000] "GET / HTTP/1.1" 404 33 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 18:02:48] INFO: ::1 - - [28/Mar/2026:23:02:48 +0000] "GET / HTTP/1.1" 404 33 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 18:03:20] INFO: Login agente: admin@corpease.com
+[2026-03-28 18:03:20] INFO: ::1 - - [28/Mar/2026:23:03:20 +0000] "POST /api/auth/login HTTP/1.1" 200 381 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 18:03:21] INFO: ::1 - - [28/Mar/2026:23:03:21 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 200 2 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 18:03:21] INFO: Agente conectado: 5e147856-792f-4dc8-b6ae-309e392092be
+[2026-03-28 18:03:28] INFO: ✅ Mensaje Baileys: text de 28085361598681 [jid: 28085361598681@lid]
+[2026-03-28 18:03:28] INFO: ::1 - - [28/Mar/2026:23:03:28 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 200 475 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 18:03:31] INFO: ::1 - - [28/Mar/2026:23:03:31 +0000] "GET /api/conversaciones/2137a60e-4386-4f95-a5c4-d7a6693507db HTTP/1.1" 200 840 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 18:03:37] INFO: JID encontrado en BD: 28085361598681@lid
+[2026-03-28 18:03:37] INFO: Enviando a JID: 28085361598681@lid
+[2026-03-28 18:03:38] INFO: ✅ Mensaje enviado a 28085361598681@lid
+[2026-03-28 18:03:38] INFO: ::1 - - [28/Mar/2026:23:03:38 +0000] "POST /api/conversaciones/2137a60e-4386-4f95-a5c4-d7a6693507db/mensajes HTTP/1.1" 200 16 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 18:03:38] INFO: ::1 - - [28/Mar/2026:23:03:38 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 200 475 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 18:03:38] INFO: ::1 - - [28/Mar/2026:23:03:38 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 18:03:44] INFO: ✅ Mensaje Baileys: text de 28085361598681 [jid: 28085361598681@lid]
+[2026-03-28 18:03:44] INFO: ::1 - - [28/Mar/2026:23:03:44 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 200 479 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 18:03:47] INFO: ::1 - - [28/Mar/2026:23:03:47 +0000] "GET /api/conversaciones/2137a60e-4386-4f95-a5c4-d7a6693507db HTTP/1.1" 200 1594 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 18:03:51] INFO: ::1 - - [28/Mar/2026:23:03:51 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 200 479 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 18:04:20] INFO: Archivo local: /uploads/archivos/2026/03/0a74d4e1-f360-415d-9018-a4933c6a7071.jpg
+[2026-03-28 18:04:20] INFO: 📎 Archivo guardado: image_1774739060779.jpg (39.3 KB)
+[2026-03-28 18:04:20] INFO: ✅ Mensaje Baileys: image de status@broadcast [jid: status@broadcast]
+[2026-03-28 18:04:20] INFO: 🔄 Flujos: procesando archivo [imagen] "image_1774739060779.jpg"
+[2026-03-28 18:04:20] INFO: ::1 - - [28/Mar/2026:23:04:20 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 200 967 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 18:04:21] INFO: Archivo local: /uploads/archivos/2026/03/2153224a-a21d-4358-9140-c4ec4ffe1d41.mp4
+[2026-03-28 18:04:21] INFO: 📎 Archivo guardado: video_1774739061465.mp4 (8978.3 KB)
+[2026-03-28 18:04:21] INFO: ✅ Mensaje Baileys: video de status@broadcast [jid: status@broadcast]
+[2026-03-28 18:04:21] INFO: 🔄 Flujos: procesando archivo [audio] "video_1774739061465.mp4"
+[2026-03-28 18:04:21] INFO: 📁 Flujo: archivo clasificado como "identificacion"
+[2026-03-28 18:04:21] INFO: ✅ Flujos completados: Clasificado como: identificacion
+[2026-03-28 18:04:21] INFO: ::1 - - [28/Mar/2026:23:04:21 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 200 966 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 18:04:21] INFO: ::1 - - [28/Mar/2026:23:04:21 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 18:04:22] INFO: Archivo local: /uploads/archivos/2026/03/33f2dc17-7410-4f31-9863-432d3718dacf.mp4
+[2026-03-28 18:04:22] INFO: 📎 Archivo guardado: video_1774739062093.mp4 (7293.7 KB)
+[2026-03-28 18:04:22] INFO: ✅ Mensaje Baileys: video de status@broadcast [jid: status@broadcast]
+[2026-03-28 18:04:22] INFO: 🔄 Flujos: procesando archivo [audio] "video_1774739062093.mp4"
+[2026-03-28 18:04:22] INFO: 📁 Flujo: archivo clasificado como "identificacion"
+[2026-03-28 18:04:22] INFO: ✅ Flujos completados: Clasificado como: identificacion
+[2026-03-28 18:04:22] INFO: Archivo local: /uploads/archivos/2026/03/9b295cbe-0bfd-4e5c-b6c2-b1d7de02440f.jpg
+[2026-03-28 18:04:22] INFO: 📎 Archivo guardado: image_1774739062312.jpg (70.9 KB)
+[2026-03-28 18:04:22] INFO: ✅ Mensaje Baileys: image de status@broadcast [jid: status@broadcast]
+[2026-03-28 18:04:22] INFO: 🔄 Flujos: procesando archivo [imagen] "image_1774739062312.jpg"
+[2026-03-28 18:04:22] INFO: ::1 - - [28/Mar/2026:23:04:22 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 200 967 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 18:04:22] INFO: ::1 - - [28/Mar/2026:23:04:22 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 18:04:22] INFO: Archivo local: /uploads/archivos/2026/03/c575b5b7-9808-4543-94d8-4ad5c9c0d506.mp4
+[2026-03-28 18:04:22] INFO: 📎 Archivo guardado: video_1774739062764.mp4 (2066.4 KB)
+[2026-03-28 18:04:22] INFO: ✅ Mensaje Baileys: video de status@broadcast [jid: status@broadcast]
+[2026-03-28 18:04:22] INFO: 🔄 Flujos: procesando archivo [audio] "video_1774739062764.mp4"
+[2026-03-28 18:04:22] INFO: 📁 Flujo: archivo clasificado como "identificacion"
+[2026-03-28 18:04:22] INFO: ✅ Flujos completados: Clasificado como: identificacion
+[2026-03-28 18:04:23] INFO: Archivo local: /uploads/archivos/2026/03/0485324b-7fb8-410f-acb8-766cce5c6b0d.jpg
+[2026-03-28 18:04:23] INFO: 📎 Archivo guardado: image_1774739062994.jpg (96.6 KB)
+[2026-03-28 18:04:23] INFO: ✅ Mensaje Baileys: image de status@broadcast [jid: status@broadcast]
+[2026-03-28 18:04:23] INFO: 🔄 Flujos: procesando archivo [imagen] "image_1774739062994.jpg"
+[2026-03-28 18:04:23] INFO: ::1 - - [28/Mar/2026:23:04:23 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 200 967 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 18:04:23] INFO: ::1 - - [28/Mar/2026:23:04:23 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 18:04:23] INFO: Archivo local: /uploads/archivos/2026/03/72fc2b74-4498-4234-8397-bdb42b9010b3.jpg
+[2026-03-28 18:04:23] INFO: 📎 Archivo guardado: image_1774739063440.jpg (103.6 KB)
+[2026-03-28 18:04:23] INFO: ✅ Mensaje Baileys: image de status@broadcast [jid: status@broadcast]
+[2026-03-28 18:04:23] INFO: 🔄 Flujos: procesando archivo [imagen] "image_1774739063440.jpg"
+[2026-03-28 18:04:23] INFO: ::1 - - [28/Mar/2026:23:04:23 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 200 967 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 18:04:23] INFO: Archivo local: /uploads/archivos/2026/03/541bec2b-f936-41d7-85a1-48c8fd528256.jpg
+[2026-03-28 18:04:23] INFO: 📎 Archivo guardado: image_1774739063742.jpg (124.8 KB)
+[2026-03-28 18:04:23] INFO: ✅ Mensaje Baileys: image de status@broadcast [jid: status@broadcast]
+[2026-03-28 18:04:23] INFO: 🔄 Flujos: procesando archivo [imagen] "image_1774739063742.jpg"
+[2026-03-28 18:04:23] INFO: ::1 - - [28/Mar/2026:23:04:23 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 200 967 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 18:04:26] INFO: Archivo local: /uploads/archivos/2026/03/bf6bd523-05fa-4433-9135-f028852ac31d.jpg
+[2026-03-28 18:04:26] INFO: 📎 Archivo guardado: image_1774739066026.jpg (348.5 KB)
+[2026-03-28 18:04:26] INFO: ✅ Mensaje Baileys: image de status@broadcast [jid: status@broadcast]
+[2026-03-28 18:04:26] INFO: 🔄 Flujos: procesando archivo [imagen] "image_1774739066026.jpg"
+[2026-03-28 18:04:26] INFO: ::1 - - [28/Mar/2026:23:04:26 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 200 967 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 18:04:26] INFO: Archivo local: /uploads/archivos/2026/03/664212f3-12af-4134-8522-6d63ec5cf82c.jpg
+[2026-03-28 18:04:26] INFO: 📎 Archivo guardado: image_1774739066627.jpg (153.7 KB)
+[2026-03-28 18:04:26] INFO: ✅ Mensaje Baileys: image de status@broadcast [jid: status@broadcast]
+[2026-03-28 18:04:26] INFO: 🔄 Flujos: procesando archivo [imagen] "image_1774739066627.jpg"
+[2026-03-28 18:04:26] INFO: ::1 - - [28/Mar/2026:23:04:26 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 200 967 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 18:04:28] INFO: Archivo local: /uploads/archivos/2026/03/de91bcc6-3884-41e5-8457-8bcb8ac87cab.jpg
+[2026-03-28 18:04:28] INFO: 📎 Archivo guardado: image_1774739068584.jpg (106.6 KB)
+[2026-03-28 18:04:28] INFO: ✅ Mensaje Baileys: image de status@broadcast [jid: status@broadcast]
+[2026-03-28 18:04:28] INFO: 🔄 Flujos: procesando archivo [imagen] "image_1774739068584.jpg"
+[2026-03-28 18:04:28] INFO: ::1 - - [28/Mar/2026:23:04:28 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 200 968 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 18:04:32] INFO: Archivo local: /uploads/archivos/2026/03/8d774da8-9de6-462b-af49-21603c5d2d06.mp4
+[2026-03-28 18:04:32] INFO: 📎 Archivo guardado: video_1774739072501.mp4 (6326.1 KB)
+[2026-03-28 18:04:32] INFO: ✅ Mensaje Baileys: video de status@broadcast [jid: status@broadcast]
+[2026-03-28 18:04:32] INFO: 🔄 Flujos: procesando archivo [audio] "video_1774739072501.mp4"
+[2026-03-28 18:04:32] INFO: 📁 Flujo: archivo clasificado como "identificacion"
+[2026-03-28 18:04:32] INFO: ✅ Flujos completados: Clasificado como: identificacion
+[2026-03-28 18:04:32] INFO: ::1 - - [28/Mar/2026:23:04:32 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 200 967 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 18:04:32] INFO: Archivo local: /uploads/archivos/2026/03/6096b707-ca39-46b6-82b1-bb1269155791.jpg
+[2026-03-28 18:04:32] INFO: 📎 Archivo guardado: image_1774739072929.jpg (181.3 KB)
+[2026-03-28 18:04:32] INFO: ✅ Mensaje Baileys: image de status@broadcast [jid: status@broadcast]
+[2026-03-28 18:04:32] INFO: 🔄 Flujos: procesando archivo [imagen] "image_1774739072929.jpg"
+[2026-03-28 18:04:32] INFO: ::1 - - [28/Mar/2026:23:04:32 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 200 968 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 18:04:33] INFO: Archivo local: /uploads/archivos/2026/03/4a4a4d36-eab0-42a1-80ca-99f1e3ae70c9.mp4
+[2026-03-28 18:04:33] INFO: 📎 Archivo guardado: video_1774739073406.mp4 (3057.4 KB)
+[2026-03-28 18:04:33] INFO: ✅ Mensaje Baileys: video de status@broadcast [jid: status@broadcast]
+[2026-03-28 18:04:33] INFO: 🔄 Flujos: procesando archivo [audio] "video_1774739073406.mp4"
+[2026-03-28 18:04:33] INFO: 📁 Flujo: archivo clasificado como "identificacion"
+[2026-03-28 18:04:33] INFO: ✅ Flujos completados: Clasificado como: identificacion
+[2026-03-28 18:04:33] INFO: ::1 - - [28/Mar/2026:23:04:33 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 200 967 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 18:04:33] INFO: ✅ Mensaje Baileys: text de 28085361598681 [jid: 28085361598681@lid]
+[2026-03-28 18:04:33] INFO: ::1 - - [28/Mar/2026:23:04:33 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 200 1003 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 18:04:34] INFO: Archivo local: /uploads/archivos/2026/03/f4b7a8ca-e238-4362-a117-04e29a0aa1bd.jpg
+[2026-03-28 18:04:34] INFO: 📎 Archivo guardado: image_1774739074008.jpg (82.0 KB)
+[2026-03-28 18:04:34] INFO: ✅ Mensaje Baileys: image de status@broadcast [jid: status@broadcast]
+[2026-03-28 18:04:34] INFO: 🔄 Flujos: procesando archivo [imagen] "image_1774739074008.jpg"
+[2026-03-28 18:04:34] INFO: Archivo local: /uploads/archivos/2026/03/13b49ab9-d7bc-47bf-87b9-7962b72092ac.jpg
+[2026-03-28 18:04:34] INFO: 📎 Archivo guardado: image_1774739074131.jpg (60.0 KB)
+[2026-03-28 18:04:34] INFO: ✅ Mensaje Baileys: image de status@broadcast [jid: status@broadcast]
+[2026-03-28 18:04:34] INFO: 🔄 Flujos: procesando archivo [imagen] "image_1774739074131.jpg"
+[2026-03-28 18:04:34] INFO: ::1 - - [28/Mar/2026:23:04:34 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 200 1004 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 18:04:34] INFO: ::1 - - [28/Mar/2026:23:04:34 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 18:04:34] INFO: Archivo local: /uploads/archivos/2026/03/d34e9c06-5807-4642-83bf-76398e6620e5.jpg
+[2026-03-28 18:04:34] INFO: 📎 Archivo guardado: image_1774739074519.jpg (55.5 KB)
+[2026-03-28 18:04:34] INFO: ✅ Mensaje Baileys: image de status@broadcast [jid: status@broadcast]
+[2026-03-28 18:04:34] INFO: 🔄 Flujos: procesando archivo [imagen] "image_1774739074519.jpg"
+[2026-03-28 18:04:34] INFO: ::1 - - [28/Mar/2026:23:04:34 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 200 1004 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 18:04:35] INFO: Archivo local: /uploads/archivos/2026/03/6a4aca42-6281-4286-82e0-59df08ad9d78.jpg
+[2026-03-28 18:04:35] INFO: 📎 Archivo guardado: image_1774739075014.jpg (119.2 KB)
+[2026-03-28 18:04:35] INFO: ✅ Mensaje Baileys: image de status@broadcast [jid: status@broadcast]
+[2026-03-28 18:04:35] INFO: 🔄 Flujos: procesando archivo [imagen] "image_1774739075014.jpg"
+[2026-03-28 18:04:35] INFO: ::1 - - [28/Mar/2026:23:04:35 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 200 1004 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 18:04:38] INFO: ::1 - - [28/Mar/2026:23:04:38 +0000] "GET /api/conversaciones/39c697ce-c37e-4446-b8ac-8f2b1dc20b92 HTTP/1.1" 200 20716 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 18:04:47] INFO: ::1 - - [28/Mar/2026:23:04:47 +0000] "GET /api/conversaciones/2137a60e-4386-4f95-a5c4-d7a6693507db HTTP/1.1" 200 2053 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 18:04:48] INFO: ::1 - - [28/Mar/2026:23:04:48 +0000] "GET /api/conversaciones/39c697ce-c37e-4446-b8ac-8f2b1dc20b92 HTTP/1.1" 200 20715 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 18:04:51] INFO: ::1 - - [28/Mar/2026:23:04:51 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 200 1003 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 18:04:51] INFO: ::1 - - [28/Mar/2026:23:04:51 +0000] "GET /api/conversaciones/39c697ce-c37e-4446-b8ac-8f2b1dc20b92 HTTP/1.1" 200 20715 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 18:04:56] INFO: ::1 - - [28/Mar/2026:23:04:56 +0000] "GET /api/pagos HTTP/1.1" 200 2 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 18:04:57] INFO: ::1 - - [28/Mar/2026:23:04:57 +0000] "GET /api/dashboard HTTP/1.1" 200 221 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 18:04:57] INFO: ::1 - - [28/Mar/2026:23:04:57 +0000] "GET /api/conversaciones?limit=8 HTTP/1.1" 200 1003 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 18:04:58] INFO: ::1 - - [28/Mar/2026:23:04:58 +0000] "GET /api/clientes?limit=50 HTTP/1.1" 200 41 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 18:04:59] INFO: ::1 - - [28/Mar/2026:23:04:59 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 200 1003 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 18:05:02] INFO: ::1 - - [28/Mar/2026:23:05:02 +0000] "GET /api/conversaciones/2137a60e-4386-4f95-a5c4-d7a6693507db HTTP/1.1" 200 2053 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 18:05:03] INFO: ::1 - - [28/Mar/2026:23:05:03 +0000] "GET /api/conversaciones/39c697ce-c37e-4446-b8ac-8f2b1dc20b92 HTTP/1.1" 200 20715 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 18:05:05] INFO: ::1 - - [28/Mar/2026:23:05:05 +0000] "GET /api/conversaciones/2137a60e-4386-4f95-a5c4-d7a6693507db HTTP/1.1" 200 2053 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 18:05:21] INFO: ::1 - - [28/Mar/2026:23:05:21 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 200 1003 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 18:05:32] INFO: ::1 - - [28/Mar/2026:23:05:32 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 18:05:36] INFO: ::1 - - [28/Mar/2026:23:05:36 +0000] "GET /api/clientes?limit=50 HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 18:05:37] INFO: ::1 - - [28/Mar/2026:23:05:37 +0000] "GET /api/archivos HTTP/1.1" 200 12637 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 18:05:42] INFO: ::1 - - [28/Mar/2026:23:05:42 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 18:05:44] INFO: ::1 - - [28/Mar/2026:23:05:44 +0000] "GET /api/conversaciones/39c697ce-c37e-4446-b8ac-8f2b1dc20b92 HTTP/1.1" 200 20715 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 18:05:50] INFO: ::1 - - [28/Mar/2026:23:05:50 +0000] "PUT /api/conversaciones/39c697ce-c37e-4446-b8ac-8f2b1dc20b92/etiquetas HTTP/1.1" 200 361 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 18:05:50] INFO: ::1 - - [28/Mar/2026:23:05:50 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 200 1003 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 18:05:51] INFO: ::1 - - [28/Mar/2026:23:05:51 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 18:05:52] INFO: ::1 - - [28/Mar/2026:23:05:52 +0000] "PUT /api/conversaciones/39c697ce-c37e-4446-b8ac-8f2b1dc20b92/estado HTTP/1.1" 200 361 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 18:05:52] INFO: ::1 - - [28/Mar/2026:23:05:52 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 200 1003 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 18:05:55] INFO: ::1 - - [28/Mar/2026:23:05:55 +0000] "GET /api/conversaciones/39c697ce-c37e-4446-b8ac-8f2b1dc20b92 HTTP/1.1" 200 20715 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 18:06:07] INFO: ::1 - - [28/Mar/2026:23:06:07 +0000] "GET /api/clientes?limit=50 HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 18:06:08] INFO: ::1 - - [28/Mar/2026:23:06:08 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 200 1003 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 18:06:09] INFO: ::1 - - [28/Mar/2026:23:06:09 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 18:06:09] INFO: ::1 - - [28/Mar/2026:23:06:09 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 18:06:11] INFO: Socket desconectado: 5e147856-792f-4dc8-b6ae-309e392092be
+[2026-03-28 18:06:11] INFO: ::1 - - [28/Mar/2026:23:06:11 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 18:06:11] INFO: Agente conectado: 5e147856-792f-4dc8-b6ae-309e392092be
+[2026-03-28 18:06:12] INFO: Socket desconectado: 5e147856-792f-4dc8-b6ae-309e392092be
+[2026-03-28 18:06:12] INFO: ::1 - - [28/Mar/2026:23:06:12 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 18:06:12] INFO: Agente conectado: 5e147856-792f-4dc8-b6ae-309e392092be
+[2026-03-28 18:06:16] INFO: ::1 - - [28/Mar/2026:23:06:16 +0000] "GET /api/conversaciones/2137a60e-4386-4f95-a5c4-d7a6693507db HTTP/1.1" 200 2053 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 18:06:42] INFO: ::1 - - [28/Mar/2026:23:06:42 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 200 1003 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 18:07:12] INFO: ::1 - - [28/Mar/2026:23:07:12 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 18:07:18] INFO: Archivo local: /uploads/archivos/2026/03/cd6e540e-e453-4654-b63b-d4d55fe563f0.jpg
+[2026-03-28 18:07:18] INFO: 📎 Archivo guardado: image_1774739238746.jpg (146.4 KB)
+[2026-03-28 18:07:18] INFO: ✅ Mensaje Baileys: image de 28085361598681 [jid: 28085361598681@lid]
+[2026-03-28 18:07:18] INFO: 🔄 Flujos: procesando archivo [imagen] "image_1774739238746.jpg"
+[2026-03-28 18:07:18] INFO: ::1 - - [28/Mar/2026:23:07:18 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 200 964 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 18:07:42] INFO: ::1 - - [28/Mar/2026:23:07:42 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 18:08:12] INFO: ::1 - - [28/Mar/2026:23:08:12 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 18:08:42] INFO: ::1 - - [28/Mar/2026:23:08:42 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 18:09:43] INFO: ::1 - - [28/Mar/2026:23:09:43 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 18:10:44] INFO: ::1 - - [28/Mar/2026:23:10:44 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+[2026-03-28 18:11:45] INFO: ::1 - - [28/Mar/2026:23:11:45 +0000] "GET /api/conversaciones?limit=50 HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"

@@ -1,12 +1,27 @@
 // src/services/whatsappService.js
-// Adaptado para usar Baileys en lugar de Meta Cloud API
+// Adaptado para usar Baileys — usa el JID guardado en BD para responder correctamente
 const { query } = require('../models/db');
 const logger = require('../utils/logger');
 const baileysService = require('./baileysService');
 
 async function enviarTexto(telefono, texto, conversacionId, agenteId) {
   try {
-    await baileysService.enviarTexto(telefono, texto);
+    // Buscar el JID real guardado en la BD para este contacto
+    let jidDestino = telefono;
+    try {
+      const { rows } = await query(
+        `SELECT jid FROM contactos WHERE telefono = $1 OR telefono = $2 LIMIT 1`,
+        [telefono, telefono.replace(/^\+/, '')]
+      );
+      if (rows[0]?.jid) {
+        jidDestino = rows[0].jid;
+        logger.info(`JID encontrado en BD: ${jidDestino}`);
+      }
+    } catch (e) {
+      logger.warn(`No se pudo buscar JID para ${telefono}, usando teléfono directo`);
+    }
+
+    await baileysService.enviarTexto(jidDestino, texto);
 
     if (conversacionId) {
       await query(
@@ -37,7 +52,6 @@ async function enviarTexto(telefono, texto, conversacionId, agenteId) {
 }
 
 async function enviarPlantilla(telefono, nombre, idioma = 'es', componentes = []) {
-  // Con Baileys no hay plantillas oficiales — enviamos texto plano
   logger.warn(`Plantilla '${nombre}' no disponible en Baileys — enviando como texto`);
   const texto = componentes?.[0]?.parameters?.[0]?.text || `Mensaje automático: ${nombre}`;
   return enviarTexto(telefono, texto, null, null);
@@ -45,12 +59,21 @@ async function enviarPlantilla(telefono, nombre, idioma = 'es', componentes = []
 
 async function enviarArchivo(telefono, urlArchivo, tipoMime, nombreArchivo, conversacionId, agenteId) {
   try {
-    // Descargar el archivo desde la URL para obtener el buffer
+    // Buscar JID real
+    let jidDestino = telefono;
+    try {
+      const { rows } = await query(
+        `SELECT jid FROM contactos WHERE telefono = $1 OR telefono = $2 LIMIT 1`,
+        [telefono, telefono.replace(/^\+/, '')]
+      );
+      if (rows[0]?.jid) jidDestino = rows[0].jid;
+    } catch (e) {}
+
     const axios = require('axios');
     const res = await axios.get(urlArchivo, { responseType: 'arraybuffer' });
     const buffer = Buffer.from(res.data);
 
-    await baileysService.enviarArchivo(telefono, buffer, tipoMime, nombreArchivo);
+    await baileysService.enviarArchivo(jidDestino, buffer, tipoMime, nombreArchivo);
 
     const contenido = `[${nombreArchivo}]`;
     if (conversacionId) {

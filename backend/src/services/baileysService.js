@@ -36,15 +36,20 @@ async function iniciarBaileys(io) {
   sock.ev.on('connection.update', (update) => {
     const { connection, lastDisconnect, qr } = update;
 
-    if (qr) {
-      qrCode = qr;
-      connectionStatus = 'connecting';
-      logger.info('📱 QR generado — escanea desde el panel');
-      if (ioInstance) {
-        ioInstance.emit('wa_qr', { qr });
-        ioInstance.emit('wa_status', { status: 'connecting', qr });
-      }
-    }
+ if (qr) {
+  qrCode = qr;
+  connectionStatus = 'connecting';
+  logger.info('📱 QR generado — escanea desde el panel');
+  
+  // Mostrar QR en terminal
+  const qrTerminal = require('qrcode-terminal');
+  qrTerminal.generate(qr, { small: true });
+  
+  if (ioInstance) {
+    ioInstance.emit('wa_qr', { qr });
+    ioInstance.emit('wa_status', { status: 'connecting', qr });
+  }
+}
 
     if (connection === 'close') {
       const shouldReconnect = (lastDisconnect?.error instanceof Boom)
@@ -101,9 +106,19 @@ async function enviarTexto(telefono, texto) {
   if (!sock || connectionStatus !== 'connected') {
     throw new Error('WhatsApp no está conectado');
   }
-  const jid = formatearJID(telefono);
+  
+  let jid;
+  if (telefono.includes('@')) {
+    jid = telefono;
+  } else {
+    // Intentar encontrar el JID correcto en los chats activos
+    const limpio = telefono.replace(/\D/g, '');
+    jid = `${limpio}@s.whatsapp.net`;
+  }
+  
+  logger.info(`Enviando a JID: ${jid}`);
   await sock.sendMessage(jid, { text: texto });
-  logger.info(`✅ Mensaje enviado a ${telefono}`);
+  logger.info(`✅ Mensaje enviado a ${jid}`);
   return { success: true };
 }
 
@@ -134,6 +149,10 @@ async function descargarMedia(msg) {
 }
 
 function formatearJID(telefono) {
+  // Si ya tiene @, devolverlo tal cual
+  if (telefono.includes('@')) return telefono;
+  
+  // Limpiar y formatear
   const limpio = telefono.replace(/\D/g, '');
   return `${limpio}@s.whatsapp.net`;
 }

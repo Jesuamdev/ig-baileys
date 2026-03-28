@@ -31,7 +31,7 @@ router.post('/whatsapp/enviar', authenticate, soloAgente, async (req, res) => {
   try {
     const { telefono, mensaje, conversacion_id } = req.body;
     const waService = require('../services/whatsappService');
-    const result = await waService.enviarTexto(telefono.replace(/\D/g,''), mensaje, conversacion_id, req.user.id);
+    const result = await waService.enviarTexto(telefono, mensaje, conversacion_id, req.user.id);
     res.json({ success: true, ...result });
   } catch (err) { res.status(500).json({ message: err.message }); }
 });
