@@ -99,6 +99,10 @@ server.listen(PORT, () => {
   logger.info(`📱 WhatsApp webhook: /api/whatsapp/webhook`);
   logger.info(`🖥️  Panel agentes:   ${process.env.FRONTEND_URL || 'http://localhost:5500'}`);
   iniciarCron();
+   // Iniciar WhatsApp via Baileys
+  const { iniciarBaileys } = require('./services/baileysService');
+  iniciarBaileys(io);
+
 });
 
 module.exports = { app, server, io };

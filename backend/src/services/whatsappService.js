@@ -1,46 +1,74 @@
 // src/services/whatsappService.js
-const axios  = require('axios');
+// Adaptado para usar Baileys en lugar de Meta Cloud API
 const { query } = require('../models/db');
 const logger = require('../utils/logger');
-
-const WA_URL = () => `https://graph.facebook.com/v18.0/${process.env.WHATSAPP_PHONE_ID}/messages`;
-const HEADERS = () => ({ Authorization: `Bearer ${process.env.WHATSAPP_TOKEN}`, 'Content-Type': 'application/json' });
+const baileysService = require('./baileysService');
 
 async function enviarTexto(telefono, texto, conversacionId, agenteId) {
-  return _enviar({ messaging_product:'whatsapp', to: telefono, type:'text', text:{ body: texto } }, 'texto', texto, conversacionId, agenteId);
+  try {
+    await baileysService.enviarTexto(telefono, texto);
+
+    if (conversacionId) {
+      await query(
+        `INSERT INTO mensajes (conversacion_id, agente_id, direccion, tipo, contenido, estado)
+         VALUES ($1, $2, 'saliente', 'text', $3, 'enviado')`,
+        [conversacionId, agenteId || null, texto]
+      );
+      await query(
+        `UPDATE conversaciones SET ultimo_mensaje = $1, ultima_actividad = NOW() WHERE id = $2`,
+        [texto.substring(0, 100), conversacionId]
+      );
+    }
+
+    return { success: true };
+  } catch (err) {
+    logger.error(`Error enviando mensaje: ${err.message}`);
+
+    if (conversacionId) {
+      await query(
+        `INSERT INTO mensajes (conversacion_id, agente_id, direccion, tipo, contenido, estado)
+         VALUES ($1, $2, 'saliente', 'text', $3, 'fallido')`,
+        [conversacionId, agenteId || null, texto]
+      ).catch(() => {});
+    }
+
+    throw new Error(err.message);
+  }
 }
 
 async function enviarPlantilla(telefono, nombre, idioma = 'es', componentes = []) {
-  const payload = { messaging_product:'whatsapp', to: telefono, type:'template', template:{ name: nombre, language:{ code: idioma }, components: componentes }};
-  const res = await axios.post(WA_URL(), payload, { headers: HEADERS() });
-  logger.info(`Plantilla '${nombre}' → ${telefono}`);
-  return res.data;
+  // Con Baileys no hay plantillas oficiales — enviamos texto plano
+  logger.warn(`Plantilla '${nombre}' no disponible en Baileys — enviando como texto`);
+  const texto = componentes?.[0]?.parameters?.[0]?.text || `Mensaje automático: ${nombre}`;
+  return enviarTexto(telefono, texto, null, null);
 }
 
 async function enviarArchivo(telefono, urlArchivo, tipoMime, nombreArchivo, conversacionId, agenteId) {
-  const tipo    = tipoMime.startsWith('image/') ? 'image' : 'document';
-  const payload = { messaging_product:'whatsapp', to: telefono, type: tipo, [tipo]:{ link: urlArchivo, ...(tipo==='document' && { filename: nombreArchivo }) }};
-  return _enviar(payload, tipo, `[${nombreArchivo}]`, conversacionId, agenteId);
-}
-
-async function _enviar(payload, tipo, contenido, conversacionId, agenteId) {
   try {
-    const res = await axios.post(WA_URL(), payload, { headers: HEADERS() });
-    const waId = res.data.messages?.[0]?.id;
+    // Descargar el archivo desde la URL para obtener el buffer
+    const axios = require('axios');
+    const res = await axios.get(urlArchivo, { responseType: 'arraybuffer' });
+    const buffer = Buffer.from(res.data);
+
+    await baileysService.enviarArchivo(telefono, buffer, tipoMime, nombreArchivo);
+
+    const contenido = `[${nombreArchivo}]`;
     if (conversacionId) {
-      await query(`INSERT INTO mensajes (conversacion_id,agente_id,direccion,tipo,contenido,whatsapp_message_id,estado) VALUES ($1,$2,'saliente',$3,$4,$5,'enviado')`,
-        [conversacionId, agenteId||null, tipo, contenido, waId]);
-      await query(`UPDATE conversaciones SET ultimo_mensaje=$1, ultima_actividad=NOW() WHERE id=$2`, [contenido.substring(0,100), conversacionId]);
+      await query(
+        `INSERT INTO mensajes (conversacion_id, agente_id, direccion, tipo, contenido, estado)
+         VALUES ($1, $2, 'saliente', 'document', $3, 'enviado')`,
+        [conversacionId, agenteId || null, contenido]
+      );
+      await query(
+        `UPDATE conversaciones SET ultimo_mensaje = $1, ultima_actividad = NOW() WHERE id = $2`,
+        [contenido, conversacionId]
+      );
     }
-    return { success: true, messageId: waId };
+
+    return { success: true };
   } catch (err) {
-    const msg = err.response?.data?.error?.message || err.message;
-    logger.error(`WA error: ${msg}`);
-    if (conversacionId) {
-      await query(`INSERT INTO mensajes (conversacion_id,agente_id,direccion,tipo,contenido,estado) VALUES ($1,$2,'saliente',$3,$4,'fallido')`,
-        [conversacionId, agenteId||null, tipo, contenido]);
-    }
-    throw new Error(msg);
+    logger.error(`Error enviando archivo: ${err.message}`);
+    throw new Error(err.message);
   }
 }
 
