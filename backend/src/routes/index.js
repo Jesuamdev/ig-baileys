@@ -415,4 +415,21 @@ router.post('/portal/solicitudes/:id/subir', authenticate, soloCliente, ...(() =
   ];
 })());
 
+// ── WHATSAPP STATUS (solo admin) ──────────────────────────────────────────────
+router.get('/whatsapp/status', authenticate, soloAdmin, async (req, res) => {
+  const { getStatus } = require('../services/baileysService');
+  res.json(getStatus());
+});
+
+router.post('/whatsapp/desconectar', authenticate, soloAdmin, async (req, res) => {
+  try {
+    const { getSocket } = require('../services/baileysService');
+    const sock = getSocket();
+    if (sock) await sock.logout();
+    res.json({ success: true, message: 'WhatsApp desconectado' });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
 module.exports = router;

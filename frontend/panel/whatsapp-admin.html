@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>IG Accounting — WhatsApp Admin</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --green:#25D366;--green-dark:#128C7E;--green-light:#DCF8C6;
+  --bg:#0d1117;--card:#161b22;--border:#30363d;
+  --text:#e6edf3;--text2:#8b949e;--text3:#484f58;
+  --red:#f85149;--amber:#d29922;--blue:#58a6ff;
+  --font:'DM Sans',sans-serif;
+}
+body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px}
+
+.header{text-align:center;margin-bottom:40px}
+.logo{display:inline-flex;align-items:center;gap:10px;margin-bottom:16px}
+.logo-badge{width:44px;height:44px;background:var(--green);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:700;color:white}
+.logo-name{font-size:18px;font-weight:600;color:var(--text)}
+.header h1{font-size:24px;font-weight:700;margin-bottom:8px}
+.header p{font-size:14px;color:var(--text2);max-width:400px;line-height:1.6}
+
+.card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:32px;width:100%;max-width:480px;text-align:center}
+
+/* STATUS BADGE */
+.status-bar{display:flex;align-items:center;justify-content:center;gap:8px;padding:10px 20px;border-radius:50px;font-size:13px;font-weight:600;margin-bottom:28px;width:fit-content;margin-left:auto;margin-right:auto}
+.status-bar.connected{background:rgba(37,211,102,.12);color:var(--green);border:1px solid rgba(37,211,102,.25)}
+.status-bar.disconnected{background:rgba(248,81,73,.12);color:var(--red);border:1px solid rgba(248,81,73,.25)}
+.status-bar.connecting{background:rgba(210,153,34,.12);color:var(--amber);border:1px solid rgba(210,153,34,.25)}
+.status-dot{width:8px;height:8px;border-radius:50%;background:currentColor}
+.status-dot.pulse{animation:pulse 1.5s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+
+/* QR */
+.qr-wrap{background:white;border-radius:12px;padding:16px;display:inline-block;margin:0 auto 24px;position:relative}
+.qr-wrap canvas{display:block}
+.qr-overlay{position:absolute;inset:0;background:rgba(255,255,255,.9);border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;font-size:13px;color:#374151;font-weight:500}
+.qr-overlay.hidden{display:none}
+.spinner{width:32px;height:32px;border:3px solid #e5e7eb;border-top-color:var(--green);border-radius:50%;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* CONNECTED STATE */
+.connected-icon{width:80px;height:80px;background:rgba(37,211,102,.1);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;border:2px solid rgba(37,211,102,.3)}
+.connected-icon svg{width:40px;height:40px;stroke:var(--green);fill:none;stroke-width:2}
+.phone-info{background:rgba(37,211,102,.08);border:1px solid rgba(37,211,102,.2);border-radius:10px;padding:12px 16px;margin-bottom:20px;font-size:13px;color:var(--text2)}
+.phone-info strong{color:var(--text);display:block;font-size:15px;margin-bottom:2px}
+
+/* BUTTONS */
+.btn{display:inline-flex;align-items:center;gap:8px;padding:10px 20px;border-radius:10px;font-size:14px;font-family:var(--font);font-weight:500;cursor:pointer;border:none;transition:all .2s}
+.btn svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2}
+.btn-green{background:var(--green);color:white}
+.btn-green:hover{background:var(--green-dark)}
+.btn-ghost{background:transparent;color:var(--text2);border:1px solid var(--border)}
+.btn-ghost:hover{background:rgba(255,255,255,.05);color:var(--text)}
+.btn-red{background:rgba(248,81,73,.1);color:var(--red);border:1px solid rgba(248,81,73,.2)}
+.btn-red:hover{background:rgba(248,81,73,.2)}
+.btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:8px}
+
+/* INSTRUCTIONS */
+.steps{text-align:left;margin:20px 0;display:flex;flex-direction:column;gap:10px}
+.step{display:flex;align-items:flex-start;gap:12px;font-size:13px;color:var(--text2)}
+.step-num{width:22px;height:22px;background:rgba(37,211,102,.15);color:var(--green);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;margin-top:1px}
+
+.divider{height:1px;background:var(--border);margin:24px 0}
+.back-link{margin-top:24px;font-size:13px;color:var(--text2)}
+.back-link a{color:var(--green);text-decoration:none;font-weight:500}
+.back-link a:hover{text-decoration:underline}
+
+.error-box{background:rgba(248,81,73,.1);border:1px solid rgba(248,81,73,.2);border-radius:10px;padding:12px 16px;font-size:13px;color:var(--red);margin-bottom:16px;display:none}
+.timer{font-size:12px;color:var(--text3);margin-top:8px}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="logo">
+    <div class="logo-badge">IG</div>
+    <div class="logo-name">IG Accounting Services PA</div>
+  </div>
+  <h1>Conexión WhatsApp</h1>
+  <p>Panel exclusivo para administradores. Escanea el QR para conectar WhatsApp al sistema.</p>
+</div>
+
+<div class="card">
+  <div class="error-box" id="error-box"></div>
+
+  <!-- STATUS -->
+  <div class="status-bar connecting" id="status-bar">
+    <div class="status-dot pulse"></div>
+    <span id="status-text">Verificando estado...</span>
+  </div>
+
+  <!-- QR STATE -->
+  <div id="state-qr" style="display:none">
+    <div class="qr-wrap">
+      <div id="qr-code"></div>
+      <div class="qr-overlay" id="qr-overlay">
+        <div class="spinner"></div>
+        <span>Generando QR...</span>
+      </div>
+    </div>
+    <div class="timer" id="qr-timer"></div>
+
+    <div class="steps">
+      <div class="step"><div class="step-num">1</div><span>Abre WhatsApp en tu teléfono</span></div>
+      <div class="step"><div class="step-num">2</div><span>Ve a <strong style="color:var(--text)">Configuración → Dispositivos vinculados</strong></span></div>
+      <div class="step"><div class="step-num">3</div><span>Toca <strong style="color:var(--text)">Vincular un dispositivo</strong> y escanea el código QR</span></div>
+    </div>
+
+    <div class="btns">
+      <button class="btn btn-ghost" onclick="refrescarEstado()">
+        <svg viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+        Actualizar QR
+      </button>
+    </div>
+  </div>
+
+  <!-- CONNECTED STATE -->
+  <div id="state-connected" style="display:none">
+    <div class="connected-icon">
+      <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.42a16 16 0 0 0 6.29 6.29l.82-.83a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+    </div>
+    <div style="font-size:16px;font-weight:600;margin-bottom:6px;color:var(--green)">✓ WhatsApp Conectado</div>
+    <div style="font-size:13px;color:var(--text2);margin-bottom:20px">El sistema está recibiendo y enviando mensajes correctamente.</div>
+
+    <div class="phone-info">
+      <strong id="wa-phone">Número conectado</strong>
+      <span>Sesión activa · Compartida con todos los agentes</span>
+    </div>
+
+    <div class="btns">
+      <button class="btn btn-ghost" onclick="refrescarEstado()">
+        <svg viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+        Refrescar
+      </button>
+      <button class="btn btn-red" onclick="confirmarDesconectar()">
+        <svg viewBox="0 0 24 24"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"/><line x1="12" y1="2" x2="12" y2="12"/></svg>
+        Desconectar
+      </button>
+    </div>
+  </div>
+
+  <!-- DISCONNECTED STATE -->
+  <div id="state-disconnected" style="display:none">
+    <div style="font-size:48px;margin-bottom:16px">📵</div>
+    <div style="font-size:15px;font-weight:600;margin-bottom:8px;color:var(--red)">WhatsApp Desconectado</div>
+    <div style="font-size:13px;color:var(--text2);margin-bottom:20px">La sesión se cerró. Reconectando automáticamente...</div>
+    <div class="btns">
+      <button class="btn btn-green" onclick="refrescarEstado()">
+        <svg viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+        Intentar reconectar
+      </button>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+  <div style="font-size:12px;color:var(--text3);line-height:1.6">
+    🔒 La sesión de WhatsApp se comparte entre todos los agentes del sistema. Solo el administrador puede conectar o desconectar.
+  </div>
+</div>
+
+<div class="back-link">
+  <a href="index.html">← Volver al panel</a>
+</div>
+
+<script>
+const API = localStorage.getItem('ce_api') || 'https://ig-baileys-production.up.railway.app';
+const token = localStorage.getItem('ce_token');
+const user  = JSON.parse(localStorage.getItem('ce_user') || 'null');
+
+// Verificar que es admin
+if (!token || !user) { window.location.href = 'login.html'; }
+if (user?.rol !== 'admin') {
+  alert('Acceso restringido. Solo administradores.');
+  window.location.href = 'index.html';
+}
+
+let _qrInstance = null;
+let _pollTimer = null;
+let _qrExpireTimer = null;
+
+async function refrescarEstado() {
+  try {
+    const r = await fetch(`${API}/api/whatsapp/status`, {
+      headers: { Authorization: `Bearer ${token}` }
+    });
+    if (!r.ok) throw new Error('Error al obtener estado');
+    const d = await r.json();
+    renderEstado(d);
+  } catch (e) {
+    mostrarError('No se pudo conectar al servidor: ' + e.message);
+    setStatus('disconnected', 'Sin conexión al servidor');
+  }
+}
+
+function renderEstado(d) {
+  ocultarError();
+  const { status, qr } = d;
+
+  document.getElementById('state-qr').style.display = 'none';
+  document.getElementById('state-connected').style.display = 'none';
+  document.getElementById('state-disconnected').style.display = 'none';
+
+  if (status === 'connected') {
+    setStatus('connected', 'WhatsApp conectado');
+    document.getElementById('state-connected').style.display = 'block';
+    document.getElementById('wa-phone').textContent = 'Sesión activa ✓';
+    clearInterval(_pollTimer);
+    _pollTimer = setInterval(refrescarEstado, 30000);
+  } else if (status === 'connecting' && qr) {
+    setStatus('connecting', 'Escanea el código QR');
+    document.getElementById('state-qr').style.display = 'block';
+    renderQR(qr);
+    // Poll cada 3 segundos mientras espera QR
+    clearInterval(_pollTimer);
+    _pollTimer = setInterval(refrescarEstado, 3000);
+  } else {
+    setStatus('disconnected', 'Desconectado — reconectando...');
+    document.getElementById('state-disconnected').style.display = 'block';
+    clearInterval(_pollTimer);
+    _pollTimer = setInterval(refrescarEstado, 5000);
+  }
+}
+
+function renderQR(qrData) {
+  const overlay = document.getElementById('qr-overlay');
+  const container = document.getElementById('qr-code');
+
+  // Limpiar QR anterior
+  container.innerHTML = '';
+  if (_qrInstance) { _qrInstance = null; }
+
+  overlay.classList.remove('hidden');
+
+  try {
+    _qrInstance = new QRCode(container, {
+      text: qrData,
+      width: 220,
+      height: 220,
+      colorDark: '#000000',
+      colorLight: '#ffffff',
+      correctLevel: QRCode.CorrectLevel.M,
+    });
+    overlay.classList.add('hidden');
+
+    // Timer de expiración
+    clearTimeout(_qrExpireTimer);
+    let secs = 60;
+    const timerEl = document.getElementById('qr-timer');
+    const tick = () => {
+      if (secs <= 0) { timerEl.textContent = 'QR expirado — actualizando...'; refrescarEstado(); return; }
+      timerEl.textContent = `El QR expira en ${secs}s`;
+      secs--;
+      _qrExpireTimer = setTimeout(tick, 1000);
+    };
+    tick();
+  } catch (e) {
+    overlay.innerHTML = '<span style="color:#374151;font-size:13px">Error al generar QR</span>';
+  }
+}
+
+function setStatus(type, text) {
+  const bar = document.getElementById('status-bar');
+  const dot = bar.querySelector('.status-dot');
+  bar.className = 'status-bar ' + type;
+  document.getElementById('status-text').textContent = text;
+  if (type === 'connecting') dot.classList.add('pulse');
+  else dot.classList.remove('pulse');
+}
+
+function mostrarError(msg) {
+  const el = document.getElementById('error-box');
+  el.textContent = msg;
+  el.style.display = 'block';
+}
+
+function ocultarError() {
+  document.getElementById('error-box').style.display = 'none';
+}
+
+async function confirmarDesconectar() {
+  if (!confirm('¿Desconectar WhatsApp? Los agentes perderán acceso hasta que vuelvas a escanear el QR.')) return;
+  try {
+    const r = await fetch(`${API}/api/whatsapp/desconectar`, {
+      method: 'POST',
+      headers: { Authorization: `Bearer ${token}` }
+    });
+    const d = await r.json();
+    if (d?.success) {
+      setStatus('disconnected', 'Desconectado');
+      setTimeout(refrescarEstado, 2000);
+    }
+  } catch (e) {
+    mostrarError('Error al desconectar: ' + e.message);
+  }
+}
+
+// Socket.IO para QR en tiempo real
+(function initSocket() {
+  const script = document.createElement('script');
+  script.src = `${API}/socket.io/socket.io.js`;
+  script.onload = () => {
+    const socket = io(API, { auth: { token }, transports: ['websocket', 'polling'] });
+    socket.on('wa_qr', data => {
+      setStatus('connecting', 'Escanea el código QR');
+      document.getElementById('state-qr').style.display = 'block';
+      document.getElementById('state-connected').style.display = 'none';
+      document.getElementById('state-disconnected').style.display = 'none';
+      renderQR(data.qr);
+    });
+    socket.on('wa_status', data => {
+      if (data.status === 'connected') {
+        clearInterval(_pollTimer);
+        renderEstado({ status: 'connected' });
+      } else if (data.status === 'disconnected') {
+        renderEstado({ status: 'disconnected' });
+      }
+    });
+  };
+  document.head.appendChild(script);
+})();
+
+// Iniciar
+refrescarEstado();
+</script>
+</body>
+</html>

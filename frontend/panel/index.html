@@ -305,7 +305,10 @@ tr:hover td{background:#fafafa}
     <svg viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
     <span class="s-tooltip">Pagos</span>
   </div>
-
+<div class="s-item" id="nav-wa-admin" onclick="window.location.href='whatsapp-admin.html'" style="display:none">
+  <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.42a16 16 0 0 0 6.29 6.29l.82-.83a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+  <span class="s-tooltip">WhatsApp Admin</span>
+</div>
   <div class="s-bottom">
     <div class="s-item" onclick="showView('agentes')" id="nav-agentes">
       <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
@@ -551,7 +554,7 @@ tr:hover td{background:#fafafa}
 
 <script>
 // ── CONFIG ────────────────────────────────────────────────────────────────────
-const API = localStorage.getItem('ce_api') || 'https://ig-baileys-production.up.railway.app';
+const API = localStorage.getItem('ce_api') || 'https://ig-production-d1bf.up.railway.app';
 let token = localStorage.getItem('ce_token');
 let user  = JSON.parse(localStorage.getItem('ce_user') || 'null');
 let currentView = 'chats';
@@ -565,6 +568,9 @@ else {
   const ini = user.nombre?.[0]?.toUpperCase() || 'A';
   document.getElementById('s-user-av').textContent = ini;
   document.title = 'IG Accounting — Panel';
+  if (user.rol === 'admin') {
+  document.getElementById('nav-wa-admin').style.display = 'flex';
+}
 }
 
 function logout() { localStorage.clear(); window.location.href = 'login.html'; }
