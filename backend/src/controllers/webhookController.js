@@ -179,9 +179,9 @@ async function procesarMensajeBaileys(msg, sock, io) {
 
       logger.info(`✅ Mensaje Baileys: ${tipo} de ${telefono} [jid: ${jid}]${clienteId ? ` [cliente ${clienteId}]` : ''}`);
     });
-  } catch (err) {
-    logger.error('procesarMensajeBaileys error:', err.message);
-  }
+} catch (err) {
+  logger.error('procesarMensajeBaileys error:', err.message, err.stack);
+}
 }
 
 async function descargarYGuardarArchivo(msg, message, tipo, mensajeId, conversacionId, contactoId, clienteId, client, sock) {
