@@ -573,6 +573,34 @@ else {
 }
 }
 
+// Sonido de notificación estilo WhatsApp
+function playNotifSound() {
+  try {
+    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    const t = ctx.currentTime;
+
+    // Nota 1
+    const o1 = ctx.createOscillator();
+    const g1 = ctx.createGain();
+    o1.connect(g1); g1.connect(ctx.destination);
+    o1.frequency.setValueAtTime(830, t);
+    o1.frequency.exponentialRampToValueAtTime(1050, t + 0.1);
+    g1.gain.setValueAtTime(0.3, t);
+    g1.gain.exponentialRampToValueAtTime(0.001, t + 0.25);
+    o1.start(t); o1.stop(t + 0.25);
+
+    // Nota 2
+    const o2 = ctx.createOscillator();
+    const g2 = ctx.createGain();
+    o2.connect(g2); g2.connect(ctx.destination);
+    o2.frequency.setValueAtTime(1050, t + 0.15);
+    o2.frequency.exponentialRampToValueAtTime(1300, t + 0.3);
+    g2.gain.setValueAtTime(0.25, t + 0.15);
+    g2.gain.exponentialRampToValueAtTime(0.001, t + 0.4);
+    o2.start(t + 0.15); o2.stop(t + 0.4);
+  } catch(e) {}
+}
+
 function logout() { localStorage.clear(); window.location.href = 'login.html'; }
 
 // ── API ────────────────────────────────────────────────────────────────────────
@@ -1999,36 +2027,52 @@ async function desactivarAgente(id) {
     socket.on('connect', () => console.log('✅ Socket.IO:', socket.id));
     socket.on('connect_error', e => console.warn('⚠️', e.message));
 
-    socket.on('nuevo_mensaje', data => {
-      const convId = data.conversacion_id;
-      const nombre = data.contacto?.nombre || data.contacto?.telefono || 'Contacto';
+socket.on('nuevo_mensaje', data => {
+  const convId = data.conversacion_id;
+  const nombre = data.contacto?.nombre || data.contacto?.telefono || 'Contacto';
 
-      // Badge
-      const badge=document.getElementById('wa-badge');
-      if(badge){const n=parseInt(badge.textContent||'0')+1;badge.textContent=n;badge.classList.remove('hidden');}
+  // Badge
+  const badge = document.getElementById('wa-badge');
+  if (badge) {
+    const n = parseInt(badge.textContent || '0') + 1;
+    badge.textContent = n;
+    badge.classList.remove('hidden');
+  }
 
-      // Notificación escritorio
-      if('Notification' in window && Notification.permission==='granted') {
-        const notif=new Notification(`💬 ${nombre}`,{body:(data.mensaje?.contenido||'Nuevo mensaje').substring(0,60),tag:`conv-${convId}`});
-        notif.onclick=()=>{window.focus();showView('chats');notif.close();};
-        setTimeout(()=>notif.close(),5000);
-      }
+  // Sonido de notificación estilo WhatsApp
+  playNotifSound();
 
-      // Refrescar lista
-      if(currentView==='chats') {
-        refrescarWAList();
-        const activeConv=document.querySelector('.chat-item.active');
-        if(activeConv?.id===`ci-${convId}`) {
-          const msgs=document.getElementById('wa-msgs');
-          if(msgs) {
-            msgs.insertAdjacentHTML('beforeend',renderMsg({...data.mensaje,archivo_id:data.archivo?.id,archivo_nombre:data.archivo?.nombre_original}));
-            msgs.scrollTop=msgs.scrollHeight;
-          }
-        }
-      } else {
-        toast(`💬 ${nombre}: ${(data.mensaje?.contenido||'').substring(0,40)}`,'ok');
-      }
+  // Notificación escritorio
+  if ('Notification' in window && Notification.permission === 'granted') {
+    const notif = new Notification(`💬 ${nombre}`, {
+      body: (data.mensaje?.contenido || 'Nuevo mensaje').substring(0, 60),
+      tag: `conv-${convId}`
     });
+    notif.onclick = () => { window.focus(); showView('chats'); notif.close(); };
+    setTimeout(() => notif.close(), 5000);
+  }
+
+  // Refrescar lista siempre
+  if (currentView === 'chats') {
+    refrescarWAList();
+
+    // Si la conversación está abierta, agregar mensaje en tiempo real
+    const activeItem = document.querySelector('.chat-item.active');
+    if (activeItem?.id === `ci-${convId}`) {
+      const msgs = document.getElementById('wa-msgs');
+      if (msgs && data.mensaje) {
+        msgs.insertAdjacentHTML('beforeend', renderMsg({
+          ...data.mensaje,
+          archivo_id: data.archivo?.id,
+          archivo_nombre: data.archivo?.nombre_original
+        }));
+        msgs.scrollTop = msgs.scrollHeight;
+      }
+    }
+  } else {
+    toast(`💬 ${nombre}: ${(data.mensaje?.contenido || '').substring(0, 40)}`, 'ok');
+  }
+});
 
     // ── ARCHIVO SUBIDO DESDE EL PORTAL DEL CLIENTE ────────────────────────────
     socket.on('archivo_portal', data => {
