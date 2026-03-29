@@ -554,7 +554,7 @@ tr:hover td{background:#fafafa}
 
 <script>
 // ── CONFIG ────────────────────────────────────────────────────────────────────
-const API = localStorage.getItem('ce_api') || 'https://ig-production-d1bf.up.railway.app';
+const API = localStorage.getItem('ce_api') || 'https://ig-baileys-production.up.railway.app';
 let token = localStorage.getItem('ce_token');
 let user  = JSON.parse(localStorage.getItem('ce_user') || 'null');
 let currentView = 'chats';
@@ -774,6 +774,27 @@ function renderMsg(m) {
   const hora = fmtT(m.created_at);
   const ext  = fileExt(m.tipo_mime, m.contenido);
   let html = '';
+
+  if (m.tipo === 'audio' && m.archivo_id) {
+    return `<div class="msg-row ${cls}">
+      <div class="msg-bubble ${cls}" style="padding:8px 12px;min-width:220px;max-width:300px">
+        <div style="display:flex;align-items:center;gap:10px">
+          <button onclick="toggleAudio('${m.archivo_id}','${m.id}')"
+            style="width:38px;height:38px;border-radius:50%;background:var(--green);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .2s">
+            <svg id="icon-${m.id}" width="14" height="14" fill="white" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          </button>
+          <div style="flex:1">
+            <div style="height:4px;background:rgba(0,0,0,.12);border-radius:4px;cursor:pointer;position:relative" onclick="seekAudio('${m.archivo_id}','${m.id}',event)">
+              <div id="prog-${m.id}" style="height:100%;background:var(--green-dark);border-radius:4px;width:0%;transition:width .1s"></div>
+            </div>
+            <div style="font-size:10px;color:var(--text3);margin-top:4px" id="dur-${m.id}">0:00</div>
+          </div>
+          <span style="font-size:16px">🎤</span>
+        </div>
+        <div class="msg-time">${hora}${!entrante?' ✓✓':''}</div>
+      </div>
+    </div>`;
+  }
 
   if (['document','image','audio','video'].includes(m.tipo)) {
     const nombre = m.archivo_nombre || m.contenido || m.tipo;
@@ -2183,6 +2204,62 @@ function renderNotifPanel() {
         </div>
       </div>
     </div>`).join('');
+}
+
+// ── AUDIO PLAYER ──────────────────────────────────────────────────────────────
+const _audios = {};
+
+async function toggleAudio(archivoId, msgId) {
+  if (!_audios[archivoId]) {
+    try {
+      const r = await fetch(`${API}/api/archivos/${archivoId}/descargar`, {headers:{Authorization:`Bearer ${token}`}});
+      const ct = r.headers.get('content-type') || '';
+      let url;
+      if (ct.includes('application/json')) {
+        const d = await r.json(); url = d.url;
+      } else {
+        const blob = await r.blob();
+        url = URL.createObjectURL(blob);
+      }
+      const audio = new Audio(url);
+      _audios[archivoId] = audio;
+      audio.ontimeupdate = () => {
+        const pct = (audio.currentTime / audio.duration * 100) || 0;
+        document.getElementById(`prog-${msgId}`)?.style.setProperty('width', pct + '%');
+        const el = document.getElementById(`dur-${msgId}`);
+        if (el) el.textContent = fmtAudioTime(audio.currentTime);
+      };
+      audio.onended = () => {
+        const icon = document.getElementById(`icon-${msgId}`);
+        if (icon) icon.innerHTML = '<polygon points="5 3 19 12 5 21 5 3"/>';
+        document.getElementById(`prog-${msgId}`)?.style.setProperty('width', '0%');
+      };
+    } catch(e) { toast('Error cargando audio', 'err'); return; }
+  }
+  const audio = _audios[archivoId];
+  const icon = document.getElementById(`icon-${msgId}`);
+  if (audio.paused) {
+    Object.values(_audios).forEach(a => { if (a !== audio) a.pause(); });
+    audio.play();
+    if (icon) icon.innerHTML = '<rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>';
+  } else {
+    audio.pause();
+    if (icon) icon.innerHTML = '<polygon points="5 3 19 12 5 21 5 3"/>';
+  }
+}
+
+function seekAudio(archivoId, msgId, event) {
+  const audio = _audios[archivoId];
+  if (!audio || !audio.duration) return;
+  const bar = event.currentTarget;
+  const pct = event.offsetX / bar.offsetWidth;
+  audio.currentTime = pct * audio.duration;
+}
+
+function fmtAudioTime(s) {
+  const m = Math.floor(s / 60);
+  const sec = Math.floor(s % 60);
+  return `${m}:${sec.toString().padStart(2, '0')}`;
 }
 
 function notifClick(clienteId, convId) {
