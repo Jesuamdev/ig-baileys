@@ -16,40 +16,23 @@ const AUTH_FOLDER = path.resolve('./baileys_auth');
 async function iniciarBaileys(io) {
   ioInstance = io;
   if (!fs.existsSync(AUTH_FOLDER)) fs.mkdirSync(AUTH_FOLDER, { recursive: true });
-
-  const { state, saveCreds } = await useMultiFileAuthState(AUTH_FOLDER);
-  const { version } = await fetchLatestBaileysVersion();
-
-  sock = makeWASocket({
-    version,
-    auth: state,
-    printQRInTerminal: true,
-    logger: require('pino')({ level: 'silent' }),
-    browser: ['IG Accounting', 'Chrome', '1.0.0'],
-    generateHighQualityLinkPreview: false,
-  });
-
-  // Guardar credenciales cuando cambien
-  sock.ev.on('creds.update', saveCreds);
-
-  // Manejar cambios de conexión
-  sock.ev.on('connection.update', (update) => {
-    const { connection, lastDisconnect, qr } = update;
-
- if (qr) {
-  qrCode = qr;
-  connectionStatus = 'connecting';
-  logger.info('📱 QR generado — escanea desde el panel');
   
-  // Mostrar QR en terminal
-  const qrTerminal = require('qrcode-terminal');
-  qrTerminal.generate(qr, { small: true });
-  
-  if (ioInstance) {
-    ioInstance.emit('wa_qr', { qr });
-    ioInstance.emit('wa_status', { status: 'connecting', qr });
+  // Si existe creds.json pero la sesión está cerrada, limpiar para forzar nuevo QR
+  const credsPath = path.join(AUTH_FOLDER, 'creds.json');
+  if (fs.existsSync(credsPath)) {
+    try {
+      const creds = JSON.parse(fs.readFileSync(credsPath, 'utf8'));
+      if (!creds?.me?.id) {
+        // Credenciales inválidas, limpiar
+        fs.rmSync(AUTH_FOLDER, { recursive: true, force: true });
+        fs.mkdirSync(AUTH_FOLDER, { recursive: true });
+        logger.info('🧹 Credenciales inválidas limpiadas — generando nuevo QR');
+      }
+    } catch(e) {
+      fs.rmSync(AUTH_FOLDER, { recursive: true, force: true });
+      fs.mkdirSync(AUTH_FOLDER, { recursive: true });
+    }
   }
-}
 
     if (connection === 'close') {
       const shouldReconnect = (lastDisconnect?.error instanceof Boom)
